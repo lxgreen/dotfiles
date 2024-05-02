@@ -1,0 +1,49 @@
+# fnm bindings
+source $ZDOTDIR/fnm.zsh
+
+# fzf bindings
+source $ZDOTDIR/fzf.zsh
+
+# key bindings
+source $ZDOTDIR/zle.zsh
+
+setopt HIST_SAVE_NO_DUPS        # Do not write a duplicate event to the history file.
+setopt HIST_IGNORE_SPACE        # Do not record an event starting with a space.
+
+autoload -U compinit; compinit  # Enable completion
+_comp_options+=(globdots)       # With hidden files
+# TODO: add https://github.com/Phantas0s/.dotfiles/blob/master/zsh/completion.zsh
+
+# zoxide
+eval "$(zoxide init zsh)"
+
+# prompt
+eval "$(starship init zsh)"
+
+# dir stack
+setopt AUTO_PUSHD           # Push the current directory visited on the stack.
+setopt PUSHD_IGNORE_DUPS    # Do not store duplicates in the stack.
+setopt PUSHD_SILENT         # Do not print the directory stack after pushd or popd.
+
+# auto cd
+setopt AUTO_CD              # cd to a directory by typing its name
+
+# vi mode
+source $ZDOTDIR/vi-mode.zsh
+
+# plugins
+source $ZDOTDIR/plugins/git.zsh
+source $ZDOTDIR/plugins/ai.zsh
+
+# sg completions
+eval "$(sg completions)"
+
+# haskell env init
+[ -f "/Users/alexgr/.ghcup/env" ] && source "/Users/alexgr/.ghcup/env" # ghcup-env
+
+# python env init
+eval "$(pyenv init -)"
+
+# aliases -- keep this last
+source $ZDOTDIR/zsh-alias.zsh
+

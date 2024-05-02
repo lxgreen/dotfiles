@@ -1,0 +1,7 @@
+.DS_Store
+dot_config/nvim/.luarc.json
+node_modules
+dot_config/zsh/dot_zcompdump
+dot_config/zsh/dot_zsh_history
+dot_config/zsh/plugins/ai.zsh
+

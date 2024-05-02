@@ -1,0 +1,9 @@
+Session.vim
+.vimlocal
+**/$TEMP
+*.swp
+*.log
+.ultra.cache.json
+jest.config.ts
+cspell.json
+*.gp.md

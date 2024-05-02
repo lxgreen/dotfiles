@@ -1,0 +1,123 @@
+version: '3.7'
+
+volumes:
+  nextcloud_aio_mastercontainer:
+    name: nextcloud_aio_mastercontainer # This line is not allowed to be changed
+
+services:
+  taskchampion-sync-server:
+    container_name: taskchampion-sync-server
+    restart: unless-stopped
+    image: yarekt/taskchampion-sync-server
+    ports:
+      - "8444:8443"
+    volumes:
+      - /media/lx/BKP_1/Sync/tasks:/var/taskwarrior-data
+  taskwarrior_webui:
+    image: dcsunset/taskwarrior-webui
+    container_name: taskwarrior_webui
+    restart: unless-stopped
+    ports:
+      - 8081:80
+    environment:
+      - TAKSRC=$HOME/.taskrc
+      - TASKDATA=$HOME/.task
+    volumes:
+      - /media/lx/BKP_1/Sync/tasks/task:$HOME/.task:rw
+      - /media/lx/BKP_1/Sync/tasks/taskrc:$HOME/.taskrc:rw
+  nginx_proxy_manager:
+    image: jc21/nginx-proxy-manager:latest
+    restart: unless-stopped
+    container_name: nginx-proxy-manager
+    network_mode: host
+    volumes:
+      - ${NEXTCLOUD_ROOT}/nginx-proxy:/data
+      - ${NEXTCLOUD_ROOT}/letsencrypt:/etc/letsencrypt
+    ports:
+      - 80:80 # Public HTTP Port
+      - 443:443 # Public HTTPS Port
+      - 81:81 # Admin Web Port
+  plex:
+    container_name: plex
+    image: plexinc/pms-docker
+    restart: unless-stopped
+    network_mode: bridge
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+      - PLEX_CLAIM=claim-zSnNhz8r8us4ZArqyyMT
+      - HOSTNAME="PlexServer"
+    ports:
+      - "32400:32400/tcp"
+      - "8324:8324/tcp"
+      - "32469:32469/tcp"
+      - "1900:1900/udp"
+      - "32410:32410/udp"
+      - "32412:32412/udp"
+      - "32413:32413/udp"
+      - "32414:32414/udp"
+    volumes:
+      - ${NEXTCLOUD_ROOT}/plex:/config
+      - ${NEXTCLOUD_ROOT}/temp:/transcode
+      - /media/lx/Downloads/Movies:/data
+      - /media/lx/Downloads/Shows:/shows
+      - /media/lx/Downloads/Music:/music
+      - /media/lx/Downloads/gora:/gora
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent:latest
+    container_name: qbittorrent
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - WEBUI_PORT=8080
+    volumes:
+      - ${NEXTCLOUD_ROOT}/qbittorrent:/config
+      - /media/lx/Downloads:/downloads:rw
+    ports:
+      - 8080:8080
+      - 6881:6881
+      - 6881:6881/udp
+    restart: unless-stopped
+  calibre-web:
+    image: lscr.io/linuxserver/calibre-web:latest
+    container_name: calibre-web
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+    volumes:
+      - ${NEXTCLOUD_ROOT}/calibre-web:/config
+      - /media/lx/BKP_1/Sync/Calibre:/books:rw
+      - /media/lx/Downloads:/downloads:rw
+    ports:
+      - 8083:8083
+    restart: unless-stopped
+  # nextcloud:
+  #   image: nextcloud/all-in-one:latest # Must be changed to 'nextcloud/all-in-one:latest-arm64' when used with an arm64 CPU
+  #   restart: always
+  #   container_name: nextcloud-aio-mastercontainer # This line is not allowed to be changed
+  #   volumes:
+  #     - nextcloud_aio_mastercontainer:/mnt/docker-aio-config # This line is not allowed to be changed
+  #     - /var/run/docker.sock:/var/run/docker.sock:ro # May be changed on macOS, Windows or docker rootless. See the applicable documentation
+  #   ports:
+  #     # - 80:80 # Can be removed when running behind a reverse proxy. See https://github.com/nextcloud/all-in-one/blob/main/reverse-proxy.md
+  #     # - 8080:8080
+  #     - 8443:8443 # Can be removed when running behind a reverse proxy. See https://github.com/nextcloud/all-in-one/blob/main/reverse-proxy.md
+  #   environment: # Is needed when using any of the options below
+  #     - APACHE_PORT=11000 # Is needed when running behind a reverse proxy. See https://github.com/nextcloud/all-in-one/blob/main/reverse-proxy.md
+  #     - APACHE_IP_BINDING=127.0.0.1 # Should be set when running behind a reverse proxy that is running on the same host. See https://github.com/nextcloud/all-in-one/blob/main/reverse-proxy.md
+  #     - TALK_PORT=3478 # This allows to adjust the port that the talk container is using.
+  #     # - NEXTCLOUD_DATADIR=${NEXTCLOUD_ROOT}/aio # Allows to set the host directory for Nextcloud's datadir. See https://github.com/nextcloud/all-in-one#how-to-change-the-default-location-of-nextclouds-datadir
+  #     - APACHE_DISABLE_REWRITE_IP=1
+  #     - NEXTCLOUD_TRUSTED_DOMAINS=lxgreen.duckdns.tld 192.168.1.41 # Your domain name + proxy host IP
+  #     - TRUSTED_PROXIES=192.168.1.41 # proxy host IP
+  #     - NEXTCLOUD_MOUNT=/media/lx # Allows the Nextcloud container to access the chosen directory on the host. See https://github.com/nextcloud/all-in-one#how-to-allow-the-nextcloud-container-to-access-directories-on-the-host
+  #     # - DOCKER_SOCKET_PATH=/home/lx/.docker/desktop/docker.sock # Needs to be specified if the docker socket on the host is not located in the default '/var/run/docker.sock'. Otherwise mastercontainer updates will fail.
+  #     # - DISABLE_BACKUP_SECTION=true # Setting this to true allows to hide the backup section in the AIO interface.
+  #     # - NEXTCLOUD_UPLOAD_LIMIT=10G # Can be adjusted if you need more. See https://github.com/nextcloud/all-in-one#how-to-adjust-the-upload-limit-for-nextcloud
+  #     # - NEXTCLOUD_MAX_TIME=3600 # Can be adjusted if you need more. See https://github.com/nextcloud/all-in-one#how-to-adjust-the-max-execution-time-for-nextcloud
+  #    # - TRUSTED_CACERTS_DIR=${NEXTCLOUD_ROOT}/letsencrypt/live/npm-3 # CA certificates in this directory will be trusted by the OS of the nexcloud container (Useful e.g. for LDAPS) See See https://github.com/nextcloud/all-in-one#how-to-trust-user-defiend-certification-authorities-ca
+  #     # - COLLABORA_SECCOMP_DISABLED=false # Setting this to true allows to disable Collabora's Seccomp feature. See https://github.com/nextcloud/all-in-one#how-to-disable-collaboras-seccomp-feature
+  #
