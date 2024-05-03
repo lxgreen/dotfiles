@@ -1,144 +1,147 @@
 tap "cormacrelf/tap"
-tap "crisidev/chunkwm"
+brew "cormacrelf/tap/dark-notify"
+
 tap "daipeihust/tap"
-tap "dandavison/open-in-editor", "https://github.com/dandavison/open-in-editor.git"
+brew "daipeihust/tap/im-select"
+
 tap "eth-p/software"
-tap "felixkratz/formulae"
-tap "homebrew/bundle"
-tap "homebrew/cask"
+brew "eth-p/software/bat-extras"
+
+tap "homebrew/bundle" # brew infra
 tap "homebrew/cask-fonts"
-tap "homebrew/core"
 tap "homebrew/services"
-tap "koekeishiya/formulae"
+
 tap "morantron/tmux-fingers"
+brew "morantron/tmux-fingers/tmux-fingers"
+
 tap "ms-jpq/sad"
-tap "noahgorstein/tap"
+brew "ms-jpq/sad/sad" # sed-like
+
 tap "schniz/tap"
-tap "sourcegraph/src-cli"
-brew "abduco"
-brew "libtiff"
-brew "openexr"
+brew "fnm"
+
+# libs
+brew "libtiff" # font support libs
+brew "freetype"
+brew "harfbuzz"
+brew "openexr" # image formats
+brew "imlib2"
 brew "webp"
 brew "aom"
-brew "ast-grep"
-brew "atool"
-brew "bash"
+brew "netpbm" 
+brew "exiftool"
+brew "gd"
+brew "gdk-pixbuf"
+brew "libexif"
+brew "gobject-introspection"
+brew "jasper"
+brew "libavif"
+brew "librsvg"
+brew "libvterm"
+brew "libzip"
+brew "bdw-gc" # garbage collector for C and C++
+brew "boost" # C++ library
+brew "jemalloc" # memory allocator
+brew "nghttp2" # HTTP/2 C library
 brew "ca-certificates"
 brew "openssl@3"
-brew "bat"
-brew "bdw-gc"
-brew "boost"
-brew "freetype"
 brew "pcre2"
 brew "sqlite"
 brew "glib", link: false
 brew "libxcb"
 brew "libx11"
-brew "chezmoi"
 brew "clang-format"
 brew "nettle"
 brew "gnutls"
 brew "python@3.9"
 brew "libssh"
+brew "lima" # VMs
+brew "colima" # container manager
 brew "qemu"
-brew "lima"
-brew "colima"
 brew "coreutils"
-brew "diff-so-fancy"
-brew "docker"
-brew "double-conversion"
-brew "fmt"
-brew "wangle"
-brew "fb303"
+brew "double-conversion" # convert to/from double-precision floating point
+brew "fmt" # string formatting
+brew "wangle" # networking library
+brew "fb303" # query services
+
+brew "ast-grep"
+
+brew "atool" # archive tools
+brew "bash"
+
+# CLI utils
+brew "bat" # cat with wings
 brew "entr"
-brew "exa"
-brew "exiftool"
-brew "fasd"
+brew "watchman"
+brew "zoxide"
 brew "fd"
-brew "figlet"
-brew "file-formula"
-brew "findutils"
-brew "fnm"
-brew "fribidi"
 brew "fzf"
 brew "gawk"
-brew "libavif"
-brew "gd"
-brew "gdk-pixbuf"
-brew "gh"
-brew "git-delta"
-brew "glow"
+brew "figlet" # ascii art
 brew "gnu-sed"
-brew "gnu-typist"
-brew "gobject-introspection"
-brew "jasper"
-brew "netpbm"
-brew "harfbuzz"
-brew "pango"
-brew "librsvg"
-brew "graphviz"
 brew "htop"
 brew "httpie"
+brew "wget"
 brew "httrack"
-brew "imlib2"
-brew "jemalloc"
-brew "jless"
-brew "jq"
+brew "starship" # prompt
+brew "tldr"
+brew "xclip"
+
+brew "chezmoi" # dotfile manager
+
+brew "diff-so-fancy" # git diff
+brew "git-delta"
 brew "lazygit"
-brew "libcaca"
-brew "libexif"
-brew "libvterm"
-brew "libzip"
-brew "luajit"
+
+brew "docker"
+
+brew "file-formula" # file type detection
+brew "findutils" # GNU find, locate, updatedb, and xargs
+brew "fribidi" # bidirectional text rendering
+
+brew "glow" # markdown renderer
+brew "pango"
+brew "pandoc"
+
+brew "graphviz" # graph visualization for project structure
+
+brew "jless" # JSON pager
+brew "jq" # JSON processor
+
+brew "luajit" # Lua interpreter
 brew "luarocks"
 brew "luv"
+
 brew "tree-sitter"
 brew "neovim"
-brew "nghttp2"
 brew "node", link: false
-brew "nvm"
-brew "pandoc"
 brew "prettier"
 brew "protobuf"
+
 brew "pyenv"
 brew "python@3.11"
-brew "python@3.7"
 brew "python@3.8"
+brew "six"
+
 brew "reattach-to-user-namespace"
 brew "ripgrep"
 brew "ruby"
-brew "shfmt"
-brew "six"
+brew "shfmt" # shell script formatter
 brew "slides"
-brew "starship"
+
 brew "task"
 brew "taskwarrior-tui"
-brew "telnet"
-brew "tldr"
+
+cask "wezterm"
 brew "tmux"
 brew "tmuxp"
+
 brew "w3m"
-brew "watchman"
-brew "wget"
-brew "xclip"
-brew "yadm"
-brew "zk"
-brew "zoxide"
-brew "cormacrelf/tap/dark-notify"
-brew "daipeihust/tap/im-select"
-brew "eth-p/software/bat-extras"
-brew "felixkratz/formulae/sketchybar"
-brew "koekeishiya/formulae/skhd"
-brew "koekeishiya/formulae/yabai", args: ["HEAD"]
-brew "morantron/tmux-fingers/tmux-fingers"
-brew "ms-jpq/sad/sad"
+
+
+brew "zk" # zettelkasten
+
 cask "font-hack-nerd-font"
 cask "font-jetbrains-mono"
-cask "kdiff3"
+
 cask "keepassxc"
-cask "open-in-editor"
-cask "qutebrowser"
-cask "rectangle"
-cask "vimr"
-cask "wezterm"
-cask "xquartz"

@@ -1,0 +1,7 @@
+session_name: zettel
+start_directory: $HOME/Sync/Notes
+windows:
+  - window_name: Zettelkasten
+    layout: tiled
+    panes:
+      - nvim
