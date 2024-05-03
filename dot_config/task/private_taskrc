@@ -19,7 +19,7 @@ data.location=$HOME/.task
 
 sync.server.origin=https://tw.lxgreen.duckdns.org
 sync.server.client_id=68510b9b-fcbb-46c0-a997-a892a982c590
-sync.encryption_secret='{{ keepassxcAttribute "task" "Password" }}'
+sync.encryption_secret="MYSECRET"
 
 # To use the default location of the XDG directories,
 # move this configuration file from ~/.taskrc to ~/.config/task/taskrc and uncomment below
