@@ -1,0 +1,58 @@
+[user]
+  signingkey = {{ keepassxcAttribute "dot-gpg" "Password" }}
+  name = {{ keepassxcAttribute "dot-github" "UserName" }}
+  email = {{ keepassxcAttribute "dot-github" "URL" }}
+[commit]
+  gpgsign = true
+[gpg]
+  program = gpg
+[core]
+  mergeoptions = --no-edit
+	excludesFile = ~/.gitignore
+	pager = diff-so-fancy | less --tabs=2 -RFX
+  editor = nvim
+[interactive]
+	diffFilter = diff-so-fancy --patch
+[alias]
+	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --oneline
+	dlog = "!f() { GIT_EXTERNAL_DIFF=difft git log -p --ext-diff $@; }; f"
+	dft = difftool
+# define command which will be used when "nvim" is set as a merge tool
+[mergetool "nvim"]
+  cmd = nvim -f -c \"Gdiffsplit!\" \"$MERGED\"
+# set "nvim" as tool for merging
+[merge]
+	tool = nvim
+[mergetool]
+  prompt = false
+# automatically launch merge tool without displaying a prompt
+[init]
+	defaultBranch = master
+[color]
+	ui = true
+[color "diff-highlight"]
+	oldNormal = bold
+	oldHighlight = red bold 52
+	newNormal = bold
+	newHighlight = green bold 22
+[color "diff"]
+	meta = 11
+	frag = magenta bold
+	func = 146 bold
+	commit = yellow bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
+[diff-so-fancy]
+	markEmptyLines = false
+	changeHunkIndicators = true
+	stripLeadingSymbols = true
+	useUnicodeRuler = true
+[diff]
+	tool = difftastic
+[difftool]
+	prompt = false
+[difftool "difftastic"]
+	cmd = difft "$LOCAL" "$REMOTE"
+[pager]
+	difftool = true
