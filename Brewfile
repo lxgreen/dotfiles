@@ -83,7 +83,7 @@ brew "htop"
 brew "httpie"
 brew "wget"
 brew "httrack"
-brew "starship" # prompt
+brew "spaceship" # prompt
 brew "tldr"
 brew "xclip"
 
@@ -92,6 +92,7 @@ brew "chezmoi" # dotfile manager
 brew "diff-so-fancy" # git diff
 brew "git-delta"
 brew "lazygit"
+brew "difftastic"
 
 brew "docker"
 
