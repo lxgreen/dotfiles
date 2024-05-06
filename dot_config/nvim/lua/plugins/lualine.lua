@@ -37,8 +37,8 @@ return {
         "Trouble",
       }
 
-      opts.winbar = { lualine_c = winbar_filetype }
-      opts.inactive_winbar = { lualine_c = winbar_filetype }
+      -- opts.winbar = { lualine_c = winbar_filetype }
+      -- opts.inactive_winbar = { lualine_c = winbar_filetype }
       opts.theme = "catppuccin"
       opts.globalstatus = true
     end,
