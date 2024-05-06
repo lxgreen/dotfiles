@@ -1,0 +1,42 @@
+promptToReturnFromSubprocess: false
+os:
+  # https://github.com/jesseduffield/lazygit/issues/3064
+  openLink: open -n "$(echo {{link}} | sed 's/%2F/\//g')"
+gui:
+  nerdFontsVersion: "3"
+  border: "rounded"
+  expandFocusedSidePanel: true
+  showBottomLine: false
+  commandLogSize: 3
+  showCommandLog: false
+git:
+  branchLogCmd: "git lg {{branchName}} --"
+  paging:
+    externalDiffCommand: difft
+customCommands:
+  - key: "n"
+    context: "localBranches"
+    prompts:
+      - type: "menu"
+        title: "What kind of branch is it?"
+        key: "BranchType"
+        options:
+          - name: "feature"
+            description: "a feature branch"
+            value: "feat"
+          - name: "bugfix"
+            description: "a bugfix branch"
+            value: "fix"
+          - name: "refactoring"
+            description: "a refactoring branch"
+            value: "refactor"
+          - name: "testing"
+            description: "a testing branch"
+            value: "test"
+      - type: "input"
+        title: "What is the new branch name?"
+        key: "BranchName"
+        initialValue: ""
+    command: "git checkout -b {{.Form.BranchType}}/{{.Form.BranchName}}"
+    description: "new branch"
+    loadingText: "creating branch..."
