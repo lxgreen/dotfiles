@@ -14,6 +14,10 @@ alias ......='cd ../../../../..'
 alias .......='cd ../../../../../..'
 alias take='function _take() { mkdir -p $1 && cd $1 }; _take $1'
 alias md='mkdir -p'
+-(){
+  cd -
+}
+
 
 # npm
 alias regpub="npm config set registry https://registry.npmjs.org"
@@ -32,11 +36,9 @@ alias yaw="yarn add -W"
 alias yt="yarn test"
 alias yyt="yarn && yarn test"
 
-#apps
+#CLIs
 alias firefox='function _fox(){ (cd /Applications/Firefox\ Developer\ Edition.app/Contents/MacOS && ./firefox $1) }; _fox $1' # TODO: machine specific
-alias firefox_hardened='function _hfox(){ (cd /Applications/Firefox\ Developer\ Edition.app/Contents/MacOS && ./firefox -new-instance -P hardened $1) }; _hfox $1' # TODO: machine specific
 alias ff='firefox NUL &'
-alias fh='firefox_hardened NUL &'
 alias man='batman'
 alias cat="bat"
 alias lg='lazygit'
@@ -78,6 +80,17 @@ alias cde='$XDG_CONFIG_HOME/zsh/cde'
 # chezmoi
 alias cz='chezmoi'
 
--(){
-  cd -
+#apps
+alias e='nvim'
+alias t='vit'
+alias ts='task export > ~/Sync/tasks/tasks.json'
+
+v() {
+  if [[ -z $1 ]]; then
+    exa -lah
+  elif [[ -d $1 ]]; then
+    exa -lah $1
+  else
+    bat $1
+  fi
 }
