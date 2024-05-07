@@ -7,6 +7,9 @@ brew "daipeihust/tap/im-select"
 tap "eth-p/software"
 brew "eth-p/software/bat-extras"
 
+tap "FelixKratz/formulae"
+brew "svim"
+
 tap "homebrew/bundle" # brew infra
 tap "homebrew/cask-fonts"
 tap "homebrew/services"
