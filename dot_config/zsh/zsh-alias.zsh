@@ -85,6 +85,22 @@ alias e='nvim'
 alias t='vit'
 alias ts='task export > ~/Sync/tasks/tasks.json'
 
+i() {
+  if [[ -z $1 ]]; then
+    nvim ~/Sync/Notes/Inbox/
+  else
+    nvim ~/Sync/Notes/Inbox/$1.md
+  fi
+}
+
+n() {
+  if [[ -z $1 ]]; then
+    nvim ~/Sync/Notes/
+  else
+    nvim ~/Sync/Notes/$1.md
+  fi
+}
+
 v() {
   if [[ -z $1 ]]; then
     exa -lah
