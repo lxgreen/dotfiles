@@ -1,12 +1,8 @@
 #!/usr/bin/env bash
 
-# Catppuccin theme colors
-FZF_LATTE_COLORS="bg+:#ccd0da,bg:#eff1f5,spinner:#dc8a78,hl:#d20f39,fg:#4c4f69,header:#d20f39,info:#8839ef,pointer:#dc8a78,marker:#dc8a78,fg+:#4c4f69,prompt:#8839ef,hl+:#d20f39"
-FZF_MOCHA_COLORS="bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8,fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc,marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
-
 languages="ts\ntsx\ncss\njson\n"
 LANG=$(
-	echo -e "$languages" | fzf --prompt="Select a language: " --color $(defaults read -globalDomain AppleInterfaceStyle &>/dev/null && echo $FZF_MOCHA_COLORS || echo $FZF_LATTE_COLORS)
+	echo -e "$languages" | fzf --prompt="Select a language: "
 )
 
 SG_PREFIX="sg --lang $LANG --pattern"
@@ -17,11 +13,9 @@ IFS=: read -ra selected < <(
 		--query "\$A" \
 		--bind "change:reload:sleep 0.1; $SG_PREFIX {q} || true" \
 		--delimiter : \
-		--preview 'bat --color=always {1} --highlight-line {2} --theme=$(defaults read -globalDomain AppleInterfaceStyle &> /dev/null && echo Catppuccin-mocha || echo Catppuccin-latte)' \
+		--preview 'bat --color=always {1} --highlight-line {2}' \
 		--preview-window 'up,60%,border-bottom,+{2}+3/3,~3' \
 		--prompt "$LANG pattern > " \
-		--header "type $LANG expression pattern ($A-Z => token, $$$ => tokens to skip)" \
-		--color $(defaults read -globalDomain AppleInterfaceStyle &>/dev/null && echo $FZF_MOCHA_COLORS || echo $FZF_LATTE_COLORS)
-
+		--header "type $LANG expression pattern ($A-Z => token, $$$ => tokens to skip)"
 )
 [ -n "${selected[0]}" ] && nvim "${selected[0]}:${selected[1]}:${selected[2]}"

@@ -9,6 +9,7 @@ brew "eth-p/software/bat-extras"
 
 tap "FelixKratz/formulae"
 brew "svim"
+brew "borders"
 
 tap "homebrew/bundle" # brew infra
 tap "homebrew/cask-fonts"
