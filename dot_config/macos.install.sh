@@ -122,3 +122,6 @@ defaults write com.apple.spaces "spans-displays" -bool "false"
 defaults write com.apple.frameworks.diskimages "skip-verify" -bool "true"
 defaults write com.apple.frameworks.diskimages "skip-verify-locked" -bool "true"
 defaults write com.apple.frameworks.diskimages "skip-verify-remote" -bool "true"
+
+defaults write -g NSWindowShouldDragOnGesture YES                #  move windows by holding ctrl + cmd and dragging any part of the window
+defaults write -g NSAutomaticWindowAnimationsEnabled -bool false # Disable window animations
