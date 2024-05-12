@@ -63,7 +63,6 @@ return {
             EdgyTitle = { bg = c.mantle },
             FlashPrompt = { bg = c.mantle },
             FloatBorder = { fg = c_blend(c.base, c.lavender, 50) },
-            -- FloatBorder = { link = "WinBar" },
             FloatTitle = { fg = c.lavender, style = { "bold" } },
             Folded = { bg = c.base, fg = c.surface2 },
             GitConflictCurrent = { bg = c_blend(c.blue, c.base, 90) },
