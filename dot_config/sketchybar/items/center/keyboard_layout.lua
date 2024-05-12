@@ -2,8 +2,9 @@ local sbar = require("sketchybar")
 local colors = require("config").colors
 
 local icons = {
-	en = "􀂕",
-	ru = "􀂷",
+	en = "ᚤ",
+	ru = "ᲇ",
+	he = "𐤀",
 	unknown = "􀃭",
 }
 
@@ -22,11 +23,15 @@ local function update()
 		color = colors.white,
 	}
 
-	if layout == "com.apple.keylayout.US" then
+	if layout == "com.apple.keylayout.ABC" then
 		icon.string = icons.en
-	elseif layout == "com.apple.keylayout.Russian" then
+		icon.color = colors.green
+	elseif layout == "com.apple.keylayout.Russian-Phonetic" then
 		icon.string = icons.ru
 		icon.color = colors.red
+	elseif layout == "com.apple.keylayout.Hebrew" then
+		icon.string = icons.he
+		icon.color = colors.blue
 	end
 
 	sbar.animate("sin", 10, function()
