@@ -81,10 +81,11 @@ alias cde='$XDG_CONFIG_HOME/zsh/cde'
 alias cz='chezmoi'
 
 #apps
-alias e='nvim'
+alias e='nvim' # edit
 alias t='vit'
 alias ts='task export > ~/Sync/tasks/tasks.json'
 
+# Inbox note
 i() {
   if [[ -z $1 ]]; then
     nvim ~/Sync/Notes/Inbox/
@@ -93,6 +94,7 @@ i() {
   fi
 }
 
+# Note
 n() {
   if [[ -z $1 ]]; then
     nvim ~/Sync/Notes/
@@ -101,6 +103,7 @@ n() {
   fi
 }
 
+# View file/directory
 v() {
   if [[ -z $1 ]]; then
     exa -lah
@@ -109,4 +112,52 @@ v() {
   else
     bat $1
   fi
+}
+
+# Add a new file/directory including the parent directories
+a() {
+  local p="$1"
+  # Check if the path ends with a '/'
+  if [[ "$p" =~ /$ ]]; then
+    # Create directory structure if it doesn't exist
+    mkdir -p "$p"
+  else
+    # Get the directory part of the path
+    local dir=$(dirname "$p")
+    # Create directory structure if it doesn't exist
+    mkdir -p "$dir"
+    # Create the file if it doesn't exist
+    touch "$p"
+  fi
+}
+
+c() {
+  local name="$1"
+
+    # Define common file extensions to search for
+    local extensions=("conf" "config" "toml" "json" "yml" "yaml")
+
+    # Construct paths
+    local config_home_path="${XDG_CONFIG_HOME:-$HOME/.config}"
+    local search_dirs=("$config_home_path/$name" "$HOME/.$name")
+
+    # Check directories and files with no extension
+    for target in "${search_dirs[@]}"; do
+      if [[ -d "$target" || -f "$target" ]]; then
+        $EDITOR "$target"
+        return
+      fi
+    done
+
+    # Check files with common extensions
+    for ext in "${extensions[@]}"; do
+      for target in "${search_dirs[@]}"; do
+        if [[ -f "${target}.$ext" ]]; then
+          $EDITOR "${target}.$ext"
+          return
+        fi
+      done
+    done
+
+    echo "No matching file or directory found."
 }
