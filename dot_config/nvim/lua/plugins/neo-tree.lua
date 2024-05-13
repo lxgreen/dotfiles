@@ -132,6 +132,7 @@ return {
     dependencies = {
       "nvim-lua/plenary.nvim",
       "famiu/bufdelete.nvim",
+      "antosha417/nvim-lsp-file-operations",
     },
 
     keys = {

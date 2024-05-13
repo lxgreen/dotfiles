@@ -29,6 +29,7 @@ return {
   },
   {
     "robitx/gp.nvim",
+    keys = { "<C-g>", mode = "n", desc = "AI Chat" },
     config = function()
       require("gp").setup(config)
 
