@@ -43,6 +43,7 @@ end
 return {
   {
     "akinsho/bufferline.nvim",
+    event = "LazyFile",
     opts = {
       options = {
         always_show_bufferline = true,
@@ -92,10 +93,6 @@ return {
       })
       require("bufferline").setup(opts)
     end,
-
-    keys = {
-      { "<leader>bg", "<cmd>BufferLinePick<cr>", mode = { "n", "v", "t" }, desc = "Pick Buffer" },
-    },
   },
 
   {
