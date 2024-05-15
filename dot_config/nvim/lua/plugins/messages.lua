@@ -2,12 +2,14 @@ return {
   {
     "rcarriga/nvim-notify",
     optional = true,
+    event = "VimEnter",
     opts = { render = "minimal", stages = "fade" },
   },
 
   {
     "folke/noice.nvim",
     optional = true,
+    event = "VimEnter",
     opts = {
       presets = { bottom_search = false, lsp_doc_border = true },
 

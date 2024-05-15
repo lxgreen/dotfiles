@@ -88,18 +88,18 @@ alias ts='task export > ~/Sync/tasks/tasks.json'
 # Inbox note
 i() {
   if [[ -z $1 ]]; then
-    nvim ~/Sync/Notes/Inbox/
+    zk new -g inbox -W ~/Sync/Notes/Inbox/
   else
-    nvim ~/Sync/Notes/Inbox/$1.md
+    zk new -t $1 -g inbox -W ~/Sync/Notes/Inbox/
   fi
 }
 
 # Note
 n() {
   if [[ -z $1 ]]; then
-    nvim ~/Sync/Notes/
+    zk edit -i -W ~/Sync/Notes/
   else
-    nvim ~/Sync/Notes/$1.md
+    zk edit $1 -W ~/Sync/Notes/
   fi
 }
 
