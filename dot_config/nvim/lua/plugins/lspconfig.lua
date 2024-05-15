@@ -65,6 +65,16 @@ return {
             workingDirectories = { mode = "auto" },
           },
         },
+        jsonls = {
+          filetypes = { "json", "jsonc", "trans" },
+          settings = {
+            json = {
+              format = {
+                enable = true,
+              },
+            },
+          },
+        },
       },
       setup = {
         eslint = function()

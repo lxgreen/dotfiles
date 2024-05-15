@@ -1,5 +1,6 @@
 return {
   "echasnovski/mini.move",
+  event = "LazyFile",
   opts = {
     mappings = {
       -- Move visual selection in Visual mode.

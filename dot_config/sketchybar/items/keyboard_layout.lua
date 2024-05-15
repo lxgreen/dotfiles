@@ -3,13 +3,13 @@ local colors = require("colors")
 
 local icons = {
 	en = "ᚤ",
-	ru = "ᲇ",
+	ru = "ꙋ",
 	he = "𐤀",
 	unknown = "􀃭",
 }
 
 local keyboard_layout = sbar.add("item", {
-	icon = { font = { size = 26 } },
+	icon = { font = { size = 26 }, align = "left" },
 	padding_left = 0,
 	padding_right = 0,
 	display = "active",
