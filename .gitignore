@@ -1,4 +1,5 @@
 .DS_Store
+**/.zsh_history
 dot_config/nvim/.luarc.json
 node_modules
 dot_config/zsh/dot_zcompdump
