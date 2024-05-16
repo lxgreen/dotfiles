@@ -1,7 +1,8 @@
 return {
-  { "tpope/vim-speeddating" },
+  { "tpope/vim-speeddating", event = "LazyFile" },
   {
     "nguyenvukhang/nvim-toggler",
+    event = "LazyFile",
     config = function()
       require("nvim-toggler").setup({
         inverses = {

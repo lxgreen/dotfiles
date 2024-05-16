@@ -44,7 +44,7 @@ opt.shiftwidth = 2 -- number of spaces to use for autoindenting, >> <<, etc
 opt.virtualedit = "block" -- allow cursor to move where there is no text in visual block mode
 opt.inccommand = "split" -- show live preview of :s in split window
 opt.langmap =
-  [[АБЦДЕФГЧИЙКЛМНОПЯРСТУВШХЫЗЮЖЩЬЪЭ;ABCDEFGHIJKLMNOPQRSTUVWXYZ{}~_+|,абцдефгчийклмнопярстувшхызюжщьъэ;abcdefghijklmnopqrstuvwxyz[]`-=\]]
+  [[АБЦДЕФГЧИЙКЛМНОПЯРСТУВШХЫЗЮЖЩЬЪЭ;ABCDEFGHIJKLMNOPQRSTUVWXYZ{}~_+|,абцдефгчийклмнопярстувшхызюжщьъэ;abcdefghijklmnopqrstuvwxyz[]`-=\\]]
 -- opt.sessionoptions = {
 --   "blank",
 --   "buffers",
