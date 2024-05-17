@@ -1,3 +1,14 @@
+local inlayHints = {
+  includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all'
+  includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+  includeInlayFunctionParameterTypeHints = false,
+  includeInlayVariableTypeHints = false,
+  includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+  includeInlayPropertyDeclarationTypeHints = false,
+  includeInlayFunctionLikeReturnTypeHints = true,
+  includeInlayEnumMemberValueHints = true,
+}
+
 return {
   {
     "williamboman/mason-lspconfig.nvim",
@@ -46,6 +57,15 @@ return {
                 convertTabsToSpaces = vim.o.expandtab,
                 tabSize = vim.o.tabstop,
               },
+              inlayHints = inlayHints,
+            },
+            typescriptreact = {
+              format = {
+                indentSize = vim.o.shiftwidth,
+                convertTabsToSpaces = vim.o.expandtab,
+                tabSize = vim.o.tabstop,
+              },
+              inlayHints = inlayHints,
             },
             javascript = {
               format = {
@@ -53,6 +73,7 @@ return {
                 convertTabsToSpaces = vim.o.expandtab,
                 tabSize = vim.o.tabstop,
               },
+              inlayHints = inlayHints,
             },
             completions = {
               completeFunctionCalls = true,
