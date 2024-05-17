@@ -27,6 +27,8 @@ return {
           ["true"] = "false",
           ["up"] = "down",
           ["yes"] = "no",
+          ["from"] = "to",
+          ["all"] = "none",
         },
         -- removes the default set of inverses
         remove_default_inverses = true,
