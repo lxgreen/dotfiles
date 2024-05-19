@@ -1,10 +1,10 @@
 local inlayHints = {
   includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all'
-  includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-  includeInlayFunctionParameterTypeHints = false,
-  includeInlayVariableTypeHints = false,
-  includeInlayVariableTypeHintsWhenTypeMatchesName = false,
-  includeInlayPropertyDeclarationTypeHints = false,
+  includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+  includeInlayFunctionParameterTypeHints = true,
+  includeInlayVariableTypeHints = true,
+  includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+  includeInlayPropertyDeclarationTypeHints = true,
   includeInlayFunctionLikeReturnTypeHints = true,
   includeInlayEnumMemberValueHints = true,
 }

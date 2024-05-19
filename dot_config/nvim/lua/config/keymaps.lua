@@ -31,8 +31,8 @@ map(
   { desc = "Open current in remote" }
 )
 
--- neotree
-map({ "n" }, "<leader>m", "<cmd>Neotree focus<CR>", { desc = "Open/focus file explorer" })
+-- file explorer
+map({ "n" }, "<leader>e", "<cmd>Oil<CR>", { desc = "Open/focus file explorer" })
 
 -- close buffer on Q
 map({ "v", "n", "s" }, "<S-q>", "<cmd>q<cr><esc>", { desc = "Close buffer" })
