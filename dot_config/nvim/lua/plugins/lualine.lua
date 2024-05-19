@@ -1,6 +1,7 @@
 return {
   {
     "nvim-lualine/lualine.nvim",
+    dependencies = { "kyazdani42/nvim-web-devicons", "akinsho/bufferline.nvim" },
     opts = function(_, opts)
       local winbar_filetype = {
         {
