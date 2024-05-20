@@ -12,7 +12,7 @@ local brew = sbar.add("item", {
 	},
 
 	position = "right",
-	update_freq = 60 * 60,
+	update_freq = 60 * 15,
 })
 
 local function action()
