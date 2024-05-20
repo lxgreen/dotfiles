@@ -16,6 +16,7 @@ return {
   },
   {
     "neovim/nvim-lspconfig",
+    event = "VimEnter",
     ---@class PluginLspOpts
     opts = {
       -- make sure mason installs the server

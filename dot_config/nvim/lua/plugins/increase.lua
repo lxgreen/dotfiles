@@ -1,5 +1,5 @@
 return {
-  { "monaqa/dial.nvim", event = "LazyFile" },
+  { "tpope/vim-speeddating", event = "LazyFile" },
   {
     "nguyenvukhang/nvim-toggler",
     event = "LazyFile",
