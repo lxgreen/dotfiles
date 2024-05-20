@@ -1,2 +1,8 @@
 vim.cmd("abbreviate cosnt const")
+vim.cmd("abbreviate dont don't")
+vim.cmd("abbreviate doesnt doesn't")
+vim.cmd("abbreviate shouldnt shouldn't")
+vim.cmd("abbreviate wouldnt wouldn't")
+vim.cmd("abbreviate couldnt couldn't")
+vim.cmd("abbreviate wont won't")
 vim.cmd("abbreviate hrlp help")

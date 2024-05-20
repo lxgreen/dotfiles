@@ -32,7 +32,8 @@ map(
 )
 
 -- file explorer
-map({ "n" }, "<leader>e", "<cmd>Oil<CR>", { desc = "Open/focus file explorer" })
+map({ "n" }, "<leader>m", "<cmd>Neotree focus<CR>", { desc = "Open/focus file explorer" })
+map({ "n" }, "<leader>o", "<cmd>Oil<CR>", { desc = "Open cwd as a buffer" })
 
 -- close buffer on Q
 map({ "v", "n", "s" }, "<S-q>", "<cmd>q<cr><esc>", { desc = "Close buffer" })
@@ -125,7 +126,6 @@ map(
 )
 
 -- text-case
-
 map(
   "n",
   "gau",
@@ -300,29 +300,5 @@ map("x", "*", [[:<C-u>lua MiniSurround.add('visual')<CR>*]], { silent = true })
 map("x", "_", [[:<C-u>lua MiniSurround.add('visual')<CR>_]], { silent = true })
 map("x", "~", [[:<C-u>lua MiniSurround.add('visual')<CR>~]], { silent = true })
 
--- dial.nvim
-local dial = require("dial.map")
-map("n", "<C-a>", function()
-  dial.manipulate("increment", "normal")
-end)
-map("n", "<C-x>", function()
-  dial.manipulate("decrement", "normal")
-end)
-map("n", "g<C-a>", function()
-  dial.manipulate("increment", "gnormal")
-end)
-map("n", "g<C-x>", function()
-  dial.manipulate("decrement", "gnormal")
-end)
-map("v", "<C-a>", function()
-  dial.manipulate("increment", "visual")
-end)
-map("v", "<C-x>", function()
-  dial.manipulate("decrement", "visual")
-end)
-map("v", "g<C-a>", function()
-  dial.manipulate("increment", "gvisual")
-end)
-map("v", "g<C-x>", function()
-  dial.manipulate("decrement", "gvisual")
-end)
+-- commands mode with ;
+map({ "n", "v" }, ";", ":", { noremap = true })

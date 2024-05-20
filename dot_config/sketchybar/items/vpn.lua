@@ -8,10 +8,6 @@ local vpn = sbar.add("item", {
 	update_freq = 60,
 })
 
-local function action()
-	sbar.exec([[wezterm start -- zsh -c "brew upgrade"]])
-end
-
 local function update()
 	local command =
 		"curl --connect-timeout 3 -f --silent --output /dev/null 'https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos'"
