@@ -2,10 +2,10 @@ local sbar = require("sketchybar")
 local colors = require("colors")
 
 local icons = {
-	normal = "􀂯",
-	insert = "􀂥",
-	visual = "􀂿",
-	cmd = "􀂙",
+	normal = "ℕ",
+	insert = "𝕀",
+	visual = "𝕍",
+	cmd = "ℂ",
 	pending = "􀈏",
 }
 
