@@ -5,7 +5,7 @@ local icons = require("icons")
 local vpn = sbar.add("item", {
 	icon = { font = { size = 26 }, string = icons.trigrams.fire, color = colors.yellow },
 	position = "right",
-	update_freq = 60,
+	update_freq = 20,
 })
 
 local function update()
