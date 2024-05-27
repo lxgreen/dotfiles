@@ -40,24 +40,24 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 -- Function to switch to English keyboard layout
-function on_leave_insert()
-  -- vim.g.insert_mode_layout = vim.fn.system("im-select")
-  os.execute("im-select com.apple.keylayout.ABC")
-end
-
--- Function to save the current layout and restore it
-function on_enter_insert()
-  local layout = vim.g.insert_mode_layout or "com.apple.keylayout.ABC"
-  os.execute("im-select " .. layout)
-end
-
--- Set autocommands to switch layout on insert leave and to save/restore on insert enter/leave
-vim.api.nvim_create_autocmd("InsertLeave", {
-  pattern = "markdown",
-  callback = on_leave_insert,
-})
-
-vim.api.nvim_create_autocmd("InsertEnter", {
-  pattern = "markdown",
-  callback = on_enter_insert,
-})
+-- function on_leave_insert()
+--   -- vim.g.insert_mode_layout = vim.fn.system("im-select")
+--   os.execute("im-select com.apple.keylayout.ABC")
+-- end
+--
+-- -- Function to save the current layout and restore it
+-- function on_enter_insert()
+--   local layout = vim.g.insert_mode_layout or "com.apple.keylayout.ABC"
+--   os.execute("im-select " .. layout)
+-- end
+--
+-- -- Set autocommands to switch layout on insert leave and to save/restore on insert enter/leave
+-- vim.api.nvim_create_autocmd("InsertLeave", {
+--   pattern = "markdown",
+--   callback = on_leave_insert,
+-- })
+--
+-- vim.api.nvim_create_autocmd("InsertEnter", {
+--   pattern = "markdown",
+--   callback = on_enter_insert,
+-- })

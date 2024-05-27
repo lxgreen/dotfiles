@@ -1,7 +1,7 @@
 -- creadit to https://github.com/Allaman/
 local M = {
   "L3MON4D3/LuaSnip",
-  event = "InsertEnter",
+  event = "VimEnter",
   dependencies = {
     "rafamadriz/friendly-snippets",
   },

@@ -43,7 +43,7 @@ end
 return {
   {
     "akinsho/bufferline.nvim",
-    event = "VimEnter",
+    lazy = false,
     opts = {
       options = {
         always_show_bufferline = true,
