@@ -1,12 +1,12 @@
-local inlayHints = {
-  includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all'
-  includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-  includeInlayFunctionParameterTypeHints = true,
-  includeInlayVariableTypeHints = true,
-  includeInlayVariableTypeHintsWhenTypeMatchesName = true,
-  includeInlayPropertyDeclarationTypeHints = true,
-  includeInlayFunctionLikeReturnTypeHints = true,
+local inlay_hints_settings = {
   includeInlayEnumMemberValueHints = true,
+  includeInlayFunctionLikeReturnTypeHints = true,
+  includeInlayFunctionParameterTypeHints = true,
+  includeInlayParameterNameHints = "literal",
+  includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+  includeInlayPropertyDeclarationTypeHints = true,
+  includeInlayVariableTypeHints = false,
+  includeInlayVariableTypeHintsWhenTypeMatchesName = false,
 }
 
 return {
@@ -58,7 +58,7 @@ return {
                 convertTabsToSpaces = vim.o.expandtab,
                 tabSize = vim.o.tabstop,
               },
-              inlayHints = inlayHints,
+              inlayHints = inlay_hints_settings,
             },
             typescriptreact = {
               format = {
@@ -66,7 +66,7 @@ return {
                 convertTabsToSpaces = vim.o.expandtab,
                 tabSize = vim.o.tabstop,
               },
-              inlayHints = inlayHints,
+              inlayHints = inlay_hints_settings,
             },
             javascript = {
               format = {
@@ -74,7 +74,7 @@ return {
                 convertTabsToSpaces = vim.o.expandtab,
                 tabSize = vim.o.tabstop,
               },
-              inlayHints = inlayHints,
+              inlayHints = inlay_hints_settings,
             },
             completions = {
               completeFunctionCalls = true,

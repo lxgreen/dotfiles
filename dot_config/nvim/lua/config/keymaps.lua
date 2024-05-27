@@ -37,6 +37,7 @@ map({ "n" }, "<leader>o", "<cmd>Oil<CR>", { desc = "Open cwd as a buffer" })
 
 -- close buffer on Q
 map({ "v", "n", "s" }, "<S-q>", "<cmd>q<cr><esc>", { desc = "Close buffer" })
+map({ "v", "n", "s" }, "<leader><S-q>", "<cmd>wqa<cr>", { desc = "Save all and quit" })
 
 -- restart LSP on <F3>
 map({ "n", "o", "x", "i" }, "<F3>", "<Cmd>LspRestart<CR>", { desc = "Restart LSP", noremap = true })
@@ -60,7 +61,7 @@ end, { desc = "Split [d]efinition" })
 map("n", "<leader>a", "<cmd>Telescope ast_grep<cr>", { desc = "Find on [A]ST" }) -- depends on ast_grep
 
 -- mundo
-map({ "n", "i", "s", "o", "x" }, "<F7>", "<cmd>MundoToggle<CR>", { desc = "Toggle Undo Tree" })
+-- map({ "n", "i", "s", "o", "x" }, "<F7>", "<cmd>MundoToggle<CR>", { desc = "Toggle Undo Tree" })
 
 -- notifications
 map({ "n", "i", "s", "o", "x" }, "<F1>", "<cmd>NoiceDismiss<CR>", { desc = "Dismiss Notifications" })

@@ -188,7 +188,7 @@ return {
           hide_dotfiles = false,
           hide_gitignored = true,
           never_show = { ".DS_Store", ".git" },
-          hide_by_pattern = { ".*" },
+          never_show_by_pattern = { "messages_*.json", "!messages_en.json" },
         },
 
         -- commands = {

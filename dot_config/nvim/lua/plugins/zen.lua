@@ -1,5 +1,6 @@
 return {
   "folke/zen-mode.nvim",
+  event = "LazyFile",
   dependencies = {
     "folke/twilight.nvim",
     opts = {
