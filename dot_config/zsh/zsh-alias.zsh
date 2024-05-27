@@ -77,9 +77,6 @@ alias gcmrg='function _merge(){ git commit -m "Merge branch master into $1" };_m
 alias gde='$XDG_CONFIG_HOME/zsh/gde'
 alias cde='$XDG_CONFIG_HOME/zsh/cde'
 
-# chezmoi
-alias cz='chezmoi'
-
 #apps
 alias e='nvim' # edit
 alias t='vit'
@@ -161,3 +158,18 @@ c() {
 
     echo "No matching file or directory found."
 }
+
+function cz() {
+  local config_home="${XDG_CONFIG_HOME:-$HOME/.config}"
+
+  if [[ $# -eq 0 ]]; then
+    chezmoi cd
+  elif [[ $1 == "nvim" ]]; then
+    chezmoi add "$config_home/nvim/lua" "$config_home/nvim/lazy-lock.json"
+  elif [[ $1 == "sbar" ]]; then
+    chezmoi add "$config_home/sketchybar"
+  else
+    chezmoi "$@"
+  fi
+}
+
