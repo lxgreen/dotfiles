@@ -2,7 +2,7 @@
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 
-local map = require("utils").map
+local map = require("util").map
 
 -- word-motions
 map({ "n", "o", "x" }, "w", "<cmd>lua require('spider').motion('w')<CR>", { desc = "word-wise-w" })
@@ -13,22 +13,22 @@ map({ "n", "o", "x" }, "ge", "<cmd>lua require('spider').motion('ge')<CR>", { de
 -- gitlinker
 map("n", "<leader>gC", '<cmd>lua require"gitlinker".get_repo_url()<cr>', { silent = true, desc = "Copy repo URL" })
 map(
-  "n",
-  "<leader>gr",
-  '<cmd>lua require"gitlinker".get_repo_url({action_callback = require"gitlinker.actions".open_in_browser})<cr>',
-  { silent = true, desc = "Open repo in browser" }
+	"n",
+	"<leader>gr",
+	'<cmd>lua require"gitlinker".get_repo_url({action_callback = require"gitlinker.actions".open_in_browser})<cr>',
+	{ silent = true, desc = "Open repo in browser" }
 )
 map(
-  "n",
-  "<leader>gb",
-  '<cmd>lua require"gitlinker".get_buf_range_url("n", {action_callback = require"gitlinker.actions".open_in_browser})<cr>',
-  { silent = true, desc = "Open current in remote" }
+	"n",
+	"<leader>gb",
+	'<cmd>lua require"gitlinker".get_buf_range_url("n", {action_callback = require"gitlinker.actions".open_in_browser})<cr>',
+	{ silent = true, desc = "Open current in remote" }
 )
 map(
-  "v",
-  "<leader>gb",
-  '<cmd>lua require"gitlinker".get_buf_range_url("v", {action_callback = require"gitlinker.actions".open_in_browser})<cr>',
-  { desc = "Open current in remote" }
+	"v",
+	"<leader>gb",
+	'<cmd>lua require"gitlinker".get_buf_range_url("v", {action_callback = require"gitlinker.actions".open_in_browser})<cr>',
+	{ desc = "Open current in remote" }
 )
 
 -- file explorer
@@ -48,13 +48,13 @@ map("x", "<Tab>", ">gv", { desc = "Indent right", noremap = true })
 -- commands
 -- save file on W
 vim.cmd([[command! -nargs=0 -bar W :w]])
-vim.cmd([[command! -nargs=0 -bar NewDiary :lua require("diary").createDiaryEntry()]])
 
+-- shortcuts
 map("n", "gF", "<cmd>vertical wincmd f<cr>", { desc = "Split [f]ile under cursor", noremap = true })
-
+map("n", "g?", "<cmd>pwd<cr>", { desc = "CWD", noremap = true })
 map("n", "<leader>D", function()
-  vim.cmd([[ vsplit ]])
-  vim.lsp.buf.definition()
+	vim.cmd([[ vsplit ]])
+	vim.lsp.buf.definition()
 end, { desc = "Split [d]efinition" })
 
 -- telescope
@@ -100,16 +100,16 @@ map({ "n", "o", "x" }, "<leader>s+", "<cmd>lua require('harpoon.ui').toggle_quic
 
 local Util = require("lazyvim.util")
 vim.keymap.set("n", "<leader>v", function()
-  Util.terminal.open({ "vit" }, {
-    size = {
-      width = 1,
-      height = 1,
-    },
-  })
+	Util.terminal.open({ "vit" }, {
+		size = {
+			width = 1,
+			height = 1,
+		},
+	})
 end, { desc = "Vit tasks" })
 
 map("n", "<leader>R", "<cmd>vs scp://lx@192.168.1.41//home/lx/nextcloud/docker-compose.yml<cr>", {
-  desc = "Edit Docker Compose",
+	desc = "Edit Docker Compose",
 })
 
 -- refactoring
@@ -120,78 +120,78 @@ map({ "n", "x" }, "Xi", ":Refactor inline_var", { noremap = true, silent = false
 map("n", "XI", ":Refactor inline_func", { noremap = true, silent = false, desc = "Refactor inline_func" })
 map("n", "Xb", ":Refactor extract_block", { noremap = true, silent = false, desc = "Refactor extract_block" })
 map(
-  "n",
-  "Xbf",
-  ":Refactor extract_block_to_file",
-  { noremap = true, silent = false, desc = "Refactor extract_block_to_file" }
+	"n",
+	"Xbf",
+	":Refactor extract_block_to_file",
+	{ noremap = true, silent = false, desc = "Refactor extract_block_to_file" }
 )
 
 -- text-case
 map(
-  "n",
-  "gau",
-  "<cmd>lua require('textcase').current_word('to_upper_case')<cr>",
-  { desc = "Rename to upper case (current word)" }
+	"n",
+	"gau",
+	"<cmd>lua require('textcase').current_word('to_upper_case')<cr>",
+	{ desc = "Rename to upper case (current word)" }
 )
 map(
-  "n",
-  "gal",
-  "<cmd>lua require('textcase').current_word('to_lower_case')<cr>",
-  { desc = "Rename to lower case (current word)" }
+	"n",
+	"gal",
+	"<cmd>lua require('textcase').current_word('to_lower_case')<cr>",
+	{ desc = "Rename to lower case (current word)" }
 )
 map(
-  "n",
-  "gas",
-  "<cmd>lua require('textcase').current_word('to_snake_case')<cr>",
-  { desc = "Rename to snake case (current word)" }
+	"n",
+	"gas",
+	"<cmd>lua require('textcase').current_word('to_snake_case')<cr>",
+	{ desc = "Rename to snake case (current word)" }
 )
 map(
-  "n",
-  "gad",
-  "<cmd>lua require('textcase').current_word('to_dash_case')<cr>",
-  { desc = "Rename to dash case (current word)" }
+	"n",
+	"gad",
+	"<cmd>lua require('textcase').current_word('to_dash_case')<cr>",
+	{ desc = "Rename to dash case (current word)" }
 )
 map(
-  "n",
-  "gan",
-  "<cmd>lua require('textcase').current_word('to_constant_case')<cr>",
-  { desc = "Rename to constant case (current word)" }
+	"n",
+	"gan",
+	"<cmd>lua require('textcase').current_word('to_constant_case')<cr>",
+	{ desc = "Rename to constant case (current word)" }
 )
 map(
-  "n",
-  "gaa",
-  "<cmd>lua require('textcase').current_word('to_phrase_case')<cr>",
-  { desc = "Rename to phrase case (current word)" }
+	"n",
+	"gaa",
+	"<cmd>lua require('textcase').current_word('to_phrase_case')<cr>",
+	{ desc = "Rename to phrase case (current word)" }
 )
 map(
-  "n",
-  "gac",
-  "<cmd>lua require('textcase').current_word('to_camel_case')<cr>",
-  { desc = "Rename to camel case (current word)" }
+	"n",
+	"gac",
+	"<cmd>lua require('textcase').current_word('to_camel_case')<cr>",
+	{ desc = "Rename to camel case (current word)" }
 )
 map(
-  "n",
-  "gap",
-  "<cmd>lua require('textcase').current_word('to_pascal_case')<cr>",
-  { desc = "Rename to pascal case (current word)" }
+	"n",
+	"gap",
+	"<cmd>lua require('textcase').current_word('to_pascal_case')<cr>",
+	{ desc = "Rename to pascal case (current word)" }
 )
 map(
-  "n",
-  "gat",
-  "<cmd>lua require('textcase').current_word('to_title_case')<cr>",
-  { desc = "Rename to title case (current word)" }
+	"n",
+	"gat",
+	"<cmd>lua require('textcase').current_word('to_title_case')<cr>",
+	{ desc = "Rename to title case (current word)" }
 )
 map(
-  "n",
-  "gaf",
-  "<cmd>lua require('textcase').current_word('to_path_case')<cr>",
-  { desc = "Rename to path case (current word)" }
+	"n",
+	"gaf",
+	"<cmd>lua require('textcase').current_word('to_path_case')<cr>",
+	{ desc = "Rename to path case (current word)" }
 )
 map(
-  "n",
-  "ga.",
-  "<cmd>lua require('textcase').current_word('to_dot_case')<cr>",
-  { desc = "Rename to dot case (current word)" }
+	"n",
+	"ga.",
+	"<cmd>lua require('textcase').current_word('to_dot_case')<cr>",
+	{ desc = "Rename to dot case (current word)" }
 )
 
 map("n", "gaU", "<cmd>lua require('textcase').lsp_rename('to_upper_case')<cr>", { desc = "Rename to upper case (LSP)" })
@@ -199,95 +199,93 @@ map("n", "gaL", "<cmd>lua require('textcase').lsp_rename('to_lower_case')<cr>", 
 map("n", "gaS", "<cmd>lua require('textcase').lsp_rename('to_snake_case')<cr>", { desc = "Rename to snake case (LSP)" })
 map("n", "gaD", "<cmd>lua require('textcase').lsp_rename('to_dash_case')<cr>", { desc = "Rename to dash case (LSP)" })
 map(
-  "n",
-  "gaN",
-  "<cmd>lua require('textcase').lsp_rename('to_constant_case')<cr>",
-  { desc = "Rename to constant case (LSP)" }
+	"n",
+	"gaN",
+	"<cmd>lua require('textcase').lsp_rename('to_constant_case')<cr>",
+	{ desc = "Rename to constant case (LSP)" }
 )
 map(
-  "n",
-  "gaA",
-  "<cmd>lua require('textcase').lsp_rename('to_phrase_case')<cr>",
-  { desc = "Rename to phrase case (LSP)" }
+	"n",
+	"gaA",
+	"<cmd>lua require('textcase').lsp_rename('to_phrase_case')<cr>",
+	{ desc = "Rename to phrase case (LSP)" }
 )
 map("n", "gaC", "<cmd>lua require('textcase').lsp_rename('to_camel_case')<cr>", { desc = "Rename to camel case (LSP)" })
 map(
-  "n",
-  "gaP",
-  "<cmd>lua require('textcase').lsp_rename('to_pascal_case')<cr>",
-  { desc = "Rename to pascal case (LSP)" }
+	"n",
+	"gaP",
+	"<cmd>lua require('textcase').lsp_rename('to_pascal_case')<cr>",
+	{ desc = "Rename to pascal case (LSP)" }
 )
 map("n", "gaT", "<cmd>lua require('textcase').lsp_rename('to_title_case')<cr>", { desc = "Rename to title case (LSP)" })
 map("n", "gaF", "<cmd>lua require('textcase').lsp_rename('to_path_case')<cr>", { desc = "Rename to path case (LSP)" })
 map(
-  "n",
-  "ga>",
-  "<cmd>lua require('textcase').lsp_rename('to_dot_case')<cr>",
-  { desc = "Rename to dot case (current word)" }
+	"n",
+	"ga>",
+	"<cmd>lua require('textcase').lsp_rename('to_dot_case')<cr>",
+	{ desc = "Rename to dot case (current word)" }
 )
 
 map(
-  "n",
-  "gou",
-  "<cmd>lua require('textcase').operator('to_upper_case')<cr>",
-  { desc = "Rename to upper case (operator)" }
+	"n",
+	"gou",
+	"<cmd>lua require('textcase').operator('to_upper_case')<cr>",
+	{ desc = "Rename to upper case (operator)" }
 )
 map(
-  "n",
-  "gol",
-  "<cmd>lua require('textcase').operator('to_lower_case')<cr>",
-  { desc = "Rename to lower case (operator)" }
+	"n",
+	"gol",
+	"<cmd>lua require('textcase').operator('to_lower_case')<cr>",
+	{ desc = "Rename to lower case (operator)" }
 )
 map(
-  "n",
-  "gos",
-  "<cmd>lua require('textcase').operator('to_snake_case')<cr>",
-  { desc = "Rename to snake case (operator)" }
+	"n",
+	"gos",
+	"<cmd>lua require('textcase').operator('to_snake_case')<cr>",
+	{ desc = "Rename to snake case (operator)" }
 )
 map(
-  "n",
-  "god",
-  "<cmd>lua require('textcase').operator('to_dash_case')<cr>",
-  { desc = "Rename to dash case (operator)" }
+	"n",
+	"god",
+	"<cmd>lua require('textcase').operator('to_dash_case')<cr>",
+	{ desc = "Rename to dash case (operator)" }
 )
 map(
-  "n",
-  "gon",
-  "<cmd>lua require('textcase').operator('to_constant_case')<cr>",
-  { desc = "Rename to constant case (operator)" }
+	"n",
+	"gon",
+	"<cmd>lua require('textcase').operator('to_constant_case')<cr>",
+	{ desc = "Rename to constant case (operator)" }
 )
 map(
-  "n",
-  "goa",
-  "<cmd>lua require('textcase').operator('to_phrase_case')<cr>",
-  { desc = "Rename to phrase case (operator)" }
+	"n",
+	"goa",
+	"<cmd>lua require('textcase').operator('to_phrase_case')<cr>",
+	{ desc = "Rename to phrase case (operator)" }
 )
 map(
-  "n",
-  "goc",
-  "<cmd>lua require('textcase').operator('to_camel_case')<cr>",
-  { desc = "Rename to camel case (operator)" }
+	"n",
+	"goc",
+	"<cmd>lua require('textcase').operator('to_camel_case')<cr>",
+	{ desc = "Rename to camel case (operator)" }
 )
 map(
-  "n",
-  "gop",
-  "<cmd>lua require('textcase').operator('to_pascal_case')<cr>",
-  { desc = "Rename to pascal case (operator)" }
+	"n",
+	"gop",
+	"<cmd>lua require('textcase').operator('to_pascal_case')<cr>",
+	{ desc = "Rename to pascal case (operator)" }
 )
 map(
-  "n",
-  "got",
-  "<cmd>lua require('textcase').operator('to_title_case')<cr>",
-  { desc = "Rename to title case (operator)" }
+	"n",
+	"got",
+	"<cmd>lua require('textcase').operator('to_title_case')<cr>",
+	{ desc = "Rename to title case (operator)" }
 )
 map(
-  "n",
-  "gof",
-  "<cmd>lua require('textcase').operator('to_path_case')<cr>",
-  { desc = "Rename to path case (operator)" }
+	"n",
+	"gof",
+	"<cmd>lua require('textcase').operator('to_path_case')<cr>",
+	{ desc = "Rename to path case (operator)" }
 )
-
-require("ai-keymaps")
 
 -- visual mode surround mappings
 map("x", "'", [[:<C-u>lua MiniSurround.add('visual')<CR>']], { silent = true })
