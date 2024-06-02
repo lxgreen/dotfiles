@@ -1,2 +1,5 @@
--- bootstrap lazy.nvim, LazyVim and your plugins
-require("config.lazy")
+require("config.lazy.init")
+
+if LazyVim.has("langmapper.nvim") then
+	require("langmapper").automapping()
+end
