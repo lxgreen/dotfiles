@@ -33,7 +33,10 @@ local options = {
 	listchars = { eol = " ", space = "·", tab = "→ " },
 	fillchars = { diff = " ", eob = " " },
 
-	spelllang = "",
+	spell = true,
+	spelllang = "en_us",
+	spelloptions = { "camel" },
+
 	langmap = OptionsUtil.langmap_create(),
 }
 
