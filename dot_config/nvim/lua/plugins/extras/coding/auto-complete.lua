@@ -2,6 +2,50 @@ return {
 	{
 		"hrsh7th/nvim-cmp",
 		lazy = false, -- gitcommit in LazyGit
+		dependencies = {
+			"hrsh7th/cmp-buffer",
+			"hrsh7th/cmp-nvim-lsp",
+			"hrsh7th/cmp-path",
+			"hrsh7th/cmp-cmdline",
+			"saadparwaiz1/cmp_luasnip",
+			{
+				"petertriho/cmp-git",
+				config = function()
+					local cmp_git = require("cmp_git")
+					cmp_git.setup()
+				end,
+			},
+			{
+				"uga-rosa/cmp-dictionary",
+				config = function()
+					local dict = {
+						["*"] = { "/usr/share/dict/words" },
+						ft = {
+							["markdown"] = { vim.fn.stdpath("config") .. "/lua/dictionaries/wix.names.txt" },
+						},
+					}
+
+					require("cmp_dictionary").setup({
+						paths = dict["*"],
+						exact_length = 4,
+						first_case_insensitive = true,
+						max_number_items = 1000,
+					})
+
+					vim.api.nvim_create_autocmd("BufWinEnter", {
+						pattern = "*",
+						callback = function()
+							local filetype = vim.bo.filetype
+							local paths = dict.ft[filetype] or {}
+							vim.list_extend(paths, dict["*"])
+							require("cmp_dictionary").setup({
+								paths = paths,
+							})
+						end,
+					})
+				end,
+			},
+		},
 		opts = function(_, opts)
 			local cmp = require("cmp")
 

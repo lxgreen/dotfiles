@@ -165,7 +165,7 @@ function cz() {
   if [[ $# -eq 0 ]]; then
     chezmoi cd
   elif [[ $1 == "nvim" ]]; then
-    chezmoi add "$config_home/nvim/lua" "$config_home/nvim/lazy-lock.json"
+    chezmoi add "$config_home/nvim/"
   elif [[ $1 == "sbar" ]]; then
     chezmoi add "$config_home/sketchybar"
   else

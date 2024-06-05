@@ -27,12 +27,13 @@ local settings = {
 
 		-- enables inline hints
 		inlayHints = {
-			parameterNames = { enabled = "literals" },
-			parameterTypes = { enabled = true },
-			variableTypes = { enabled = true },
-			propertyDeclarationTypes = { enabled = true },
-			functionLikeReturnTypes = { enabled = true },
-			enumMemberValues = { enabled = true },
+			enabled = false,
+			-- parameterNames = { enabled = "literals" },
+			-- parameterTypes = { enabled = true },
+			-- variableTypes = { enabled = true },
+			-- propertyDeclarationTypes = { enabled = true },
+			-- functionLikeReturnTypes = { enabled = true },
+			-- enumMemberValues = { enabled = true },
 		},
 
 		-- otherwise it would ask every time if you want to update imports, which is a bit annoying
@@ -59,12 +60,13 @@ local settings = {
 		},
 
 		inlayHints = {
-			parameterNames = { enabled = "literals" },
-			parameterTypes = { enabled = true },
-			variableTypes = { enabled = true },
-			propertyDeclarationTypes = { enabled = true },
-			functionLikeReturnTypes = { enabled = true },
-			enumMemberValues = { enabled = true },
+			enabled = false,
+			-- parameterNames = { enabled = "literals" },
+			-- parameterTypes = { enabled = true },
+			-- variableTypes = { enabled = true },
+			-- propertyDeclarationTypes = { enabled = true },
+			-- functionLikeReturnTypes = { enabled = true },
+			-- enumMemberValues = { enabled = true },
 		},
 
 		-- enables project wide error reporting similar to vscode

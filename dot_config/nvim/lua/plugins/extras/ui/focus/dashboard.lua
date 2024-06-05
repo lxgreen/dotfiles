@@ -86,10 +86,9 @@ local section = {
 		type = "group",
 		opts = { lh = "AlphaButtons" },
 		val = {
-			button("n", "󰫻", "  New file", "<cmd>ene <bar> startinsert<cr>"),
-			button("l", "󱎦", "󰒲  Lazy", "<cmd>Lazy<cr>"),
-			button("x", "󱂑", "󰏗  Extras", "<cmd>LazyExtras<cr>"),
-			button("q", "󰫾", "  Quit", "<cmd>qa<cr>"),
+			button("l", "L", "󰒲  Lazy", "<cmd>Lazy<cr>"),
+			button("x", "X", "󰏗  Extras", "<cmd>LazyExtras<cr>"),
+			button("q", "Q", "  Quit", "<cmd>qa<cr>"),
 		},
 	},
 	footer = {
@@ -120,19 +119,19 @@ return {
 			table.insert(
 				opts.section.buttons.val,
 				#opts.section.buttons.val - 2,
-				button("f", "󰫳", "  Find file", "<cmd>Telescope find_files<cr>")
+				button("f", "F", "  Find file", "<cmd>Telescope find_files<cr>")
 			)
 
 			table.insert(
 				opts.section.buttons.val,
 				#opts.section.buttons.val - 2,
-				button("r", "󰫿", "  Recent files", "<cmd>Telescope oldfiles<cr>")
+				button("r", "R", "  Recent files", "<cmd>Telescope oldfiles<cr>")
 			)
 
 			table.insert(
 				opts.section.buttons.val,
 				#opts.section.buttons.val - 2,
-				button("g", "󰫴", "  Find text", "<cmd>Telescope live_grep_args<cr>")
+				button("p", "P", "  Projects", "<cmd>Telescope projects<cr>")
 			)
 		end
 
@@ -140,7 +139,7 @@ return {
 			table.insert(
 				opts.section.buttons.val,
 				#opts.section.buttons.val - 2,
-				button("s", "󰬀", "  Restore Session", [[<cmd>lua require("persistence").load()<cr>]])
+				button("s", "S", "  Restore Session", [[<cmd>lua require("persistence").load()<cr>]])
 			)
 		end
 	end,
