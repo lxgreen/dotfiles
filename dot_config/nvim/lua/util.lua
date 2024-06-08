@@ -42,7 +42,6 @@ end
 function M.colorscheme_get_household()
 	local colorschemes_available = {
 		catppuccin = { "catppuccin-mocha", "catppuccin-latte" },
-		tokyonight = { "tokyonight-storm", "tokyonight-day" },
 	}
 
 	local colorschemes_enabled = {}
