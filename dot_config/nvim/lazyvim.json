@@ -73,6 +73,7 @@
     "plugins.extras.optimizations.stop-inactive-lsp",
     "plugins.extras.optimizations.stop-treesitter-on-large-js-files",
     "plugins.extras.test.jest",
+    "plugins.extras.ui.editor.auto-dark",
     "plugins.extras.ui.editor.folds",
     "plugins.extras.ui.editor.indent-lines",
     "plugins.extras.ui.editor.inlay-hints",
