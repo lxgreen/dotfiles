@@ -5,10 +5,17 @@ local icons = require("icons")
 local vpn = sbar.add("item", {
 	icon = { font = { size = 26 }, string = icons.trigrams.fire, color = colors.yellow },
 	position = "right",
-	update_freq = 20,
+	update_freq = 10 * 60,
 })
 
 local function update()
+	local icon = { font = { size = 26 }, string = icons.trigrams.fire, color = colors.yellow }
+	local label = { string = "", color = colors.white, drawing = true }
+
+	sbar.animate("sin", 10, function()
+		vpn:set({ label = label, icon = icon })
+	end)
+
 	local command =
 		"curl --connect-timeout 3 -f --silent --output /dev/null 'https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos'"
 
@@ -19,8 +26,6 @@ local function update()
 
 	-- Extracting the exit code from the output
 	local exit_code = tonumber(result)
-	local icon = { font = { size = 26 }, string = icons.trigrams.fire, color = colors.white }
-	local label = { string = "", color = colors.white, drawing = true }
 
 	if exit_code == 0 then
 		icon.color = colors.green

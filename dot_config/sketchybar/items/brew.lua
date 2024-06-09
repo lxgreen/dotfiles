@@ -15,10 +15,6 @@ local brew = sbar.add("item", {
 	update_freq = 60 * 15,
 })
 
-local function action()
-	sbar.exec([[wezterm start -- zsh -c "brew upgrade"]])
-end
-
 local function update()
 	local file = assert(io.popen("brew outdated | wc -l | tr -d ' '"))
 	local brew_info = assert(file:read("a"))
@@ -39,6 +35,11 @@ local function update()
 	sbar.animate("sin", 10, function()
 		brew:set({ label = label, icon = icon })
 	end)
+end
+
+local function action()
+	sbar.exec([[wezterm start -- zsh -c "brew upgrade"]])
+	update()
 end
 
 brew:subscribe({ "forced", "routine", "brew_update", "update" }, update)
