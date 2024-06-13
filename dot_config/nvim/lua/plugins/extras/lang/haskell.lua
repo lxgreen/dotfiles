@@ -1,9 +1,8 @@
 return {
-  "mrcjkb/haskell-tools.nvim",
-  ft = { "haskell" },
-  dependencies = {
-    "nvim-lua/plenary.nvim",
-    "nvim-telescope/telescope.nvim", -- optional
-  },
-  branch = "1.x.x", -- recommended
+	"mrcjkb/haskell-tools.nvim",
+	ft = { "haskell" },
+	dependencies = {
+		"nvim-lua/plenary.nvim",
+	},
+	branch = "1.x.x", -- recommended
 }
