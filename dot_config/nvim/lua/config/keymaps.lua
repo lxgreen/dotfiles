@@ -57,12 +57,6 @@ map("n", "<leader>D", function()
 	vim.lsp.buf.definition()
 end, { desc = "Split [d]efinition" })
 
--- telescope
-map("n", "<leader>a", "<cmd>Telescope ast_grep<cr>", { desc = "Find on [A]ST" }) -- depends on ast_grep
-
--- mundo
--- map({ "n", "i", "s", "o", "x" }, "<F7>", "<cmd>MundoToggle<CR>", { desc = "Toggle Undo Tree" })
-
 -- notifications
 map({ "n", "i", "s", "o", "x" }, "<F1>", "<cmd>NoiceDismiss<CR>", { desc = "Dismiss Notifications" })
 map({ "n", "i", "s", "o", "x" }, "<F2>", "<cmd>Noice<CR>", { desc = "Show Notifications" })
@@ -87,16 +81,6 @@ map("n", "<C-k>", nvim_tmux_nav.NvimTmuxNavigateUp, { noremap = true, desc = "Na
 map("n", "<C-l>", nvim_tmux_nav.NvimTmuxNavigateRight, { noremap = true, desc = "Navigate right" })
 map("n", "<C-p>", nvim_tmux_nav.NvimTmuxNavigateLastActive, { noremap = true, desc = "Navigate last active" })
 map("n", "<C-n>", nvim_tmux_nav.NvimTmuxNavigateNext, { noremap = true, desc = "Navigate next" })
-
--- harpoon
-map({ "n", "o", "x" }, "<leader>1", "<cmd>lua require('harpoon.ui').nav_file(1)<CR>", { desc = "harpoon 1" })
-map({ "n", "o", "x" }, "<leader>2", "<cmd>lua require('harpoon.ui').nav_file(2)<CR>", { desc = "harpoon 2" })
-map({ "n", "o", "x" }, "<leader>3", "<cmd>lua require('harpoon.ui').nav_file(3)<CR>", { desc = "harpoon 3" })
-map({ "n", "o", "x" }, "<leader>4", "<cmd>lua require('harpoon.ui').nav_file(4)<CR>", { desc = "harpoon 4" })
-map({ "n", "o", "x" }, "<leader>5", "<cmd>lua require('harpoon.ui').nav_file(5)<CR>", { desc = "harpoon 5" })
-map({ "n", "o", "x" }, "<leader>6", "<cmd>lua require('harpoon.ui').nav_file(6)<CR>", { desc = "harpoon 6" })
-map({ "n", "o", "x" }, "+", "<cmd>lua require('harpoon.mark').add_file()<CR>", { desc = "harpoon +" })
-map({ "n", "o", "x" }, "<leader>s+", "<cmd>lua require('harpoon.ui').toggle_quick_menu()<CR>", { desc = "harpoons" })
 
 local Util = require("lazyvim.util")
 vim.keymap.set("n", "<leader>v", function()

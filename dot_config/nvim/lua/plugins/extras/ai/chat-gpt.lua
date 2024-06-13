@@ -4,7 +4,6 @@ return {
 	dependencies = {
 		"MunifTanjim/nui.nvim",
 		"nvim-lua/plenary.nvim",
-		"nvim-telescope/telescope.nvim",
 		"folke/trouble.nvim",
 		{
 			"folke/which-key.nvim",

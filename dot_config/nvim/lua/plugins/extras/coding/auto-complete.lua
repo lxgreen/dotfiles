@@ -105,9 +105,10 @@ return {
 			}, {
 
 				{ name = "copilot" },
-				{ name = "nvim_lua" },
+				{ name = "luasnip" },
 				{ name = "path" },
 				{ name = "buffer", keyword_length = 3 },
+				{ name = "nvim_lua" },
 			})
 			cmp.setup.filetype("gitcommit", {
 				sources = cmp.config.sources({
