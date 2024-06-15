@@ -82,14 +82,8 @@ map("n", "<C-l>", nvim_tmux_nav.NvimTmuxNavigateRight, { noremap = true, desc = 
 map("n", "<C-p>", nvim_tmux_nav.NvimTmuxNavigateLastActive, { noremap = true, desc = "Navigate last active" })
 map("n", "<C-n>", nvim_tmux_nav.NvimTmuxNavigateNext, { noremap = true, desc = "Navigate next" })
 
-local Util = require("lazyvim.util")
 vim.keymap.set("n", "<leader>v", function()
-	Util.terminal.open({ "vit" }, {
-		size = {
-			width = 1,
-			height = 1,
-		},
-	})
+	vim.cmd([[ edit term://vit ]])
 end, { desc = "Vit tasks" })
 
 map("n", "<leader>R", "<cmd>vs scp://lx@192.168.1.41//home/lx/nextcloud/docker-compose.yml<cr>", {
