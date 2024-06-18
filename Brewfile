@@ -97,6 +97,7 @@ brew "diff-so-fancy" # git diff
 brew "git-delta"
 brew "lazygit"
 brew "difftastic"
+brew "gh" # GitHub CLI
 
 brew "docker"
 
