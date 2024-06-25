@@ -1,4 +1,5 @@
 require("config.lazy.boot")
+require("abbreviations")
 
 local opts = {
 	spec = { { import = "plugins" } },

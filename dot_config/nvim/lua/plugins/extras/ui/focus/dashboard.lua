@@ -115,42 +115,23 @@ return {
 			},
 		}
 
-		if LazyVim.has("fzf-lua") then
+		if LazyVim.has("telescope.nvim") then
 			table.insert(
 				opts.section.buttons.val,
 				#opts.section.buttons.val - 2,
-				button("f", "F", "  Find file", "<cmd>FzfLua files<cr>")
+				button("f", "F", "  Find file", "<cmd>Telescope find_files<cr>")
 			)
 
 			table.insert(
 				opts.section.buttons.val,
 				#opts.section.buttons.val - 2,
-				button("r", "R", "  Recent files", "<cmd>FzfLua oldfiles<cr>")
+				button("r", "R", "  Recent files", "<cmd>Telescope oldfiles<cr>")
 			)
-
-			local pick = function()
-				if LazyVim.pick.picker.name == "telescope" then
-					return vim.cmd("Telescope projects")
-				elseif LazyVim.pick.picker.name == "fzf" then
-					local fzf_lua = require("fzf-lua")
-					local history = require("project_nvim.utils.history")
-					local results = history.get_recent_projects()
-					fzf_lua.fzf_exec(results, {
-						actions = {
-							["default"] = {
-								function(selected)
-									fzf_lua.files({ cwd = selected[1] })
-								end,
-							},
-						},
-					})
-				end
-			end
 
 			table.insert(
 				opts.section.buttons.val,
 				#opts.section.buttons.val - 2,
-				button("p", "P", " " .. " Projects", pick)
+				button("p", "P", "  Projects", "<cmd>Telescope projects<cr>")
 			)
 		end
 
