@@ -51,11 +51,15 @@ vim.cmd([[command! -nargs=0 -bar W :w]])
 
 -- shortcuts
 map("n", "gF", "<cmd>vertical wincmd f<cr>", { desc = "Split [f]ile under cursor", noremap = true })
+map("n", "g.", "<cmd>lua vim.cmd('cd '.. vim.fn.expand('%:p:h'))<cr>", { desc = "cd to current file path" })
 map("n", "g?", "<cmd>pwd<cr>", { desc = "CWD", noremap = true })
 map("n", "<leader>D", function()
 	vim.cmd([[ vsplit ]])
 	vim.lsp.buf.definition()
 end, { desc = "Split [d]efinition" })
+
+-- telescope
+map("n", "<leader>a", "<cmd>Telescope ast_grep<cr>", { desc = "Find on [A]ST" }) -- depends on ast_grep
 
 -- notifications
 map({ "n", "i", "s", "o", "x" }, "<F1>", "<cmd>NoiceDismiss<CR>", { desc = "Dismiss Notifications" })
@@ -83,7 +87,7 @@ map("n", "<C-p>", nvim_tmux_nav.NvimTmuxNavigateLastActive, { noremap = true, de
 map("n", "<C-n>", nvim_tmux_nav.NvimTmuxNavigateNext, { noremap = true, desc = "Navigate next" })
 
 vim.keymap.set("n", "<leader>v", function()
-	vim.cmd([[ edit term://vit ]])
+	vim.cmd([[ edit term://vit | norm i ]])
 end, { desc = "Vit tasks" })
 
 map("n", "<leader>R", "<cmd>vs scp://lx@192.168.1.41//home/lx/nextcloud/docker-compose.yml<cr>", {

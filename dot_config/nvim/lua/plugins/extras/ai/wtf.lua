@@ -3,13 +3,13 @@ return {
 
 	opts = {
 		openai_api_key = vim.fn.getenv("OPENAI_API_KEY"),
-		openai_model_id = "gpt-3.5-turbo",
-		language = "russian",
+		openai_model_id = "gpt-4o",
+		language = "english",
 	},
 
 	keys = {
 		{
-			"<leader>cD",
+			"<leader>gw",
 			[[<cmd>lua require("wtf").ai()<cr>]],
 			desc = "Debug diagnostic with AI",
 			mode = { "n", "x" },
