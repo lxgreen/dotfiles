@@ -33,9 +33,10 @@ local options = {
 	listchars = { eol = " ", space = "·", tab = "→ " },
 	fillchars = { diff = " ", eob = " " },
 
-	spell = true,
-	spelllang = "en_us",
-	spelloptions = { "camel" },
+	spell = false,
+	-- spelllang = "en_us",
+	-- spelloptions = { "camel" },
+	-- spellfile = vim.fn.stdpath("config") .. "/spell/en.utf-8.add",
 
 	langmap = OptionsUtil.langmap_create(),
 }
