@@ -7,7 +7,7 @@ return {
 		"folke/trouble.nvim",
 		{
 			"folke/which-key.nvim",
-			opts = { defaults = { ["<leader>h"] = { name = "+chatgpt" } } },
+			opts = { defaults = { ["<leader>h"] = { group = "chatgpt" } } },
 		},
 	},
 

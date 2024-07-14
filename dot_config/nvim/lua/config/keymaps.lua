@@ -35,8 +35,8 @@ map(
 map({ "n" }, "<leader>m", "<cmd>Neotree focus<CR>", { desc = "Open/focus file explorer" })
 map({ "n" }, "<leader>o", "<cmd>Oil<CR>", { desc = "Open cwd as a buffer" })
 
--- close buffer on Q
-map({ "v", "n", "s" }, "<S-q>", "<cmd>q<cr><esc>", { desc = "Close buffer" })
+-- close window on Q
+map({ "v", "n", "s" }, "<S-q>", "<cmd>q<cr><esc>", { desc = "Close window" })
 map({ "v", "n", "s" }, "<leader><S-q>", "<cmd>wqa<cr>", { desc = "Save all and quit" })
 
 -- restart LSP on <F3>
@@ -59,23 +59,11 @@ map("n", "<leader>D", function()
 end, { desc = "Split [d]efinition" })
 
 -- telescope
-map("n", "<leader>a", "<cmd>Telescope ast_grep<cr>", { desc = "Find on [A]ST" }) -- depends on ast_grep
+map("n", "<leader>sN", "<cmd>Telescope ast_grep<cr>", { desc = "AST [N]odes" }) -- depends on ast_grep
 
 -- notifications
 map({ "n", "i", "s", "o", "x" }, "<F1>", "<cmd>NoiceDismiss<CR>", { desc = "Dismiss Notifications" })
 map({ "n", "i", "s", "o", "x" }, "<F2>", "<cmd>Noice<CR>", { desc = "Show Notifications" })
-
--- change, delete, cut, paste
-map({ "n", "o", "x" }, "d", '"_d', { noremap = true, desc = "Delete" })
-map({ "n", "o", "x" }, "dd", '"_dd', { noremap = true, desc = "Delete line" })
-map({ "n", "x" }, "D", '"_D', { noremap = true, desc = "Delete EOL" })
-map({ "n", "o", "x" }, "c", '"_c', { noremap = true, desc = "Change" })
-map({ "n", "o", "x" }, "cc", '"_cc', { noremap = true, desc = "Change line" })
-map({ "n", "x" }, "C", '"_C', { noremap = true, desc = "Change EOL" })
-map({ "n", "o", "x" }, "m", "d", { noremap = true, desc = "Cut" })
-map({ "n", "o", "x" }, "mm", "dd", { noremap = true, desc = "Cut line" })
-map({ "n", "x" }, "M", "D", { noremap = true, desc = "Cut EOL" })
-map({ "n", "x" }, "<leader>P", '"+p', { noremap = true, desc = "Paste from clipboard" })
 
 -- tmux navigation
 local nvim_tmux_nav = require("nvim-tmux-navigation")
