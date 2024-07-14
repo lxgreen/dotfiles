@@ -1,6 +1,7 @@
 return {
 	"ThePrimeagen/harpoon",
 	optional = true,
+	enabled = false,
 
 	keys = {
 		{

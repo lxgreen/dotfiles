@@ -18,13 +18,6 @@ return {
 		"LazyVim/LazyVim",
 		import = "lazyvim.plugins",
 
-		dependencies = {
-			{
-				"folke/which-key.nvim",
-				opts = { defaults = { ["<leader>l"] = { name = "+lazy" } } },
-			},
-		},
-
 		opts = {
 			kind_filter = kind_filter,
 			news = { lazyvim = true, neovim = true },
