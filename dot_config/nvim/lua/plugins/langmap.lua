@@ -42,7 +42,12 @@ return {
 			opts.plugins = { spelling = false }
 			opts.icons = { group = " " }
 			opts.layout = { spacing = 5 }
-			opts.window = { winblend = 15 }
+			opts.modes = { "n", "o", "x" }
+			opts.show_help = true
+			-- opts.triggers_blacklist = { i = { "n" } }
+			opts.triggers = {
+				{ "<leader>", mode = { "n", "v" } },
+			}
 		end,
 
 		config = function(_, opts)
