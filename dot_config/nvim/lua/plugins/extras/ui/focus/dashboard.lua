@@ -88,6 +88,7 @@ local section = {
 		val = {
 			button("l", "L", "󰒲  Lazy", "<cmd>Lazy<cr>"),
 			button("x", "X", "󰏗  Extras", "<cmd>LazyExtras<cr>"),
+			button("c", "C", "🔧 Config", "<cmd>e ~/.config/nvim/<cr>"),
 			button("q", "Q", "  Quit", "<cmd>qa<cr>"),
 		},
 	},
