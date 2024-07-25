@@ -7,5 +7,4 @@ brew "koekeishiya/formulae/yabai", args: ["HEAD"]
 
 tap "homebrew/cask"
 tap "homebrew/core"
-brew "exa"
 brew "trash"
