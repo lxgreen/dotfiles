@@ -59,7 +59,7 @@ alias bl="brew list"
 alias ww='w3m -no-mouse'
 alias -g CL="| xargs wc -l"
 alias -g G="| grep"
-alias ll='exa -lah --git'
+# alias ll='ls -lagthF'
 if [ -n "$(alias fd)" ]; then
   unalias fd
 fi
@@ -173,3 +173,5 @@ function cz() {
   fi
 }
 
+source $XDG_CONFIG_HOME/zsh/plugins/k.zsh
+alias ll='k -ath'
