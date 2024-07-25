@@ -11,6 +11,7 @@
     "lazyvim.plugins.extras.lang.git",
     "lazyvim.plugins.extras.lang.haskell",
     "lazyvim.plugins.extras.lang.json",
+    "lazyvim.plugins.extras.lang.markdown",
     "lazyvim.plugins.extras.lang.toml",
     "lazyvim.plugins.extras.lang.typescript",
     "lazyvim.plugins.extras.linting.eslint",
@@ -52,6 +53,7 @@
     "plugins.extras.hacks.lazyvim-lualine-pretty-path",
     "plugins.extras.hacks.lazyvim-pretty-terminal-open",
     "plugins.extras.hacks.lualine-pretty-extensions",
+    "plugins.extras.lang.bigfile",
     "plugins.extras.lang.css",
     "plugins.extras.lang.haskell",
     "plugins.extras.lang.lua",
@@ -109,8 +111,8 @@
     "plugins.extras.ui.style.windows.bolder-separators"
   ],
   "news": {
-    "NEWS.md": "6296",
-    "doc/news.txt": "24447"
+    "NEWS.md": "6520",
+    "doc/news.txt": "24450"
   },
   "version": 6
 }

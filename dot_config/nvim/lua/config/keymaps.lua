@@ -163,6 +163,12 @@ map(
 	"<cmd>lua require('textcase').current_word('to_dot_case')<cr>",
 	{ desc = "Rename to dot case (current word)" }
 )
+map(
+	"n",
+	"ga,",
+	"<cmd>lua require('textcase').current_word('to_comma_case')<cr>",
+	{ desc = "Rename to comma case (current word)" }
+)
 
 map("n", "gaU", "<cmd>lua require('textcase').lsp_rename('to_upper_case')<cr>", { desc = "Rename to upper case (LSP)" })
 map("n", "gaL", "<cmd>lua require('textcase').lsp_rename('to_lower_case')<cr>", { desc = "Rename to lower case (LSP)" })
@@ -194,6 +200,12 @@ map(
 	"ga>",
 	"<cmd>lua require('textcase').lsp_rename('to_dot_case')<cr>",
 	{ desc = "Rename to dot case (current word)" }
+)
+map(
+	"n",
+	"ga<",
+	"<cmd>lua require('textcase').lsp_rename('to_comma_case')<cr>",
+	{ desc = "Rename to comma case (current word)" }
 )
 
 map(
@@ -255,6 +267,13 @@ map(
 	"gof",
 	"<cmd>lua require('textcase').operator('to_path_case')<cr>",
 	{ desc = "Rename to path case (operator)" }
+)
+map("n", "go>", "<cmd>lua require('textcase').operator('to_dot_case')<cr>", { desc = "Rename to dot case (operator)" })
+map(
+	"n",
+	"go,",
+	"<cmd>lua require('textcase').operator('to_comma_case')<cr>",
+	{ desc = "Rename to comma case (operator)" }
 )
 
 -- visual mode surround mappings
