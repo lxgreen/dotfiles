@@ -175,3 +175,4 @@ function cz() {
 
 source $XDG_CONFIG_HOME/zsh/plugins/k.zsh
 alias ll='k -ath'
+source $XDG_CONFIG_HOME/zsh/plugins/yy.zsh
