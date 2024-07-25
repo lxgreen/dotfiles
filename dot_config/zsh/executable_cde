@@ -6,16 +6,13 @@ LANG=$(
 )
 
 SG_PREFIX="sg --lang $LANG --pattern"
-IFS=: read -ra selected < <(
-	FZF_DEFAULT_COMMAND="$SG_PREFIX '$(printf %q)' ." \
-		fzf --ansi \
-		--disabled \
-		--query "\$A" \
-		--bind "change:reload:sleep 0.1; $SG_PREFIX {q} || true" \
-		--delimiter : \
-		--preview 'bat --color=always {1} --highlight-line {2}' \
-		--preview-window 'up,60%,border-bottom,+{2}+3/3,~3' \
-		--prompt "$LANG pattern > " \
-		--header "type $LANG expression pattern ($A-Z => token, $$$ => tokens to skip)"
-)
-[ -n "${selected[0]}" ] && nvim "${selected[0]}:${selected[1]}:${selected[2]}"
+fzf --ansi \
+	--disabled \
+	--query "\$A" \
+	--bind "change:reload:sleep 0.1; $SG_PREFIX {q} || true" \
+	--delimiter : \
+	--preview 'bat --color=always {1} --highlight-line {2}' \
+	--preview-window 'up,60%,border-bottom,+{2}+3/3,~3' \
+	--prompt "$LANG pattern > " \
+	--header "type $LANG expression pattern ($A-Z => token, $$$ => tokens to skip)" \
+	--bind 'enter:become(nvim "+call cursor({2},{3})" {1})'
