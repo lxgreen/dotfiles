@@ -42,7 +42,6 @@ return {
 			opts.plugins = { spelling = false }
 			opts.icons = { group = " " }
 			opts.layout = { spacing = 5 }
-			opts.modes = { "n", "o", "x" }
 			opts.show_help = true
 			-- opts.triggers_blacklist = { i = { "n" } }
 			opts.triggers = {

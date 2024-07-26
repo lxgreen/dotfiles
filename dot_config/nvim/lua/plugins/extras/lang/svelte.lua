@@ -17,13 +17,20 @@ local function notify_ts_files_changed()
 	end)
 end
 
+local function prettier_svelte_formatter()
+	local formatter = require("conform.formatters.prettier")
+	formatter.args = { "--stdin-filepath", "$FILENAME" }
+
+	return formatter
+end
+
 return {
+	{ import = "lazyvim.plugins.extras.lang.svelte" },
+	{ import = "lazyvim.plugins.extras.lang.typescript" },
 	{
 		"neovim/nvim-lspconfig",
 		dependencies = { "hrsh7th/cmp-nvim-lsp" },
 		opts = {
-			servers = { svelte = {} },
-
 			setup = {
 				svelte = function(_, opts)
 					local lspconfig = require("lspconfig")
@@ -38,11 +45,19 @@ return {
 	},
 
 	{
-		"nvim-treesitter/nvim-treesitter",
+		"conform.nvim",
+		opts = { formatters = { prettier_svelte = prettier_svelte_formatter() } },
+	},
+
+	{
+		"conform.nvim",
 		optional = true,
+
 		opts = function(_, opts)
-			opts.ensure_installed = opts.ensure_installed or {}
-			vim.list_extend(opts.ensure_installed, { "svelte", "scss" })
+			if LazyVim.has_extra("formatting.prettier") then
+				opts.formatters_by_ft = opts.formatters_by_ft or {}
+				opts.formatters_by_ft.svelte = { "prettier_svelte", "stylelint" }
+			end
 		end,
 	},
 }
