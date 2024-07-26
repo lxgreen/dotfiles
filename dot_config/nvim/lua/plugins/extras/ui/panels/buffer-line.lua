@@ -62,12 +62,6 @@ return {
 				end,
 			},
 		},
-
-		keys = {
-			{ "<leader>bg", "<cmd>BufferLinePick<cr>", mode = { "n", "v", "t" }, desc = "Pick Buffer" },
-			{ "<leader>bm[", buffer_move_create("prev"), desc = "Move buffer (prev)" },
-			{ "<leader>bm]", buffer_move_create("next"), desc = "Move buffer (next)" },
-		},
 	},
 
 	{

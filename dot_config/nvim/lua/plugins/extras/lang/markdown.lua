@@ -119,16 +119,6 @@ return {
 		end,
 	},
 	{
-		"lukas-reineke/headlines.nvim",
-		dependencies = "nvim-treesitter/nvim-treesitter",
-		ft = { "markdown" },
-		opts = {
-			markdown = {
-				codeblock_highlight = false,
-			},
-		},
-	},
-	{
 		"aspeddro/slides.nvim",
 		ft = { "markdown" },
 		config = function()

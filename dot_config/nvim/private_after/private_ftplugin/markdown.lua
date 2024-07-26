@@ -46,32 +46,3 @@ vim.api.nvim_buf_set_keymap(
 	"<Cmd>ZkNotes { sort = { 'modified' } }<CR>",
 	{ silent = true, desc = "Open Notes" }
 )
-
-local wk = require("which-key")
-wk.register({
-	S = { "<Cmd>Slides<CR>", "[S]lides" },
-	Z = {
-		name = "[Z]ettelkasten",
-		b = { "<Cmd>ZkBacklinks<CR>", "[B]acklinks" },
-		l = { "<Cmd>ZkLinks<CR>", "[L]inks" },
-		o = { "<Cmd>ZkNotes { sort = { 'modified' } }<CR>", "[O]pen Notes" },
-		g = { "<Cmd>ZkTags<CR>", "Ta[g]s" },
-		s = { "<Cmd>ZkNotes { sort = { 'modified' }, match = { vim.fn.input('Search: ') } }<CR>", "[S]earch" },
-		n = { "<Cmd>ZkNew { dir = vim.fn.expand('%:p:h'), title = vim.fn.input('Title: ') }<CR>", "[N]ew Note" },
-		w = {
-			name = "bro[w]se",
-			i = { "<Cmd>Telekasten show_calendar<CR>", "d[i]ary" },
-			t = { "<Cmd>NewDiary <bar> Telekasten goto_today<CR>", "[t]oday" },
-			w = { "<Cmd>e ~/Sync/Notes/index.md<CR>", "[w]iki root" },
-		},
-	},
-	T = {
-		name = "[T]able",
-		t = { "<cmd>MkdnTable 3 3<cr>", "3x3 [T]able" },
-		f = { "<cmd>MkdnTableFormat<cr>", "[F]ormat" },
-		c = { "<cmd>MkdnTableNewColAfter<cr>", "Insert [C]olumn After" },
-		C = { "<cmd>MkdnTableNewColBefore<cr>", "Insert [C]olumn Before" },
-		r = { "<cmd>MkdnTableNewRowBelow<cr>", "Insert [R]ow Below" },
-		R = { "<cmd>MkdnTableNewRowAbove<cr>", "Insert [R]ow Above" },
-	},
-}, { prefix = "<leader>", silent = true, noremap = true, buffer = buffer_number })
