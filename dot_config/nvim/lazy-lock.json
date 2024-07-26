@@ -8,7 +8,7 @@
   "abbremand.nvim": { "branch": "main", "commit": "d633341f632b0b2666dfc6dfe6b9842ba1610a1d" },
   "alpha-nvim": { "branch": "main", "commit": "41283fb402713fc8b327e60907f74e46166f4cfd" },
   "auto-dark-mode.nvim": { "branch": "master", "commit": "2b8c938da9a7c9432120266b92936b2c22e8cfb8" },
-  "better-escape.nvim": { "branch": "master", "commit": "92b3d7d06ac3405178def49853f81118a12ea051" },
+  "better-escape.nvim": { "branch": "master", "commit": "b4d49fff133a24e47ce59548348f770b93d0b4f0" },
   "bigfile.nvim": { "branch": "main", "commit": "33eb067e3d7029ac77e081cfe7c45361887a311a" },
   "bufferline.nvim": { "branch": "main", "commit": "0b2fd861eee7595015b6561dade52fb060be10c4" },
   "catppuccin": { "branch": "main", "commit": "10eda02ea4faa7d1f94e77a3410a4ae91c25c5f5" },
