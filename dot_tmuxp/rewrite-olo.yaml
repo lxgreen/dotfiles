@@ -1,0 +1,25 @@
+
+session_name: rewrite-olo
+start_directory: $HOME/restaurants-dev/
+windows:
+  - window_name: OLO-BOB
+    shell_command_before:
+      - npm config set registry http://npm.dev.wixpress.com
+    layout: even-horizontal
+    start_directory: $HOME/restaurants-dev/restaurants-orders-blocks/packages/restaurants-orders-bob
+    panes:
+      - git status
+  - window_name: OLO-BM
+    shell_command_before:
+      - npm config set registry http://npm.dev.wixpress.com
+    layout: even-horizontal
+    start_directory: $HOME/restaurants-dev/restaurants-orders-bm/packages/restaurants-orders-settings
+    panes:
+      - git status
+  - window_name: OLO-COMMONS
+    shell_command_before:
+      - npm config set registry http://npm.dev.wixpress.com
+    layout: even-horizontal
+    start_directory: $HOME/restaurants-dev/restaurants-client-commons
+    panes:
+      - git status
