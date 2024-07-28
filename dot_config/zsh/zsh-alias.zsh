@@ -82,6 +82,10 @@ alias e='nvim' # edit
 alias t='vit'
 alias ts='task export > ~/Sync/tasks/tasks.json'
 
+source $XDG_CONFIG_HOME/zsh/plugins/k.zsh
+alias ll='k -ath'
+source $XDG_CONFIG_HOME/zsh/plugins/yy.zsh
+
 # Inbox note
 i() {
   if [[ -z $1 ]]; then
@@ -103,9 +107,9 @@ n() {
 # View file/directory
 v() {
   if [[ -z $1 ]]; then
-    exa -lah
+		k -ath
   elif [[ -d $1 ]]; then
-    exa -lah $1
+    k -ath $1
   else
     bat $1
   fi
@@ -172,7 +176,3 @@ function cz() {
     chezmoi "$@"
   fi
 }
-
-source $XDG_CONFIG_HOME/zsh/plugins/k.zsh
-alias ll='k -ath'
-source $XDG_CONFIG_HOME/zsh/plugins/yy.zsh
