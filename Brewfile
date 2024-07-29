@@ -144,10 +144,15 @@ brew "tmuxp"
 
 brew "w3m"
 
-
 brew "zk" # zettelkasten
 
 cask "font-hack-nerd-font"
 cask "font-jetbrains-mono"
 
 cask "keepassxc"
+
+cask "vlc"
+cask "telegram-desktop"
+cask "raycast"
+cask "karabiner-elements"
+brew "yazi", args: ["HEAD"]
