@@ -13,7 +13,7 @@ local keyboard_layout = sbar.add("item", {
 	padding_left = 0,
 	padding_right = 0,
 	display = "active",
-	position = "center",
+	position = "right",
 })
 
 local function update()
