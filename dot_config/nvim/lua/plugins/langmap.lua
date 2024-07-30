@@ -44,9 +44,9 @@ return {
 			opts.layout = { spacing = 5 }
 			opts.show_help = true
 			-- opts.triggers_blacklist = { i = { "n" } }
-			opts.triggers = {
-				{ "<leader>", mode = { "n", "v" } },
-			}
+			-- opts.triggers = {
+			-- 	{ "<leader>", mode = { "n", "v" } },
+			-- }
 		end,
 
 		config = function(_, opts)
@@ -60,7 +60,7 @@ return {
 			-- end
 
 			require("which-key").setup(opts)
-			require("which-key").register(opts.spec)
+			-- require("which-key").register(opts.spec)
 		end,
 	},
 }
