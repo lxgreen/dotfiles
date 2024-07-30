@@ -6,7 +6,7 @@ local buffer_delete_create = function(force)
 			local buffer_filetype = vim.api.nvim_get_option_value("filetype", { buf = buffer_number })
 
 			if buffer_filetype ~= "alpha" then
-				require("lazyvimx.util.buffer").delete(buffer_number, force)
+				require("util").delete(buffer_number, force)
 				vim.cmd([[redraw!]])
 			end
 
@@ -14,7 +14,7 @@ local buffer_delete_create = function(force)
 		end
 
 		function M.buffer_delete_repeat()
-			local char = require("lazyvimx.util.hacks").getcharstr()
+			local char = vim.fn.getcharstr()
 
 			if char == "d" then
 				M.buffer_delete(vim.fn.bufnr())
