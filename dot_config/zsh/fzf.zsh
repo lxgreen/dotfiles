@@ -1,6 +1,6 @@
 # fzf configuration
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+source <(fzf --zsh)
 
 # Returns whether the given command is executable or aliased.
 _has() {
