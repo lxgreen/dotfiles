@@ -154,5 +154,13 @@ return {
 				button("p", "P", " " .. " Projects", pick)
 			)
 		end
+
+		if LazyVim.has("persistence.nvim") then
+			table.insert(
+				opts.section.buttons.val,
+				#opts.section.buttons.val - 2,
+				button("s", "S", "  Restore Session", [[<cmd>lua require("persistence").load()<cr>]])
+			)
+		end
 	end,
 }
