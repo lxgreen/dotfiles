@@ -45,4 +45,5 @@ eval "$(pyenv init -)"
 source $ZDOTDIR/zsh-alias.zsh
 
 # spaceship prompt
-source /usr/local/opt/spaceship/spaceship.zsh
+source /opt/homebrew/opt/spaceship/spaceship.zsh
+export GPG_TTY=$(tty)
