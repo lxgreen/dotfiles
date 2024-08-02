@@ -15,7 +15,7 @@ export SAVEHIST=10000                   # Maximum events in history file
 
 export ZK_NOTEBOOK_DIR="~/Sync/Notes"
 export TERM="xterm-256color"
-export BAT_THEME=$([[ $MACOS_IS_DARK == "yes" ]] && echo "Catppuccin-frappe" || echo "Catppuccin-latte")
+export BAT_THEME=$([[ $MACOS_IS_DARK == "yes" ]] && echo "Catppuccin-mocha" || echo "Catppuccin-latte")
 export PATH="$HOME/.cargo/bin:/bin:/usr/bin:/usr/bin/python:/usr/local/opt/ruby/bin:$PATH"
 export LDFLAGS="-L/usr/local/opt/ruby/lib"
 export CPPFLAGS="-I/usr/local/opt/ruby/include"
