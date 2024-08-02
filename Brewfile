@@ -1,3 +1,6 @@
+tap "homebrew/cask"
+tap "homebrew/core"
+
 tap "cormacrelf/tap"
 brew "cormacrelf/tap/dark-notify"
 
@@ -8,6 +11,7 @@ tap "eth-p/software"
 brew "eth-p/software/bat-extras"
 
 tap "FelixKratz/formulae"
+brew "sketchybar"
 brew "svim"
 brew "borders"
 
@@ -156,3 +160,4 @@ cask "telegram-desktop"
 cask "raycast"
 cask "karabiner-elements"
 brew "yazi", args: ["HEAD"]
+brew "trash"
