@@ -10,6 +10,9 @@ brew "daipeihust/tap/im-select"
 tap "eth-p/software"
 brew "eth-p/software/bat-extras"
 
+tap "nikitabobko/tap"
+brew "nikitabobko/tap/aerospace"
+
 tap "FelixKratz/formulae"
 brew "sketchybar"
 brew "svim"
