@@ -17,8 +17,9 @@ local options = {
 	softtabstop = 2,
 	autoindent = true,
 
-	pumblend = 15,
-	winblend = 5,
+	-- cancel window transparency
+	pumblend = 0,
+	winblend = 0,
 
 	timeout = true,
 	timeoutlen = 350,
