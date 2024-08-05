@@ -61,10 +61,10 @@ return {
 	adjust_window_size_when_changing_font_size = false,
 	line_height = 1.2,
 	font_size = 15,
-	font = wezterm.font_with_fallback({
-		{ family = "SF Mono", weight = "Medium" },
-		"SF Pro",
-	}),
+	-- font = wezterm.font_with_fallback({
+	-- 	{ family = "SF Mono", weight = "Medium" },
+	-- 	"SF Pro",
+	-- }),
 
 	show_new_tab_button_in_tab_bar = false,
 	hide_tab_bar_if_only_one_tab = true,
