@@ -1,47 +1,46 @@
 local sbar = require("sketchybar")
 local colors = require("colors")
-local icons = require("icons")
 local settings = require("settings")
-local app_icons = require("helpers.app_icons")
 
--- Helper function to handle async command execution and response
-local function exec_cmd(cmd, callback)
-	sbar.exec(cmd, function(result)
-		if callback then
-			callback(result)
-		end
-	end)
-end
+local workspace = sbar.add("item", "aerospace", {
+	position = "left",
+	label = {
+		string = "",
+		color = colors.white,
+		highlight_color = colors.green,
+		font = {
+			family = settings.font.numbers,
+			style = settings.font.style_map["Bold"],
+			size = 20.0,
+		},
+		drawing = true,
+	},
+	padding_right = 12,
+})
 
--- Function to update workspace items
-local function update_workspaces()
-	exec_cmd("aerospace list-workspaces --all", function(result)
-		local workspaces = result -- Assuming `result` is JSON formatted and parsing is needed
-		for _, ws in ipairs(workspaces) do
-			local item_name = "space." .. ws.id
-			if not sbar.has_item(item_name) then
-				sbar.add("item", item_name, {
-					position = "left",
-					background = {
-						color = 0x44ffffff,
-						corner_radius = 5,
-						height = 20,
-						drawing = false,
+local function highlight_focused_workspace(env)
+	sbar.exec("aerospace list-workspaces --focused", function(focused_workspace)
+		for id in focused_workspace:gmatch("%S+") do
+			local is_focused = tostring(id) == focused_workspace:match("%S+")
+			sbar.animate("sin", 10, function()
+				workspace:set({
+					icon = {
+						highlight = is_focused,
 					},
-					label = ws.id,
-					script = "~/.config/sketchybar/plugins/aerospace.sh " .. ws.id,
-					on_click = function()
-						exec_cmd("aerospace workspace " .. ws.id)
-					end,
+					label = {
+						highlight = is_focused,
+						string = id,
+					},
 				})
-			end
+			end)
 		end
 	end)
 end
 
--- Subscribe to workspace change events
-sbar.add("event", "aerospace_workspace_change")
-sbar.subscribe("aerospace_workspace_change", update_workspaces)
+-- Subscribe to the front_app_switched event to highlight the focused workspace
+workspace:subscribe("front_app_switched", highlight_focused_workspace)
 
--- Initial call to setup workspace items
-update_workspaces()
+-- Initially highlight the focused workspace
+highlight_focused_workspace()
+
+return workspace

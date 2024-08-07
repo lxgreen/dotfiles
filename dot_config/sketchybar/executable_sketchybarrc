@@ -1,5 +1,16 @@
 #!/usr/bin/env lua
 
--- Load the sketchybar-package and prepare the helper binaries
+os.execute(
+	"[ ! -d $HOME/.local/share/sketchybar_lua/ ] && "
+		.. "(git clone https://github.com/FelixKratz/SbarLua.git /tmp/SbarLua && cd /tmp/SbarLua/ && make install)"
+)
+
+package.cpath = package.cpath .. ";" .. os.getenv("HOME") .. "/.local/share/sketchybar_lua/?.so"
+
+local sbar = require("sketchybar")
+sbar.begin_config()
 require("helpers")
 require("init")
+sbar.hotload(true)
+sbar.end_config()
+sbar.event_loop()
