@@ -15,7 +15,7 @@ local svim = sbar.add("item", {
 	padding_right = 0,
 
 	icon = {
-		align = "left",
+		align = "right",
 		font = { size = 26 },
 		padding_left = 0,
 		padding_right = 9,

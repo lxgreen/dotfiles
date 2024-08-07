@@ -74,7 +74,6 @@
     "plugins.extras.keys.nav.tmux",
     "plugins.extras.keys.nav.word",
     "plugins.extras.keys.notifications.noice",
-    "plugins.extras.keys.register.d-blackholed",
     "plugins.extras.keys.tab.rename",
     "plugins.extras.keys.terminal.open-cwd",
     "plugins.extras.keys.terminal.vit",

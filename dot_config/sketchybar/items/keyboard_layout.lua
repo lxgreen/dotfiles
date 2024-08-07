@@ -9,7 +9,7 @@ local icons = {
 }
 
 local keyboard_layout = sbar.add("item", {
-	icon = { font = { size = 26 }, align = "left" },
+	icon = { font = { size = 26 }, align = "right" },
 	padding_left = 0,
 	padding_right = 0,
 	display = "active",
