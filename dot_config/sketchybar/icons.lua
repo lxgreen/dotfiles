@@ -10,9 +10,13 @@ local icons = {
 		clipboard = "􀉄",
 
 		switch = {
-			on = "􁏮",
-			off = "􁏯",
+			on = "󱨥",
+			off = "󱨦",
 		},
+		-- switch = {
+		-- 	on = "􁏮",
+		-- 	off = "􁏯",
+		-- },
 		volume = {
 			_100 = "􀊩",
 			_66 = "􀊧",

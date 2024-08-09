@@ -69,7 +69,6 @@ for i = 1, 10, 1 do
 
 	space:subscribe("space_change", function(env)
 		local selected = env.SELECTED == "true"
-		local color = selected and colors.grey or colors.bg2
 		space:set({
 			icon = { highlight = selected },
 			label = { highlight = selected },
