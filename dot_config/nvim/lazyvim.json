@@ -66,6 +66,7 @@
     "plugins.extras.keys.files.find-by-yazi",
     "plugins.extras.keys.files.find-dir-current",
     "plugins.extras.keys.files.find-in-ast",
+    "plugins.extras.keys.git.advanced-search",
     "plugins.extras.keys.git.open-repo-temporarily-in-tab",
     "plugins.extras.keys.help.run-chtsh",
     "plugins.extras.keys.lsp.restart",

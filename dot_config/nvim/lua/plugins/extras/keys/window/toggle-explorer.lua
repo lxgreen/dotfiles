@@ -7,7 +7,7 @@ return {
 		{
 			"<leader>m",
 			"<cmd>Neotree focus<CR>",
-			{ desc = "Open/focus explorer" },
+			desc = "Open/focus explorer",
 		},
 	},
 }
