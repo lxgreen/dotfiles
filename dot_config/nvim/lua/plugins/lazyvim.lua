@@ -24,8 +24,8 @@ return {
 		},
 
 		keys = {
-			{ "<leader>ll", "<cmd>Lazy<cr>", { desc = "Lazy" } },
-			{ "<leader>lx", "<cmd>LazyExtras<cr>", { desc = "Lazy extras" } },
+			{ "<leader>ll", "<cmd>Lazy<cr>", desc = "Lazy" },
+			{ "<leader>lx", "<cmd>LazyExtras<cr>", desc = "Lazy extras" },
 		},
 	},
 
