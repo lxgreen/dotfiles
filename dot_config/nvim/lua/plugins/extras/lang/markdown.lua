@@ -1,11 +1,26 @@
 return {
 	{
-		"yaocccc/nvim-hl-mdcodeblock.lua",
-		dependencies = { "nvim-treesitter/nvim-treesitter" },
-		ft = { "markdown" },
+		"MeanderingProgrammer/markdown.nvim",
+		enabled = false,
+	},
+	{
+		"OXY2DEV/markview.nvim",
+		lazy = false,
+
+		dependencies = {
+			"nvim-tree/nvim-web-devicons",
+		},
+
 		config = function()
-			require("hl-mdcodeblock").setup({
-				-- option
+			require("markview").setup({
+				modes = { "n", "no", "c" },
+				hybrid_modes = { "n" },
+				callbacks = {
+					on_enable = function(_, win)
+						vim.wo[win].conceallevel = 2
+						vim.wo[win].concealcursor = "c"
+					end,
+				},
 			})
 		end,
 	},
