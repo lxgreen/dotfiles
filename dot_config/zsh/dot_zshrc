@@ -31,6 +31,7 @@ source $ZDOTDIR/vi-mode.zsh
 # plugins
 source $ZDOTDIR/plugins/git.zsh
 source $ZDOTDIR/plugins/ai.zsh
+source $ZDOTDIR/plugins/wezterm.zsh
 
 # sg completions
 eval "$(sg completions)"

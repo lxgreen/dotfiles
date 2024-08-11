@@ -2,8 +2,9 @@ local colors = require("colors")
 local icons = require("icons")
 local settings = require("settings")
 local app_icons = require("helpers.app_icons")
+local sbar = require("sketchybar")
 
-local workspace = sbar.add("item", "aerospace", {
+local workspace = sbar.add("item", "space", {
 	position = "left",
 	icon = {
 		font = { family = settings.font.numbers },
