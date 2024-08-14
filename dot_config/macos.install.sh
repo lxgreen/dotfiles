@@ -28,7 +28,6 @@ echo "Installing Brew..."
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 brew analytics off
 brew bundle install --global
-brew bundle install --file=$HOME/macos.Brewfile --global
 
 # /usr/bin/env zsh -c "wezterm_update_icon"
 
@@ -55,8 +54,11 @@ brew bundle install --file=$HOME/macos.Brewfile --global
 # /usr/bin/env zsh -c "cd $HOME/Library/ThemeSwitcher && swift build --configuration release"
 # launchctl load -w $HOME/Library/LaunchAgents/io.aimuzov.theme-switcher.plist
 #
-# echo "Setupping sketchybar..."
-# (git clone https://github.com/FelixKratz/SbarLua.git /tmp/SbarLua && cd /tmp/SbarLua/ && make install && rm -rf /tmp/SbarLua/)
+echo "Setupping sketchybar..."
+(git clone https://github.com/FelixKratz/SbarLua.git /tmp/SbarLua && cd /tmp/SbarLua/ && make install && rm -rf /tmp/SbarLua/)
+
+echo "Setupping tmux..."
+(git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm && ~/.tmux/plugins/tpm/bin/install_plugins)
 #
 # echo "Installing workflows scripts..."
 # /usr/bin/env zsh -c $HOME/.bin/workflows/install_workflows.zsh
@@ -115,7 +117,7 @@ defaults write com.apple.screencapture "location" -string "$HOME/temp/screenshot
 defaults write com.apple.screencapture "type" -string "png"
 
 defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)" -int "40"
-defaults write com.apple.menuextra.clock "IsAnalog" -bool "true" && killall SystemUIServer
+defaults write com.apple.menuextra.clock "IsAnalog" -bool "false" && killall SystemUIServer
 defaults write com.apple.LaunchServices "LSQuarantine" -bool "false"
 defaults write com.apple.spaces "spans-displays" -bool "false"
 
