@@ -43,3 +43,8 @@ customCommands:
     command: "git checkout -b {{.Form.BranchType}}/{{.Form.BranchName}}"
     description: "new branch"
     loadingText: "creating branch..."
+keybinding:
+  commits:
+    openLogMenu: <disabled>
+    moveDownCommit: <disabled>
+    moveUpCommit: <disabled>
