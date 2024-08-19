@@ -6,7 +6,7 @@ local function header_colorize(header)
 			type = "text",
 			val = chars,
 			opts = {
-				hl = "AlphaHeader4",
+				hl = "FlashLabel",
 				position = "center",
 			},
 		}
@@ -28,8 +28,8 @@ local function button(sc, icon, text, keybind)
 			keymap = { "n", sc, keybind, {} },
 			width = 42,
 			align_shortcut = "right",
-			hl = "AlphaButtons",
-			hl_shortcut = "AlphaShortcut",
+			hl = "FlashLabel",
+			hl_shortcut = "NeogitDiffAddHighlight",
 		},
 		on_press = function()
 			local key = vim.api.nvim_replace_termcodes(keybind .. "<Ignore>", true, false, true)
@@ -42,7 +42,7 @@ local buttons_wrap = function(border)
 	return {
 		type = "text",
 		val = string.rep(" ", 37) .. border,
-		opts = { position = "center", hl = "AlphaShortcutBorder" },
+		opts = { position = "center", hl = "FlashLabel" },
 	}
 end
 
@@ -88,7 +88,7 @@ local section = {
 		val = {
 			button("l", "L", "󰒲  Lazy", "<cmd>Lazy<cr>"),
 			button("x", "X", "󰏗  Extras", "<cmd>LazyExtras<cr>"),
-			button("c", "C", "🔧 Config", "<cmd>e ~/.config/nvim/<cr>"),
+			button("c", "C", "  Config", "<cmd>e ~/.config/nvim/<cr>"),
 			button("q", "Q", "  Quit", "<cmd>qa<cr>"),
 		},
 	},
@@ -101,7 +101,6 @@ local section = {
 
 return {
 	"goolord/alpha-nvim",
-
 	opts = function(_, opts)
 		opts.section = section
 		opts.opts = {
