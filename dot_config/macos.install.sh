@@ -59,7 +59,11 @@ echo "Setupping sketchybar..."
 
 echo "Setupping tmux..."
 (git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm && ~/.tmux/plugins/tpm/bin/install_plugins)
-#
+
+echo "Setupping latest bash..."
+echo "$(brew --prefix)/bin/bash" | sudo tee -a /etc/shells
+chsh -s "$(brew --prefix)/bin/bash"
+
 # echo "Installing workflows scripts..."
 # /usr/bin/env zsh -c $HOME/.bin/workflows/install_workflows.zsh
 
