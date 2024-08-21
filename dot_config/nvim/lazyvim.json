@@ -33,6 +33,7 @@
     "plugins.extras.ai.wtf",
     "plugins.extras.buffers.remove",
     "plugins.extras.buffers.scope",
+    "plugins.extras.coding.abbreviate",
     "plugins.extras.coding.auto-complete",
     "plugins.extras.coding.comments",
     "plugins.extras.coding.cut",

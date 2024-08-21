@@ -83,7 +83,7 @@ alias t='vit'
 alias ts='task export > ~/Sync/tasks/tasks.json'
 
 source $XDG_CONFIG_HOME/zsh/plugins/k.zsh
-alias l='k -ath'
+alias l='eza -lah --git --reverse --sort=modified'
 source $XDG_CONFIG_HOME/zsh/plugins/yy.zsh
 
 # Inbox note
