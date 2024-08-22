@@ -86,6 +86,7 @@ return {
 	use_ime = true,
 
 	keys = {
+		{ key = "k", mods = "SUPER", action = wezterm.action.QuickSelect },
 		{ key = "р", mods = "CTRL", action = wezterm.action.SendString("\x08") },
 		{ key = "h", mods = "CTRL|SHIFT", action = wezterm.action.DisableDefaultAssignment },
 		{ key = "k", mods = "CTRL|SHIFT", action = wezterm.action.DisableDefaultAssignment },
