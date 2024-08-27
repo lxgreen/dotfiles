@@ -82,7 +82,6 @@ alias e='nvim' # edit
 alias t='vit'
 alias ts='task export > ~/Sync/tasks/tasks.json'
 
-source $XDG_CONFIG_HOME/zsh/plugins/k.zsh
 alias l='eza -lah --git --reverse --sort=modified'
 source $XDG_CONFIG_HOME/zsh/plugins/yy.zsh
 
@@ -107,9 +106,9 @@ n() {
 # View file/directory
 v() {
   if [[ -z $1 ]]; then
-		k -ath
+		eza -lah --git --reverse --sort=modified
   elif [[ -d $1 ]]; then
-    k -ath $1
+    eza -lah --git --reverse --sort=modified
   else
     bat $1
   fi

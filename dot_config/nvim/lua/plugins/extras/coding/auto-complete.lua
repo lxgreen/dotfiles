@@ -95,6 +95,7 @@ return {
 			}
 
 			opts.sources = cmp.config.sources({
+				{ name = "luasnip" },
 				{
 					name = "nvim_lsp",
 					entry_filter = function(entry)
@@ -105,18 +106,17 @@ return {
 			}, {
 
 				{ name = "copilot" },
-				{ name = "luasnip" },
 				{ name = "path" },
 				{ name = "buffer", keyword_length = 3 },
 				{ name = "nvim_lua" },
 			})
 			cmp.setup.filetype("gitcommit", {
 				sources = cmp.config.sources({
+					{ name = "luasnip" },
 					{ name = "workspaces" },
 					{ name = "buffer" },
 					{ name = "git" }, -- depends on https://github.com/petertriho/cmp-git
 					{ name = "copilot" },
-					{ name = "luasnip" },
 				}),
 			})
 		end,
