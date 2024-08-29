@@ -1,3 +1,5 @@
+BAT="bat --theme=\$(defaults read -globalDomain AppleInterfaceStyle &> /dev/null && echo 'Catppuccin-Mocha' || echo 'Catppuccin-Latte')"
+
 # zsh
 alias zr="exec zsh"
 alias zshrc="nvim $ZDOTDIR"
@@ -40,7 +42,7 @@ alias yyt="yarn && yarn test"
 alias firefox='function _fox(){ (cd /Applications/Firefox\ Developer\ Edition.app/Contents/MacOS && ./firefox $1) }; _fox $1' # TODO: machine specific
 alias ff='firefox NUL &'
 alias man='batman'
-alias cat="bat"
+alias cat=$BAT
 alias lg='lazygit'
 
 # Catppuccin theme colors
@@ -110,7 +112,7 @@ v() {
   elif [[ -d $1 ]]; then
     eza -lah --git --reverse --sort=modified
   else
-    bat $1
+		eval $BAT "$1"
   fi
 }
 
