@@ -36,15 +36,21 @@ source $ZDOTDIR/plugins/wezterm.zsh
 # sg completions
 eval "$(sg completions)"
 
-# haskell env init
-[ -f "/Users/alexgr/.ghcup/env" ] && source "/Users/alexgr/.ghcup/env" # ghcup-env
-
+# gpg
+export GPG_TTY=$(tty)
 # python env init
 eval "$(pyenv init -)"
 
+# OS specific
+{{ if eq .chezmoi.os "darwin" }}
+source /opt/homebrew/opt/spaceship/spaceship.zsh
+eval "$(/bin/brew shellenv)"
+# haskell env init
+[ -f "/Users/alexgr/.ghcup/env" ] && source "/Users/alexgr/.ghcup/env" # ghcup-env
+{{ else if eq .chezmoi.os "linux" }}
+source $ZDOTDIR/spaceship/spaceship.zsh
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+{{ end }}
+
 # aliases -- keep this last
 source $ZDOTDIR/zsh-alias.zsh
-
-# spaceship prompt
-source /opt/homebrew/opt/spaceship/spaceship.zsh
-export GPG_TTY=$(tty)

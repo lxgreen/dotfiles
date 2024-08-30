@@ -10,13 +10,21 @@ brew "daipeihust/tap/im-select"
 tap "eth-p/software"
 brew "eth-p/software/bat-extras"
 
+{{ if eq .chezmoi.os "darwin" }}
 tap "nikitabobko/tap"
 brew "nikitabobko/tap/aerospace"
-
 tap "FelixKratz/formulae"
 brew "sketchybar"
 brew "svim"
 brew "borders"
+
+cask "wezterm"
+cask "keepassxc"
+cask "vlc"
+cask "telegram-desktop"
+cask "raycast"
+cask "karabiner-elements"
+{{ end }}
 
 tap "homebrew/bundle" # brew infra
 tap "homebrew/cask-fonts"
@@ -145,7 +153,6 @@ brew "slides"
 brew "task"
 brew "taskwarrior-tui"
 
-cask "wezterm"
 brew "tmux"
 brew "tmuxp"
 
@@ -156,11 +163,6 @@ brew "zk" # zettelkasten
 cask "font-hack-nerd-font"
 cask "font-jetbrains-mono"
 
-cask "keepassxc"
-
-cask "vlc"
-cask "telegram-desktop"
-cask "raycast"
-cask "karabiner-elements"
 brew "yazi", args: ["HEAD"]
 brew "trash"
+brew "eza"
