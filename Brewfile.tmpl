@@ -1,16 +1,14 @@
 tap "homebrew/cask"
 tap "homebrew/core"
 
-tap "cormacrelf/tap"
-brew "cormacrelf/tap/dark-notify"
-
-tap "daipeihust/tap"
-brew "daipeihust/tap/im-select"
-
 tap "eth-p/software"
 brew "eth-p/software/bat-extras"
 
 {{ if eq .chezmoi.os "darwin" }}
+tap "cormacrelf/tap"
+brew "cormacrelf/tap/dark-notify"
+tap "daipeihust/tap"
+brew "daipeihust/tap/im-select"
 tap "nikitabobko/tap"
 brew "nikitabobko/tap/aerospace"
 tap "FelixKratz/formulae"
