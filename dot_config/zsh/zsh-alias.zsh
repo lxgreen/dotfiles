@@ -98,6 +98,7 @@ i() {
 
 # Note
 n() {
+	FZF_DEFAULT_OPTS="--extended --color=$(defaults read -globalDomain AppleInterfaceStyle &> /dev/null && echo $FZF_MOCHA_COLORS || echo $FZF_LATTE_COLORS)"
   if [[ -z $1 ]]; then
     zk edit -i -W ~/Sync/Notes/
   else
