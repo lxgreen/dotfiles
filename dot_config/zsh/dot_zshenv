@@ -7,8 +7,6 @@ export EDITOR="nvim"
 export VISUAL="nvim"
 export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
 
-MACOS_IS_DARK=$([[ $(defaults read -g AppleInterfaceStyle 2>&1) == "Dark" ]] && echo "yes" || echo "no")
-
 export HISTFILE="$ZDOTDIR/.zsh_history"    # History filepath
 export HISTSIZE=10000                   # Maximum events for internal history
 export SAVEHIST=10000                   # Maximum events in history file
@@ -28,13 +26,4 @@ export LC_NUMERIC="en_US.UTF-8"
 export LC_TIME="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 
-export FZF_DEFAULT_OPTS=$([[ $MACOS_IS_DARK == "yes" ]] && echo " \
---color=bg+:#414559,bg:#303446,spinner:#f2d5cf,hl:#e78284 \
---color=fg:#c6d0f5,header:#e78284,info:#ca9ee6,pointer:#f2d5cf \
---color=marker:#f2d5cf,fg+:#c6d0f5,prompt:#ca9ee6,hl+:#e78284" || echo " \
---color=bg+:#ccd0da,bg:#eff1f5,spinner:#dc8a78,hl:#d20f39 \
---color=fg:#4c4f69,header:#d20f39,info:#8839ef,pointer:#dc8a78 \
---color=marker:#dc8a78,fg+:#4c4f69,prompt:#8839ef,hl+:#d20f39")
-
-export _ZO_FZF_OPTS="--height 40% --layout=reverse --border"
 export NVIM_PIPE="$HOME/.cache/nvim/server.pipe"
