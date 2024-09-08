@@ -21,6 +21,17 @@ end
 return {
 	"nvim-telescope/telescope.nvim",
 
+	dependencies = {
+		"danielfalk/smart-open.nvim",
+		priority = 1,
+		dependencies = {
+			"kkharji/sqlite.lua",
+			{ "nvim-telescope/telescope-fzf-native.nvim", make = "build" },
+			{ "nvim-telescope/telescope-fzy-native.nvim" },
+		},
+		config = true,
+	},
+
 	opts = {
 		defaults = {
 			layout_strategy = "vertical",
@@ -32,6 +43,13 @@ return {
 			mappings = {
 				i = { ["<cr>"] = open_selected },
 			},
+			extensions = {
+				smart_open = {
+					match_algorithm = "fzf",
+					rcwd_only = true,
+					filename_first = false,
+				},
+			},
 		},
 	},
 
@@ -40,6 +58,11 @@ return {
 			"<leader>fc",
 			"<cmd>Telescope find_files cwd=" .. dotfiles_path .. "<cr>",
 			desc = "Find dotfile",
+		},
+		{
+			"<leader><space>",
+			[[<cmd>Telescope smart_open theme=dropdown previewer=false<cr>]],
+			desc = "Find Files (Smart open)",
 		},
 	},
 
@@ -60,6 +83,10 @@ return {
 
 		if LazyVim.has("scope.nvim") then
 			require("telescope").load_extension("scope")
+		end
+
+		if LazyVim.has("smart-open") then
+			require("telescope").load_extension("smart-open")
 		end
 	end,
 }

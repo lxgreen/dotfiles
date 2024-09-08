@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+FZF_DEFAULT_OPTS="--extended --color=$(defaults read -globalDomain AppleInterfaceStyle &>/dev/null && echo $FZF_MOCHA_COLORS || echo $FZF_LATTE_COLORS)"
+
 languages="ts\ntsx\ncss\njson\n"
 LANG=$(
 	echo -e "$languages" | fzf --prompt="Select a language: "
