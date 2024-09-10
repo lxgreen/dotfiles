@@ -20,10 +20,8 @@ end
 
 return {
 	"nvim-telescope/telescope.nvim",
-
 	dependencies = {
 		"danielfalk/smart-open.nvim",
-		priority = 1,
 		dependencies = {
 			"kkharji/sqlite.lua",
 			{ "nvim-telescope/telescope-fzf-native.nvim", make = "build" },
@@ -31,7 +29,6 @@ return {
 		},
 		config = true,
 	},
-
 	opts = {
 		defaults = {
 			layout_strategy = "vertical",
@@ -46,7 +43,7 @@ return {
 			extensions = {
 				smart_open = {
 					match_algorithm = "fzf",
-					rcwd_only = true,
+					cwd_only = true,
 					filename_first = false,
 				},
 			},
