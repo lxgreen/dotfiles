@@ -3,6 +3,10 @@ return {
 	config = function()
 		local fzf_lua = require("fzf-lua")
 		fzf_lua.setup({
+			keys = {
+				{ "<leader><space>", false },
+				{ "<space><space>", false },
+			},
 			winopts = {
 				on_create = function()
 					local function feedkeys(normal_key, insert_key)
