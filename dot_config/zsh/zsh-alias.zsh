@@ -178,3 +178,9 @@ function cz() {
     chezmoi "$@"
   fi
 }
+
+# Math
+m() { printf "%s\n" "$@" | bc -l; }
+
+# presenterm
+alias p='presenterm'
