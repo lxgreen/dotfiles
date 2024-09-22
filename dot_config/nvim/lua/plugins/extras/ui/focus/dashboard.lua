@@ -122,12 +122,6 @@ return {
 				button("f", "F", "  Find file", "<cmd>FzfLua files<cr>")
 			)
 
-			table.insert(
-				opts.section.buttons.val,
-				#opts.section.buttons.val - 2,
-				button("r", "R", "  Recent files", "<cmd>FzfLua oldfiles<cr>")
-			)
-
 			local pick = function()
 				if LazyVim.pick.picker.name == "telescope" then
 					return vim.cmd("Telescope projects")
@@ -153,6 +147,12 @@ return {
 				button("p", "P", " " .. " Projects", pick)
 			)
 		end
+
+		table.insert(
+			opts.section.buttons.val,
+			#opts.section.buttons.val - 2,
+			button("r", "R", "  Recent files", [[<cmd>Telescope smart_open theme=dropdown previewer=false<cr>]])
+		)
 
 		if LazyVim.has("persistence.nvim") then
 			table.insert(
