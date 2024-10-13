@@ -206,6 +206,11 @@ return {
 		},
 	},
 
+	-- requires kitty.terminfo
+	-- install with: tempfile=$(mktemp) && curl -o "$tempfile" https://raw.githubusercontent.com/kovidgoyal/kitty/master/terminfo/kitty.terminfo && tic -x -o ~/.terminfo "$tempfile" && rm "$tempfile"
+	term = "xterm-kitty",
+	enable_kitty_graphics = true,
+
 	-- https://github.com/wez/wezterm/issues/119#issuecomment-1206593847
 	-- TODO: figure out why it doesn't work
 	-- mouse_bindings = {
