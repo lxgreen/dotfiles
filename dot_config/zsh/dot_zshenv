@@ -12,7 +12,6 @@ export HISTSIZE=10000                   # Maximum events for internal history
 export SAVEHIST=10000                   # Maximum events in history file
 
 export ZK_NOTEBOOK_DIR="~/Sync/Notes"
-export TERM="xterm-256color"
 export PATH="$HOME/.cargo/bin:/bin:/usr/bin:/usr/bin/python:/usr/local/opt/ruby/bin:$HOME/Library/Python/3.9/bin:$PATH"
 export LDFLAGS="-L/usr/local/opt/ruby/lib"
 export CPPFLAGS="-I/usr/local/opt/ruby/include"
