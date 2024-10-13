@@ -20,12 +20,12 @@ return {
 			servers = {
 				ltex = {
 					enabled = { "markdown" },
-					language = "auto",
+					language = "en-US",
 					diagnosticSeverity = "information",
 					sentenceCacheSize = 2000,
 					additionalRules = {
 						enablePickyRules = true,
-						motherTongue = "en",
+						motherTongue = "en-US",
 					},
 					disabledRules = {},
 				},

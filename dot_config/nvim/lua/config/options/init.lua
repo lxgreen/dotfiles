@@ -35,9 +35,9 @@ local options = {
 	fillchars = { diff = " ", eob = " " },
 
 	spell = false,
-	spelllang = "",
-	-- spelloptions = { "camel" },
-	-- spellfile = vim.fn.stdpath("config") .. "/spell/en.utf-8.add",
+	spelllang = "en,ru",
+	spelloptions = { "camel" },
+	spellfile = vim.fn.stdpath("config") .. "/spell/en.utf-8.add",
 
 	langmap = OptionsUtil.langmap_create(),
 }
