@@ -38,7 +38,7 @@ return {
 						local mode_icon_raw = mode_icon_map[mode_name_upper]
 						local mode_icon_safety = mode_icon_raw == nil and "" or mode_icon_raw
 
-						return mode_icon_safety .. " " .. mode_name_lower
+						return mode_icon_safety
 					end,
 				},
 			}
