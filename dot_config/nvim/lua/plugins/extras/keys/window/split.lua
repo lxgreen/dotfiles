@@ -13,6 +13,7 @@ return {
 			end,
 			desc = "Split [d]efinition",
 		},
+		{ "<leader>W", "<cmd>EslintFixAll<cr><cmd>noa w<cr>", desc = "Fix and [W]rite" },
 		{
 			"<leader>R",
 			"<cmd>vs scp://lx@192.168.1.41//home/lx/nextcloud/docker-compose.yml<cr>",
