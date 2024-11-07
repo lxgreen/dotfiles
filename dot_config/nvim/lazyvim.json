@@ -89,6 +89,7 @@
     "plugins.extras.lang.bigfile",
     "plugins.extras.lang.css",
     "plugins.extras.lang.help",
+    "plugins.extras.lang.json",
     "plugins.extras.lang.lua",
     "plugins.extras.lang.markdown",
     "plugins.extras.lang.markdown.markdown",
