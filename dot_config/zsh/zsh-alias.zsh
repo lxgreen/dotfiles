@@ -184,3 +184,7 @@ m() { printf "%s\n" "$@" | bc -l; }
 
 # presenterm
 alias p='presenterm'
+
+alias x='exit'
+alias xx='tmux kill-session -t .'
+alias xxx='tmux kill-server -t .'

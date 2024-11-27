@@ -1,7 +1,7 @@
 {
   "extras": [
-    "lazyvim.plugins.extras.coding.copilot",
-    "lazyvim.plugins.extras.coding.copilot-chat",
+    "lazyvim.plugins.extras.ai.copilot",
+    "lazyvim.plugins.extras.ai.copilot-chat",
     "lazyvim.plugins.extras.coding.luasnip",
     "lazyvim.plugins.extras.coding.mini-surround",
     "lazyvim.plugins.extras.coding.yanky",
@@ -55,7 +55,6 @@
     "plugins.extras.hacks.conform-stylelint-custom-syntax-for-svelte",
     "plugins.extras.hacks.lazy-pretty-keys",
     "plugins.extras.hacks.lazyvim-lualine-pretty-path",
-    "plugins.extras.hacks.lazyvim-pretty-terminal-open",
     "plugins.extras.hacks.lualine-pretty-extensions",
     "plugins.extras.keys.ai.chatgpt",
     "plugins.extras.keys.ai.wtf",
@@ -93,7 +92,6 @@
     "plugins.extras.lang.lua",
     "plugins.extras.lang.markdown",
     "plugins.extras.lang.markdown.markdown",
-    "plugins.extras.lang.markdown.tasks",
     "plugins.extras.lang.spell",
     "plugins.extras.linting.stylelint",
     "plugins.extras.nav.better-escape",
@@ -150,8 +148,8 @@
     "plugins.extras.ui.style.windows.bolder-separators"
   ],
   "news": {
-    "NEWS.md": "6520",
+    "NEWS.md": "7429",
     "doc/news.txt": "24450"
   },
-  "version": 6
+  "version": 7
 }
