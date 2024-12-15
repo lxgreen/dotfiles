@@ -43,7 +43,7 @@ eval "$(pyenv init -)"
 
 # OS specific
 {{ if eq .chezmoi.os "darwin" }}
-source /opt/homebrew/opt/spaceship/spaceship.zsh
+eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/config.json)"
 eval "$(/opt/homebrew/bin/brew shellenv)"
 # haskell env init
 [ -f "/Users/alexgr/.ghcup/env" ] && source "/Users/alexgr/.ghcup/env" # ghcup-env
