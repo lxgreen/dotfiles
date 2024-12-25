@@ -16,8 +16,7 @@ local function update()
 		vpn:set({ label = label, icon = icon })
 	end)
 
-	local command =
-		"curl --connect-timeout 3 -f --silent --output /dev/null 'https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos'"
+	local command = "curl --connect-timeout 3 -f --silent --output /dev/null 'https://bo.wix.com'"
 
 	-- Running command and capturing exit code
 	local handle = io.popen(command .. "; echo $?")
