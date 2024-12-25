@@ -6,7 +6,7 @@ return {
 			modules = {
 				bib = true,
 				buffers = true,
-				cmp = true,
+				cmp = false,
 				conceal = true,
 				cursor = true,
 				folds = true,
