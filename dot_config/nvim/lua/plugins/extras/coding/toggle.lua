@@ -36,6 +36,7 @@ return {
 				},
 				-- removes the default set of inverses
 				remove_default_inverses = true,
+				remove_default_keybinds = true,
 			})
 		end,
 	},

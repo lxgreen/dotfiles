@@ -72,6 +72,7 @@
     "plugins.extras.keys.help.run-chtsh",
     "plugins.extras.keys.lsp.rename",
     "plugins.extras.keys.lsp.restart",
+    "plugins.extras.keys.lsp.toggle",
     "plugins.extras.keys.nav.add-cursor",
     "plugins.extras.keys.nav.go-to-context",
     "plugins.extras.keys.nav.tmux",
