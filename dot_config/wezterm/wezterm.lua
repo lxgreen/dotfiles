@@ -135,6 +135,12 @@ local scheme_extend = function(scheme_name)
 end
 
 return {
+	unix_domains = {
+		{
+			name = "dev",
+		},
+	},
+	default_gui_startup_args = { "connect", "dev" },
 	color_scheme = scheme_by_os(wezterm.gui.get_appearance()),
 	color_schemes = {
 		["Catppuccin Mocha Extended"] = scheme_extend("Catppuccin Mocha"),
@@ -143,7 +149,7 @@ return {
 
 	adjust_window_size_when_changing_font_size = false,
 	line_height = 1.2,
-	font_size = 15,
+	font_size = 16,
 	font = wezterm.font_with_fallback({
 		{ family = "JetBrains Mono", weight = "Medium" },
 		"SF Pro",
