@@ -51,6 +51,7 @@ export FZF_MOCHA_COLORS="bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8,fg:#c
 
 # TODO: fix dynamic theme
 alias fzf="fzf --color=\$(defaults read -globalDomain AppleInterfaceStyle &> /dev/null && echo $FZF_MOCHA_COLORS || echo $FZF_LATTE_COLORS)"
+# alias fzf-tmux="fzf-tmux --color=\$(defaults read -globalDomain AppleInterfaceStyle &> /dev/null && echo $FZF_MOCHA_COLORS || echo $FZF_LATTE_COLORS)"
 
 alias nsc='rm -rf ~/.local/state/nvim/swap'
 
