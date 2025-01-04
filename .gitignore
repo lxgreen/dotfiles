@@ -5,3 +5,4 @@ node_modules
 dot_config/zsh/dot_zcompdump
 dot_config/zsh/dot_zsh_history
 dot_config/nvim/dot_luarc.json
+.gitconfig
