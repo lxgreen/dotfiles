@@ -179,6 +179,7 @@ return {
 		{ key = "р", mods = "CTRL", action = wezterm.action.SendString("\x08") },
 		{ key = "h", mods = "CTRL|SHIFT", action = wezterm.action.DisableDefaultAssignment },
 		{ key = "k", mods = "CTRL|SHIFT", action = wezterm.action.DisableDefaultAssignment },
+		{ key = "l", mods = "CTRL|SHIFT", action = wezterm.action.DisableDefaultAssignment },
 	},
 
 	hyperlink_rules = {
@@ -219,11 +220,11 @@ return {
 
 	-- https://github.com/wez/wezterm/issues/119#issuecomment-1206593847
 	-- TODO: figure out why it doesn't work
-	-- mouse_bindings = {
-	-- 	{
-	-- 		event = { Up = { streak = 1, button = "Left" } },
-	-- 		mods = "CTRL",
-	-- 		action = wezterm.action.OpenLinkAtMouseCursor,
-	-- 	},
-	-- },
+	mouse_bindings = {
+		{
+			event = { Up = { streak = 1, button = "Left" } },
+			mods = "CTRL",
+			action = wezterm.action.OpenLinkAtMouseCursor,
+		},
+	},
 }

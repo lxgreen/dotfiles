@@ -1,5 +1,6 @@
 return {
 	"Wansmer/sibling-swap.nvim",
+	enabled = false,
 	dependencies = { "nvim-treesitter" },
 	keys = {
 		{ "<c-,>", [[<cmd>lua require('sibling-swap').swap_with_left()<cr>]], desc = "Swap argument left" },
