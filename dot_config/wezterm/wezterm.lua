@@ -180,6 +180,36 @@ return {
 		{ key = "h", mods = "CTRL|SHIFT", action = wezterm.action.DisableDefaultAssignment },
 		{ key = "k", mods = "CTRL|SHIFT", action = wezterm.action.DisableDefaultAssignment },
 		{ key = "l", mods = "CTRL|SHIFT", action = wezterm.action.DisableDefaultAssignment },
+		{
+			key = "\\",
+			mods = "SUPER",
+			action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }),
+		},
+		{
+			key = "-",
+			mods = "SUPER",
+			action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }),
+		},
+		{
+			key = "[",
+			mods = "SUPER",
+			action = wezterm.action.ActivatePaneDirection("Left"),
+		},
+		{
+			key = "]",
+			mods = "SUPER",
+			action = wezterm.action.ActivatePaneDirection("Right"),
+		},
+		{
+			key = "UpArrow",
+			mods = "SUPER",
+			action = wezterm.action.ActivatePaneDirection("Up"),
+		},
+		{
+			key = "DownArrow",
+			mods = "SUPER",
+			action = wezterm.action.ActivatePaneDirection("Down"),
+		},
 	},
 
 	hyperlink_rules = {
@@ -209,7 +239,7 @@ return {
 		-- probably filenames
 		{
 			regex = "[/.A-Za-z0-9_-]+\\.[A-Za-z0-9]+(:\\d+)*(?=\\s*|$)",
-			format = "$EDIT:$0",
+			format = "$EDITOR $0",
 		},
 	},
 
