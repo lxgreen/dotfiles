@@ -68,7 +68,7 @@ return {
 			name = "dev",
 		},
 	},
-	default_gui_startup_args = { "connect", "dev" },
+	-- default_gui_startup_args = { "connect", "dev" },
 	color_scheme = scheme_by_os(wezterm.gui.get_appearance()),
 	color_schemes = {
 		["Catppuccin Mocha Extended"] = scheme_extend("Catppuccin Mocha"),
@@ -91,6 +91,7 @@ return {
 	cursor_thickness = "50%",
 	underline_thickness = "250%",
 	status_update_interval = 200,
+	scrollback_lines = 10000,
 
 	cursor_blink_rate = 0,
 	default_cursor_style = "SteadyBar",
@@ -119,7 +120,7 @@ return {
 		{ key = "р", mods = "CTRL", action = wezterm.action.SendString("\x08") },
 		{ key = "h", mods = "CTRL|SHIFT", action = wezterm.action.DisableDefaultAssignment },
 		{ key = "k", mods = "CTRL|SHIFT", action = wezterm.action.DisableDefaultAssignment },
-		{ key = "l", mods = "CTRL|SHIFT", action = wezterm.action.DisableDefaultAssignment },
+		-- { key = "l", mods = "CTRL|SHIFT", action = wezterm.action.DisableDefaultAssignment },
 		{
 			key = "\\",
 			mods = "LEADER",
