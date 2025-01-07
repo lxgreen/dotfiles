@@ -101,11 +101,11 @@ return {
 	macos_window_background_blur = 0,
 	debug_key_events = true,
 	use_ime = true,
-
+	leader = { key = "s", mods = "CTRL", timeout_milliseconds = 1000 },
 	keys = {
 		{
-			key = "k",
-			mods = "SUPER",
+			key = "f",
+			mods = "LEADER",
 			action = wezterm.action.QuickSelectArgs({
 				patterns = {
 					[[[/.A-Za-z0-9_-]+\.[A-Za-z0-9]+[:\d+]*(?=\s*|$)]],
@@ -122,59 +122,49 @@ return {
 		{ key = "l", mods = "CTRL|SHIFT", action = wezterm.action.DisableDefaultAssignment },
 		{
 			key = "\\",
-			mods = "SUPER",
+			mods = "LEADER",
 			action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }),
 		},
 		{
 			key = "-",
-			mods = "SUPER",
+			mods = "LEADER",
 			action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }),
 		},
 		{
-			key = "LeftArrow",
-			mods = "SUPER",
+			key = "h",
+			mods = "CTRL",
 			action = wezterm.action.ActivatePaneDirection("Left"),
 		},
 		{
-			key = "RightArrow",
-			mods = "SUPER",
+			key = "l",
+			mods = "CTRL",
 			action = wezterm.action.ActivatePaneDirection("Right"),
 		},
 		{
-			key = "[",
-			mods = "SUPER",
-			action = wezterm.action.ActivatePaneDirection("Left"),
-		},
-		{
-			key = "]",
-			mods = "SUPER",
-			action = wezterm.action.ActivatePaneDirection("Right"),
-		},
-		{
-			key = "UpArrow",
-			mods = "SUPER",
+			key = "k",
+			mods = "CTRL",
 			action = wezterm.action.ActivatePaneDirection("Up"),
 		},
 		{
-			key = "DownArrow",
-			mods = "SUPER",
+			key = "j",
+			mods = "CTRL",
 			action = wezterm.action.ActivatePaneDirection("Down"),
 		},
 		{
 			key = "z",
-			mods = "SUPER",
+			mods = "LEADER",
 			action = wezterm.action.TogglePaneZoomState,
 		},
 		{
 			key = "o",
-			mods = "SUPER",
+			mods = "LEADER",
 			action = wezterm.action.SwitchToWorkspace({
 				name = "WORK",
 			}),
 		},
 		{
-			key = "N",
-			mods = "SUPER",
+			key = "n",
+			mods = "LEADER",
 			action = wezterm.action.SwitchToWorkspace({
 				name = "NOTES",
 				spawn = {
@@ -187,8 +177,8 @@ return {
 		-- Show the launcher in fuzzy selection mode and have it list all workspaces
 		-- and allow activating one.
 		{
-			key = "l",
-			mods = "SUPER",
+			key = "s",
+			mods = "LEADER",
 			action = wezterm.action.ShowLauncherArgs({
 				flags = "FUZZY|WORKSPACES",
 			}),
