@@ -80,30 +80,35 @@ local function extract_line_and_name(uri)
 
 	if name then
 		local line = 1
-		-- check if name has a line number (e.g. `file:.../file.tsx:123` or `file:.../file.txt:123:456`)
+		local col = 1
 		local start, match_end = name:find(":[0-9]+")
 		if start then
-			-- line number is 123
 			line = name:sub(start + 1, match_end)
-			-- remove the line number from the filename
+			local colStart, colEnd = name:find(":[0-9]+", match_end + 1)
+			if colStart then
+				col = name:sub(colStart + 1, colEnd)
+				line = name:sub(start + 1, colStart - 1)
+			end
 			name = name:sub(1, start - 1)
 		end
 
-		return line, name
+		return line, col, name
 	end
 
-	return nil, nil
+	return nil, nil, nil
 end
 
-local function open_file_in_nvim(full_path, line, server_id)
-	local nvim_command = string.format("<C-\\><C-N>:e %s<CR>:normal %dG<CR>", full_path, line)
+local function open_file_in_nvim(full_path, line, col, server_id)
+	local nvim_command = string.format("<C-\\><C-N>:e %s<CR>:normal %dG<CR>:normal 0%dl<CR>", full_path, line, col - 1)
 	wezterm.run_child_process({ "/opt/homebrew/bin/nvim", "--server", server_id, "--remote-send", nvim_command })
 end
 
+-- NOTE: this does not work on remote (muxed) panes
+-- TODO: rewrite to omit the process_info usage
 M.open_in_nvim = function(window, pane, uri)
-	local line, name = extract_line_and_name(uri)
+	local line, col, name = extract_line_and_name(uri)
 
-	wezterm.log_info("uri", uri, line, name)
+	wezterm.log_info("uri", uri, line, col, name)
 
 	if name then
 		local pwd = get_pwd(pane)
@@ -126,8 +131,6 @@ M.open_in_nvim = function(window, pane, uri)
 
 		-- gather infos from all neovim instances in the active tab
 		for _, pane in ipairs(window:active_tab():panes()) do
-			-- NOTE: this does not work on remote (muxed) panes
-			-- TODO: check if in muxed session, open new nvim in this case
 			local process_info = pane:get_foreground_process_info()
 
 			for _, child_process in pairs(process_info.children) do
@@ -158,7 +161,7 @@ M.open_in_nvim = function(window, pane, uri)
 
 		if chosen_nvim_pane then
 			-- wezterm.log_info("chosen nvim pane", chosen_nvim_pane)
-			open_file_in_nvim(full_path, line, chosen_nvim_pane.server_id)
+			open_file_in_nvim(full_path, line, col, chosen_nvim_pane.server_id)
 			chosen_nvim_pane.pane:activate()
 		end
 
