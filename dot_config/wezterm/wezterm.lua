@@ -165,6 +165,18 @@ return {
 			}),
 		},
 		{
+			key = "v",
+			mods = "LEADER",
+			action = wezterm.action.SwitchToWorkspace({
+				name = "CONFIG",
+				spawn = {
+					args = { "nvim", os.getenv("HOME") .. "/.config" },
+					cwd = os.getenv("HOME") .. "/.config",
+					label = "CONFIGURATION",
+				},
+			}),
+		},
+		{
 			key = "n",
 			mods = "LEADER",
 			action = wezterm.action_callback(function(window, pane)
