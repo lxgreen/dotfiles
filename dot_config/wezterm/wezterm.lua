@@ -68,6 +68,7 @@ return {
 			name = "dev",
 		},
 	},
+	-- NOTE: uncomment to	enable mux
 	-- default_gui_startup_args = { "connect", "dev" },
 	color_scheme = scheme_by_os(wezterm.gui.get_appearance()),
 	color_schemes = {
@@ -166,14 +167,23 @@ return {
 		{
 			key = "n",
 			mods = "LEADER",
-			action = wezterm.action.SwitchToWorkspace({
-				name = "NOTES",
-				spawn = {
-					args = { "zk", "edit", "-i", "-W", "~/Sync/Notes/" },
-					cwd = "~/Sync/Notes/",
-					domain = "CurrentPaneDomain",
-				},
-			}),
+			action = wezterm.action_callback(function(window, pane)
+				local notes_workspace = "Notes"
+				local notes_dir = os.getenv("HOME") .. "/Sync/Notes/"
+				local command = { "zk", "edit", "-i", "-W", notes_dir }
+
+				-- Switch to the "Notes" workspace
+				window:perform_action(wezterm.action.SwitchToWorkspace({ name = notes_workspace }), pane)
+
+				-- Spawn a new tab in the "Notes" workspace with the command
+				window:perform_action(
+					wezterm.action.SpawnCommandInNewTab({
+						cwd = notes_dir,
+						args = command,
+					}),
+					pane
+				)
+			end),
 		},
 		-- Show the launcher in fuzzy selection mode and have it list all workspaces
 		-- and allow activating one.
