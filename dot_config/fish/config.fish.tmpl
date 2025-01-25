@@ -223,16 +223,14 @@ set -q GIT_EDITOR; or set -Ux GIT_EDITOR $EDITOR
 
 # -- SECRETS -----------------------------------------------------------------------------------------------------------
 
-set -gx OPENAI_API_KEY "{{ (keepassxcAttribute "OPENAI" "API_KEY") }}"
-set -gx GITLAB_TOKEN "{{ (keepassxcAttribute "GITLAB" "TOKEN") }}"
-set -gx GITHUB_TOKEN "{{ (keepassxcAttribute "GITHUB" "TOKEN") }}"
+set -gx OPENAI_API_KEY {{ (keepassxcAttribute "ChatGPT" "Password") }}
 
 # -- ABBRS -------------------------------------------------------------------------------------------------------------
 
 if status is-interactive
     abbr -a -- e nvim
     abbr -a -- y yazi
-    abbr -a -- c "clear && exec fish"
+    abbr -a -- zr "clear && exec fish"
     abbr -a -- ca chezmoi apply
     abbr -a -- ee nvim_config_pick
     abbr -a -- eu "nvim --headless '+Lazy! update' +qa && nvim"
@@ -243,11 +241,168 @@ if status is-interactive
 
     alias cat bat
     alias ls "eza $eza_params"
-    alias l "eza --git-ignore $eza_params"
-    alias ll "eza --all --header --long $eza_params"
-    alias llm "eza --all --header --long --sort=modified $eza_params"
+    alias l "eza --all --header --long $eza_params"
+    alias lm "eza --all --header --long --sort=modified $eza_params"
     alias la "eza -lbhHigUmuSa"
     alias lt "eza --tree $eza_params"
+
+    # 	  # Theme-dependent `bat` alias
+    # function bat
+    #     if defaults read -globalDomain AppleInterfaceStyle &> /dev/null
+    #         command bat --theme='Catppuccin-Mocha' $argv
+    #     else
+    #         command bat --theme='Catppuccin-Latte' $argv
+    #     end
+    # end
+
+    # File operations
+    alias rmf "rm -rf"
+    alias dd "dirs -v"
+    for i in (seq 1 9)
+        alias $i "cd -$i"
+    end
+    alias .. "cd .."
+    alias ... "cd ../.."
+    alias .... "cd ../../.."
+    alias ..... "cd ../../../.."
+    alias ...... "cd ../../../../.."
+    alias ....... "cd ../../../../../.."
+
+    function take
+        mkdir -p $argv[1]; and cd $argv[1]
+    end
+
+    alias md "mkdir -p"
+    # alias - "cd -"
+
+    # npm
+    alias regpub "npm config set registry https://registry.npmjs.org"
+    alias regwix "npm config set registry http://npm.dev.wixpress.com"
+
+    # Yarn
+    alias yys "yarn && yarn start"
+    alias ys "yarn start"
+    alias yl "yarn link"
+    alias yld "rm -rf ~/.config/yarn/link/"
+    alias ya "yarn add"
+    alias ye "yarn e2e"
+    alias yb "yarn build"
+    alias yyb "yarn && yarn build"
+    alias yaw "yarn add -W"
+    alias yt "yarn test"
+    alias yyt "yarn && yarn test"
+
+    # CLIs
+    alias firefox "cd /Applications/Firefox\ Developer\ Edition.app/Contents/MacOS; ./firefox $argv"
+    alias ff "firefox NUL &"
+    alias man batman
+    alias lg lazygit
+    alias chrome "open -a 'Google Chrome'"
+    alias chromed "open -a 'Google Chrome' --args --disable-web-security --user-data-dir='/tmp/chrome_dev'"
+
+    alias bi "brew install"
+    alias bu "brew uninstall"
+    alias bl "brew list"
+
+    alias ww "w3m -no-mouse"
+    # alias CL "| xargs wc -l"
+    # alias G "| grep"
+
+    # Inbox note
+    function i
+        if test -z "$argv[1]"
+            zk new -g inbox -W ~/Sync/Notes/Inbox/
+        else
+            zk new -t $argv[1] -g inbox -W ~/Sync/Notes/Inbox/
+        end
+    end
+
+    # Note
+    function n
+        if test -z "$argv[1]"
+            zk edit -i -W ~/Sync/Notes/
+        else
+            zk edit $argv[1] -W ~/Sync/Notes/
+        end
+    end
+
+    # View file/directory
+    function v
+        if test -z "$argv[1]"
+            eza -lah --git --reverse --sort=modified
+        else if test -d $argv[1]
+            eza -lah --git --reverse --sort=modified
+        else
+            bat $argv[1]
+        end
+    end
+
+    # Add a new file/directory including the parent directories
+    function a
+        if echo $argv[1] | string match -r '/$'
+            mkdir -p $argv[1]
+        else
+            mkdir -p (dirname $argv[1])
+            touch $argv[1]
+        end
+    end
+
+    # Open configuration files
+    function c
+        # Set the configuration directory
+        set config_home (set -q XDG_CONFIG_HOME; and echo $XDG_CONFIG_HOME; or echo $HOME/.config)
+
+        # Common file extensions to search for
+        set extensions conf config toml json yml yaml
+
+        # Define search directories
+        set search_dirs "$config_home/$argv[1]" "$HOME/.$argv[1]"
+
+        # Search for directories or files without extensions
+        for dir in $search_dirs
+            if test -d "$dir" || test -f "$dir"
+                nvim "$dir"
+                return
+            end
+        end
+
+        # Search for files with common extensions
+        for ext in $extensions
+            for dir in $search_dirs
+                if test -f "$dir.$ext"
+                    nvim "$dir.$ext"
+                    return
+                end
+            end
+        end
+
+        echo "No matching file or directory found."
+    end
+
+    # Chezmoi
+    function cz
+        set config_home (or $XDG_CONFIG_HOME $HOME/.config)
+
+        if test (count $argv) -eq 0
+            chezmoi cd
+        else if test $argv[1] = nvim
+            chezmoi add "$config_home/nvim/"
+        else if test $argv[1] = sbar
+            chezmoi add "$config_home/sketchybar"
+        else
+            chezmoi $argv
+        end
+    end
+
+    # Math
+    function m
+        printf "%s\n" $argv | bc -l
+    end
+
+    # Presenterm
+    alias p presenterm
+
+    alias x exit
 end
 
 # -- EZA --------------------------------------------------------------------------------------------------------------
@@ -280,3 +435,7 @@ set -gx CATPPUCCIN_FLAVOR "Catppuccin $([ $MACOS_IS_DARK = yes ]; and echo Macch
 set -gx BAT_THEME $CATPPUCCIN_FLAVOR
 
 fish_config theme choose $CATPPUCCIN_FLAVOR
+
+# -- NODE & NPM via FNM -----------------------------------------------------------------------------------------------
+
+fnm env --use-on-cd --shell fish | source
