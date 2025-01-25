@@ -273,7 +273,6 @@ if status is-interactive
     end
 
     alias md "mkdir -p"
-    # alias - "cd -"
 
     # npm
     alias regpub "npm config set registry https://registry.npmjs.org"
@@ -381,14 +380,12 @@ if status is-interactive
 
     # Chezmoi
     function cz
-        set config_home (or $XDG_CONFIG_HOME $HOME/.config)
-
         if test (count $argv) -eq 0
             chezmoi cd
-        else if test $argv[1] = nvim
-            chezmoi add "$config_home/nvim/"
-        else if test $argv[1] = sbar
-            chezmoi add "$config_home/sketchybar"
+        else if string match -q nvim $argv[1]
+            chezmoi add "$XDG_CONFIG_HOME/nvim/"
+        else if string match -q sbar $argv[1]
+            chezmoi add "$XDG_CONFIG_HOME/sketchybar"
         else
             chezmoi $argv
         end
@@ -407,7 +404,7 @@ end
 
 # -- EZA --------------------------------------------------------------------------------------------------------------
 
-set -l COLORS (vivid generate catppuccin-$([ $MACOS_IS_DARK = yes ]; and echo macchiato; or echo latte))
+set -l COLORS (vivid generate catppuccin-$([ $MACOS_IS_DARK = yes ]; and echo mocha; or echo latte))
 
 set -gx LS_COLORS $COLORS
 set -gx EZA_COLORS $COLORS
@@ -431,8 +428,9 @@ fish_add_path $HOME/.cargo/bin
 set -g ZDOTDIR $XDG_CONFIG_HOME/zsh
 set -g IWD $PWD # Set initial working directory.
 
-set -gx CATPPUCCIN_FLAVOR "Catppuccin $([ $MACOS_IS_DARK = yes ]; and echo Macchiato; or echo Latte)"
-set -gx BAT_THEME $CATPPUCCIN_FLAVOR
+set -gx CATPPUCCIN_FLAVOR "Catppuccin $([ $MACOS_IS_DARK = yes ]; and echo Mocha; or echo Latte)"
+set -gx CATPPUCCIN_FLAVOR_BAT "Catppuccin-$([ $MACOS_IS_DARK = yes ]; and echo Mocha; or echo Latte)"
+set -gx BAT_THEME $CATPPUCCIN_FLAVOR_BAT
 
 fish_config theme choose $CATPPUCCIN_FLAVOR
 
