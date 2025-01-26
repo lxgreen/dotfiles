@@ -225,6 +225,8 @@ set -q GIT_EDITOR; or set -Ux GIT_EDITOR $EDITOR
 
 set -gx OPENAI_API_KEY {{ (keepassxcAttribute "ChatGPT" "Password") }}
 
+set -x GPG_TTY (tty)
+
 # -- ABBRS -------------------------------------------------------------------------------------------------------------
 
 if status is-interactive
