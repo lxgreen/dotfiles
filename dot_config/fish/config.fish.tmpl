@@ -230,7 +230,6 @@ set -x GPG_TTY (tty)
 # -- ABBRS -------------------------------------------------------------------------------------------------------------
 
 if status is-interactive
-    abbr -a -- e nvim
     abbr -a -- y yazi
     abbr -a -- zr "clear && exec fish"
     abbr -a -- ca chezmoi apply
@@ -241,6 +240,7 @@ if status is-interactive
 
     alias nr "npm run"
 
+    alias e nvim
     alias cat bat
     alias ls "eza $eza_params"
     alias l "eza --all --header --long $eza_params"
