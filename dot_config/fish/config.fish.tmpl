@@ -236,9 +236,17 @@ if status is-interactive
     abbr -a -- ee nvim_config_pick
     abbr -a -- eu "nvim --headless '+Lazy! update' +qa && nvim"
     abbr -a -- f "for i in (seq 1 5); /usr/bin/time fish -i -c exit; end"
-    abbr -a -- q exit
+    abbr -a -- x exit
 
-    alias nr "npm run"
+    # Theme-dependent `bat` alias
+    function bat
+        if [ $MACOS_IS_DARK = yes ]
+            bat --theme='Catppuccin-Mocha' $argv
+        else
+            bat --theme='Catppuccin-Latte' $argv
+        end
+    end
+
 
     alias e nvim
     alias cat bat
@@ -247,15 +255,6 @@ if status is-interactive
     alias lm "eza --all --header --long --sort=modified $eza_params"
     alias la "eza -lbhHigUmuSa"
     alias lt "eza --tree $eza_params"
-
-    # 	  # Theme-dependent `bat` alias
-    # function bat
-    #     if defaults read -globalDomain AppleInterfaceStyle &> /dev/null
-    #         command bat --theme='Catppuccin-Mocha' $argv
-    #     else
-    #         command bat --theme='Catppuccin-Latte' $argv
-    #     end
-    # end
 
     # File operations
     alias rmf "rm -rf"
@@ -306,8 +305,6 @@ if status is-interactive
     alias bl "brew list"
 
     alias ww "w3m -no-mouse"
-    # alias CL "| xargs wc -l"
-    # alias G "| grep"
 
     # Inbox note
     function i
@@ -401,7 +398,8 @@ if status is-interactive
     # Presenterm
     alias p presenterm
 
-    alias x exit
+    # Clipboard to Markdown -- copy Slack messages to Notes interatively
+    alias md "open ~/dev/clipboard2markdown/index.html"
 end
 
 # -- EZA --------------------------------------------------------------------------------------------------------------
