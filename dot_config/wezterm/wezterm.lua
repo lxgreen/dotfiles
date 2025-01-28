@@ -69,7 +69,7 @@ return {
 		},
 	},
 	-- NOTE: uncomment to	enable mux
-	-- default_gui_startup_args = { "connect", "dev" },
+	default_gui_startup_args = { "connect", "dev" },
 	color_scheme = scheme_by_os(wezterm.gui.get_appearance()),
 	color_schemes = {
 		["Catppuccin Mocha Extended"] = scheme_extend("Catppuccin Mocha"),

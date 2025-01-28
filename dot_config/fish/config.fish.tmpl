@@ -241,9 +241,9 @@ if status is-interactive
     # Theme-dependent `bat` alias
     function bat
         if [ $MACOS_IS_DARK = yes ]
-            bat --theme='Catppuccin-Mocha' $argv
+            command bat --theme='Catppuccin-Mocha' $argv
         else
-            bat --theme='Catppuccin-Latte' $argv
+            command bat --theme='Catppuccin-Latte' $argv
         end
     end
 
@@ -273,7 +273,7 @@ if status is-interactive
         mkdir -p $argv[1]; and cd $argv[1]
     end
 
-    alias md "mkdir -p"
+    alias cm "mkdir -p"
 
     # npm
     alias regpub "npm config set registry https://registry.npmjs.org"
