@@ -251,7 +251,7 @@ if status is-interactive
     alias e nvim
     alias cat bat
     alias ls "eza $eza_params"
-    alias l "eza --all --header --long $eza_params"
+    alias l "eza --all --header --long --git --reverse --sort=modified"
     alias lm "eza --all --header --long --sort=modified $eza_params"
     alias la "eza -lbhHigUmuSa"
     alias lt "eza --tree $eza_params"
@@ -273,7 +273,7 @@ if status is-interactive
         mkdir -p $argv[1]; and cd $argv[1]
     end
 
-    alias cm "mkdir -p"
+    alias md "mkdir -p"
 
     # npm
     alias regpub "npm config set registry https://registry.npmjs.org"
@@ -399,7 +399,7 @@ if status is-interactive
     alias p presenterm
 
     # Clipboard to Markdown -- copy Slack messages to Notes interatively
-    alias md "open ~/dev/clipboard2markdown/index.html"
+    alias cm "open ~/dev/clipboard2markdown/index.html"
 end
 
 # -- EZA --------------------------------------------------------------------------------------------------------------
