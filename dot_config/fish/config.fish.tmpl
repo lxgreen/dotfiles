@@ -247,7 +247,6 @@ if status is-interactive
         end
     end
 
-
     alias e nvim
     alias cat bat
     alias ls "eza $eza_params"
@@ -388,6 +387,10 @@ if status is-interactive
         else
             chezmoi $argv
         end
+    end
+
+    function cze
+        chezmoi edit $argv
     end
 
     # Math
