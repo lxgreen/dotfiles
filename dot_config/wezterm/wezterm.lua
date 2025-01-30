@@ -180,14 +180,9 @@ return {
 			key = "n",
 			mods = "LEADER",
 			action = wezterm.action_callback(function(window, pane)
-				local notes_workspace = "Notes"
 				local notes_dir = os.getenv("HOME") .. "/Sync/Notes/"
 				local command = { "zk", "edit", "-i", "-W", notes_dir }
 
-				-- Switch to the "Notes" workspace
-				window:perform_action(wezterm.action.SwitchToWorkspace({ name = notes_workspace }), pane)
-
-				-- Spawn a new tab in the "Notes" workspace with the command
 				window:perform_action(
 					wezterm.action.SpawnCommandInNewTab({
 						cwd = notes_dir,
