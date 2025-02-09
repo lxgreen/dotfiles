@@ -2,7 +2,11 @@ require("config.lazy.boot")
 require("abbreviations")
 
 local opts = {
-	spec = { { import = "plugins" } },
+	spec = {
+		{ "LazyVim/LazyVim", import = "lazyvim.plugins" },
+		{ "LazyVim/LazyVim", import = "lazyvim.plugins.extras" },
+		{ import = "plugins" },
+	},
 	install = { colorscheme = { require("util").colorscheme_get_name() } },
 	defaults = { lazy = false, version = false },
 	checker = { enabled = true, notify = false },

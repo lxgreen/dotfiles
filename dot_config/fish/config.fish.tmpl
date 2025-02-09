@@ -106,9 +106,9 @@ set -q HOMEBREW_NO_ANALYTICS || set -gx HOMEBREW_NO_ANALYTICS 1
 
 # -- ASDF --------------------------------------------------------------------------------------------------------------
 
-if not set -q ASDF_DIR
-    source /opt/homebrew/opt/asdf/libexec/asdf.fish # https://asdf-vm.com/guide/getting-started.html#_3-install-asdf
-end
+# if not set -q ASDF_DIR
+#     source /opt/homebrew/opt/asdf/libexec/asdf.fish # https://asdf-vm.com/guide/getting-started.html#_3-install-asdf
+# end
 
 set -q ASDF_CONFIG_FILE; or set -Ux ASDF_CONFIG_FILE $HOME/.config/asdf/asdfrc
 
@@ -171,11 +171,11 @@ if type -q zoxide
 
     source $__fish_cache_dir/zoxide_init.fish
 end
-
+!
 
 # -- PAGER -------------------------------------------------------------------------------------------------------------
 
-set -q MANPAGER; or set -Ux MANPAGER less
+set -q MANPAGER; or set -Ux MANPAGER nvim +Man!
 set -q PAGER; or set -Ux PAGER $MANPAGER
 
 # Colorize man pages.
