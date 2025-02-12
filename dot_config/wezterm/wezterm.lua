@@ -177,6 +177,20 @@ return {
 			}),
 		},
 		{
+			key = "g",
+			mods = "LEADER",
+			action = wezterm.action_callback(function(window, pane)
+				local command = { "lazygit" }
+
+				window:perform_action(
+					wezterm.action.SpawnCommandInNewTab({
+						args = command,
+					}),
+					pane
+				)
+			end),
+		},
+		{
 			key = "n",
 			mods = "LEADER",
 			action = wezterm.action_callback(function(window, pane)
