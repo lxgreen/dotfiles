@@ -1,6 +1,7 @@
 return {
 	"jakewvincent/mkdnflow.nvim",
 	ft = { "markdown" },
+	enabled = false,
 	config = function()
 		require("mkdnflow").setup({
 			modules = {
@@ -14,7 +15,7 @@ return {
 				lists = true,
 				maps = true,
 				paths = true,
-				tables = true,
+				tables = false,
 				yaml = false,
 			},
 			filetypes = { md = true, rmd = true, markdown = true },
