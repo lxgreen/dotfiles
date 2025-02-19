@@ -86,7 +86,8 @@ local override_all = function(c)
 		TreesitterContextLineNumber = { bg = c.base },
 		TroubleCount = { bg = "none" },
 		TroubleNormal = { link = "NormalFloat" },
-		Visual = { style = {} },
+		Visual = { link = "LspReferenceRead" },
+		VisualWhitespace = { link = "LspReferenceRead" },
 		WhichKeyFloat = { bg = c.mantle },
 		Whitespace = { fg = c.base },
 		WinSeparator = { fg = c_blend(c.base, c.crust, 40) },
@@ -115,8 +116,8 @@ local override_dark = function(c)
 		SatelliteBar = { bg = c.surface0, blend = 15 },
 		SpectreBorderCustom = { fg = c.surface0 },
 		SymbolUsageText = { fg = c.surface2 },
-		Visual = { bg = c_blend(c.base, c.surface2, 30) },
-		VisualWhitespace = { bg = c_blend(c.base, c.surface2, 30), fg = c.surface2 },
+		-- Visual = { bg = c_blend(c.base, c.surface2, 30) },
+		-- VisualWhitespace = { bg = c_blend(c.base, c.surface2, 30), fg = c.surface2 },
 	}
 end
 
@@ -141,8 +142,8 @@ local override_light = function(c)
 		SatelliteBar = { bg = c.crust, blend = 15 },
 		SpectreBorderCustom = { fg = c.crust },
 		SymbolUsageText = { fg = c.surface0 },
-		Visual = { bg = c_blend(c.base, c.crust, 85) },
-		VisualWhitespace = { bg = c_blend(c.base, c.crust, 85), fg = c.surface2 },
+		-- Visual = { bg = c_blend(c.base, c.crust, 85) },
+		-- VisualWhitespace = { bg = c_blend(c.base, c.crust, 85), fg = c.surface2 },
 	}
 end
 
