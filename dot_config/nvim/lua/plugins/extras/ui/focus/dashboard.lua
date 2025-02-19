@@ -132,7 +132,7 @@ return {
 		table.insert(
 			opts.section.buttons.val,
 			#opts.section.buttons.val - 2,
-			button("r", "R", "  Recent files", [[<cmd>Telescope smart_open theme=dropdown previewer=false<cr>]])
+			button("r", "R", "  Recent files", [[<cmd>lua Snacks.picker.smart()<cr>]])
 		)
 
 		if LazyVim.has("persistence.nvim") then
