@@ -120,11 +120,6 @@ return {
 			"<cmd>Telescope find_files cwd=" .. dotfiles_path .. "<cr>",
 			desc = "Find dotfile",
 		},
-		{
-			"<leader><cr>",
-			[[<cmd>Telescope smart_open theme=dropdown previewer=false<cr>]],
-			desc = "Find Files (Smart open)",
-		},
 	},
 
 	config = function(_, opts)

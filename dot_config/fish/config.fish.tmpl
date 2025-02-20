@@ -81,9 +81,8 @@ if type -q oh-my-posh
     if not test -r $__fish_cache_dir/omp_init.fish
         oh-my-posh init fish --config $XDG_CONFIG_HOME/oh-my-posh/config.json >$__fish_cache_dir/omp_init.fish
     end
-
-    source $__fish_cache_dir/omp_init.fish
 end
+source $__fish_cache_dir/omp_init.fish
 
 # -- BREW --------------------------------------------------------------------------------------------------------------
 
@@ -298,6 +297,7 @@ if status is-interactive
     alias lg lazygit
     alias chrome "open -a 'Google Chrome'"
     alias chromed "open -a 'Google Chrome' --args --disable-web-security --user-data-dir='/tmp/chrome_dev'"
+    alias pr "gh pr view --web"
 
     alias bi "brew install"
     alias bu "brew uninstall"

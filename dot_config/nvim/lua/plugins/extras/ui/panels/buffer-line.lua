@@ -42,7 +42,7 @@ return {
 				modified_icon = "",
 				close_icon = "󰅖",
 				offsets = {
-					{ filetype = "neo-tree", separator = false, text = "" },
+					{ filetype = "snacks_picker_list", separator = false, text = "" },
 					{ filetype = "DiffviewFiles", separator = false, text = "" },
 				},
 
