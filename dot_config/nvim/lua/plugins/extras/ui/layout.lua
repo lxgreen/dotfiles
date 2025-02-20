@@ -54,7 +54,6 @@ return {
 			},
 
 			left = {
-				{ ft = "neo-tree" },
 				{ ft = "dapui_scopes" },
 				{ ft = "dapui_breakpoints" },
 				{ ft = "dapui_stacks" },

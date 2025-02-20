@@ -9,6 +9,7 @@ return {
 			excluded_filetypes = {
 				"alpha",
 				"neo-tree",
+				"snacks_picker_list",
 				"neotest-summary",
 				"aerial",
 				"noice",

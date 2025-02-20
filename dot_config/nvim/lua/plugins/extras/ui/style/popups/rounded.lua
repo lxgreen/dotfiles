@@ -36,9 +36,4 @@ return {
 			require("lspconfig.ui.windows").default_options.border = "rounded"
 		end,
 	},
-
-	{
-		"nvim-neo-tree/neo-tree.nvim",
-		opts = { popup_border_style = "rounded" },
-	},
 }

@@ -13,7 +13,7 @@ local function is_not_man_mode()
 end
 
 return {
-	{ "nvim-neo-tree/neo-tree.nvim", cond = is_not_man_mode },
+	{ "folke/snacks.nvim", cond = is_not_man_mode },
 	{ "akinsho/bufferline.nvim", cond = is_not_man_mode },
 	{ "nvim-lualine/lualine.nvim", cond = is_not_man_mode },
 
