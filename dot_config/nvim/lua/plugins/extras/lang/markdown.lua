@@ -1,7 +1,7 @@
 return {
 	{
 		"tadmccorkle/markdown.nvim",
-		enabled = true,
+		enabled = false,
 		ft = "markdown",
 		opts = {
 			-- configuration here or empty for defaults
