@@ -136,11 +136,7 @@ end
 # -- FZF ---------------------------------------------------------------------------------------------------------------
 
 if type -q fzf
-    if not test -r $__fish_cache_dir/fzf_init.fish
-        fzf --fish >$__fish_cache_dir/fzf_init.fish
-    end
-
-    source $__fish_cache_dir/fzf_init.fish
+    # fzf --fish | source omitted in favor if fzf.fish plugin
 
     # https://github.com/catppuccin/fzf?tab=readme-ov-file#usage
     if [ $MACOS_IS_DARK = yes ]

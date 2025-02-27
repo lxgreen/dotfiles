@@ -7,7 +7,7 @@ local opts = { noremap = true, silent = false }
 vim.api.nvim_buf_set_keymap(
 	buffer_number,
 	"v",
-	"n",
+	"<cr>",
 	":'<,'>ZkNewFromContentSelection { dir = vim.fn.expand('%:p:h'), title = vim.fn.input('Title: ') }<CR>",
 	opts
 )
