@@ -1,6 +1,8 @@
 return {
 	{
-		"karb94/neoscroll.nvim",
-		opts = {},
+		"folke/snacks.nvim",
+		opts = {
+			scroll = { enabled = true },
+		},
 	},
 }

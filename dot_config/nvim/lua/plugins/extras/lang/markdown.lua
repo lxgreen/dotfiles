@@ -1,13 +1,5 @@
 return {
 	{
-		"tadmccorkle/markdown.nvim",
-		enabled = false,
-		ft = "markdown",
-		opts = {
-			-- configuration here or empty for defaults
-		},
-	},
-	{
 		"OXY2DEV/markview.nvim",
 		lazy = false,
 
