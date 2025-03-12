@@ -2,7 +2,7 @@ return {
 	"LazyVim/LazyVim",
 	optional = true,
 	keys = {
-		{ "gF", "<cmd>vertical wincmd f<cr>", desc = "Split [f]ile under cursor", noremap = true },
+		{ "gF", "<cmd>vertical wincmd f<cr>", desc = "Open [f]ile under cursor in split", noremap = true },
 		{ "g.", "<cmd>lua vim.cmd('cd '.. vim.fn.expand('%:p:h'))<cr>", desc = "cd to current file path" },
 		{ "g?", "<cmd>pwd<cr>", desc = "CWD", noremap = true },
 		{
@@ -11,13 +11,18 @@ return {
 				vim.cmd([[ vsplit ]])
 				vim.lsp.buf.definition()
 			end,
-			desc = "Split [d]efinition",
+			desc = "Go to [D]efinition in split",
 		},
-		{ "<leader>W", "<cmd>EslintFixAll<cr><cmd>noa w<cr>", desc = "Fix and [W]rite" },
 		{
-			"<leader>R",
-			"<cmd>vs scp://lx@192.168.1.41//home/lx/nextcloud/docker-compose.yml<cr>",
-			desc = "Edit Docker Compose",
+			"<leader>W",
+			function()
+				if vim.fn.exists(":EslintFixAll") > 0 then
+					vim.cmd("EslintFixAll")
+					vim.cmd("noa write")
+				end
+				vim.cmd("write")
+			end,
+			desc = "Fix and [W]rite",
 		},
 	},
 }

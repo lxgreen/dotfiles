@@ -1,5 +1,5 @@
 require("config.lazy.init")
 
 if LazyVim.has("langmapper.nvim") then
-	require("langmapper").automapping()
+	require("langmapper").automapping({ "global", "buffer" })
 end

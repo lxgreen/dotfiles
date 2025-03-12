@@ -3,7 +3,7 @@ return {
 		"Wansmer/langmapper.nvim",
 		priority = 1,
 		lazy = false,
-		enabled = false,
+		enabled = true,
 
 		opts = {
 			default_layout = [[ABCDEFGHIJKLMNOPQRSTUVWXYZ{}~_+|abcdefghijklmnopqrstuvwxyz[]`-=\]],
