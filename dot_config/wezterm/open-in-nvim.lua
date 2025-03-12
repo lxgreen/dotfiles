@@ -25,7 +25,7 @@ local function get_nvim_instances()
 		os.getenv("SHELL"),
 		"-c",
 		-- source: https://github.com/neovim/neovim/issues/21600#issuecomment-1368651863
-		"find ${XDG_RUNTIME_DIR:-${TMPDIR}nvim.${USER}} -type s",
+		'find (echo "$TMPDIR/nvim.$USER") -type s',
 	})
 
 	if success then
@@ -128,29 +128,35 @@ M.open_in_nvim = function(window, pane, uri)
 
 		-- local nvim_panes = {}
 		local chosen_nvim_pane = nil
+		local process_info_missing = false
 
 		-- gather infos from all neovim instances in the active tab
 		for _, pane in ipairs(window:active_tab():panes()) do
 			local process_info = pane:get_foreground_process_info()
+			
+			-- Handle the case where process_info is nil (in multiplexer mode)
+			if process_info == nil then
+				process_info_missing = true
+			else
+				for _, child_process in pairs(process_info.children) do
+					for _, nvim_instance in ipairs(nvim_instances) do
+						if child_process.pid == nvim_instance.pid then
+							local nvim_pane = {
+								pane = pane,
+								pid = child_process.pid,
+								server_id = nvim_instance.server_id,
+								cwd = child_process.cwd,
+								last_focused = nvim_instance.last_focused,
+							}
 
-			for _, child_process in pairs(process_info.children) do
-				for _, nvim_instance in ipairs(nvim_instances) do
-					if child_process.pid == nvim_instance.pid then
-						local nvim_pane = {
-							pane = pane,
-							pid = child_process.pid,
-							server_id = nvim_instance.server_id,
-							cwd = child_process.cwd,
-							last_focused = nvim_instance.last_focused,
-						}
+							-- table.insert(nvim_panes, nvim_pane)
 
-						-- table.insert(nvim_panes, nvim_pane)
-
-						if
-							utils.is_subpath(nvim_pane.cwd, pwd)
-							and not (chosen_nvim_pane and chosen_nvim_pane.last_focused)
-						then
-							chosen_nvim_pane = nvim_pane
+							if
+								utils.is_subpath(nvim_pane.cwd, pwd)
+								and not (chosen_nvim_pane and chosen_nvim_pane.last_focused)
+							then
+								chosen_nvim_pane = nvim_pane
+							end
 						end
 					end
 				end
@@ -163,6 +169,15 @@ M.open_in_nvim = function(window, pane, uri)
 			-- wezterm.log_info("chosen nvim pane", chosen_nvim_pane)
 			open_file_in_nvim(full_path, line, col, chosen_nvim_pane.server_id)
 			chosen_nvim_pane.pane:activate()
+		else
+			-- If process_info is nil or no suitable pane was found, create a new vertical split pane
+			wezterm.log_info("No suitable nvim pane found or process_info is nil. Creating a new vertical split.")
+			local current_pane = window:active_tab():active_pane()
+			local new_pane = current_pane:split({ direction = "Right" })
+			
+			-- Create the nvim command to open the file at the specific line and column
+			local nvim_open_command = string.format("/opt/homebrew/bin/nvim +%d +normal\\ 0%dl %s", line, col - 1, full_path)
+			new_pane:send_text(nvim_open_command .. "\r")
 		end
 
 		-- prevent the default action from opening in a browser
