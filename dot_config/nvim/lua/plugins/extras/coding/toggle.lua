@@ -1,7 +1,8 @@
 return {
-	{ "tpope/vim-speeddating", event = "LazyFile" },
+	{ "tpope/vim-speeddating", vscode = true, event = "LazyFile" },
 	{
 		"nguyenvukhang/nvim-toggler",
+		vscode = true,
 		event = "LazyFile",
 		config = function()
 			require("nvim-toggler").setup({

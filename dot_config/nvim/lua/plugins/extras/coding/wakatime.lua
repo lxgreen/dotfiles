@@ -1,4 +1,5 @@
 return {
-  "wakatime/vim-wakatime",
-  event = "VimEnter",
+	"wakatime/vim-wakatime",
+	vscode = true,
+	event = "VimEnter",
 }
