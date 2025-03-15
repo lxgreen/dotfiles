@@ -3,6 +3,7 @@ return {
 		"folke/snacks.nvim",
 		opts = {
 			scroll = {
+				enabled = not vim.g.vscode,
 				animate = {
 					duration = { step = 15, total = 250 },
 					easing = "linear",

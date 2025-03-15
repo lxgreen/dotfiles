@@ -1,6 +1,6 @@
 return {
 	"johmsalas/text-case.nvim",
-	optional = true,
+	vscode = true,
 	keys = {
 		{
 			"gau",
