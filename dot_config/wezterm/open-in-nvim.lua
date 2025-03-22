@@ -103,8 +103,6 @@ local function open_file_in_nvim(full_path, line, col, server_id)
 	wezterm.run_child_process({ "/opt/homebrew/bin/nvim", "--server", server_id, "--remote-send", nvim_command })
 end
 
--- NOTE: this does not work on remote (muxed) panes
--- TODO: rewrite to omit the process_info usage
 M.open_in_nvim = function(window, pane, uri)
 	local line, col, name = extract_line_and_name(uri)
 
@@ -112,7 +110,7 @@ M.open_in_nvim = function(window, pane, uri)
 
 	if name then
 		local pwd = get_pwd(pane)
-		local full_path = name:match("^/") and name or pwd .. "/" .. name
+		local full_path = name:match("^/") or name:match("^~/") and name or pwd .. "/" .. name
 
 		wezterm.log_info("pwd " .. pwd)
 
@@ -133,7 +131,7 @@ M.open_in_nvim = function(window, pane, uri)
 		-- gather infos from all neovim instances in the active tab
 		for _, pane in ipairs(window:active_tab():panes()) do
 			local process_info = pane:get_foreground_process_info()
-			
+
 			-- Handle the case where process_info is nil (in multiplexer mode)
 			if process_info == nil then
 				process_info_missing = true
@@ -174,9 +172,10 @@ M.open_in_nvim = function(window, pane, uri)
 			wezterm.log_info("No suitable nvim pane found or process_info is nil. Creating a new vertical split.")
 			local current_pane = window:active_tab():active_pane()
 			local new_pane = current_pane:split({ direction = "Right" })
-			
+
 			-- Create the nvim command to open the file at the specific line and column
-			local nvim_open_command = string.format("/opt/homebrew/bin/nvim +%d +normal\\ 0%dl %s", line, col - 1, full_path)
+			local nvim_open_command =
+				string.format("/opt/homebrew/bin/nvim +%d +normal\\ 0%dl %s", line, col - 1, full_path)
 			new_pane:send_text(nvim_open_command .. "\r")
 		end
 
@@ -220,7 +219,7 @@ M.config.hyperlink_rules = {
 	-- Now add a new item at the bottom to match things that are
 	-- probably filenames
 	{
-		regex = "[/.A-Za-z0-9_-]+\\.[A-Za-z0-9]+(:\\d+)*(?=\\s*|$)",
+		regex = "(~)?[/.A-Za-z0-9_-]+\\.[A-Za-z0-9]+(:\\d+)*(?=\\s*|$)",
 		format = "$EDITOR:$0",
 	},
 }
