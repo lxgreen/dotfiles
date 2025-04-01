@@ -47,6 +47,7 @@
     "plugins.extras.coding.toggle",
     "plugins.extras.coding.wakatime",
     "plugins.extras.colorschemes.catppuccin",
+    "plugins.extras.files.picker",
     "plugins.extras.formatting",
     "plugins.extras.git.advanced-git-search",
     "plugins.extras.git.conflicts",
