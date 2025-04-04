@@ -107,6 +107,7 @@
     "plugins.extras.nav.treewalker",
     "plugins.extras.optimizations.auto-update-third-party-tools",
     "plugins.extras.optimizations.disable-markdown-preview",
+    "plugins.extras.optimizations.man-mode",
     "plugins.extras.optimizations.pinned-versions",
     "plugins.extras.optimizations.quickfile",
     "plugins.extras.optimizations.setup-devicons-after-colorscheme-changed",

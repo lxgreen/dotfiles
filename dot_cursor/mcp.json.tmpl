@@ -1,0 +1,34 @@
+{
+  "mcpServers": {
+    "figma": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "figma-developer-mcp",
+        "--figma-api-key={{ (keepassxcAttribute "figma-api" "Password") }}
+        "--stdio"
+      ]
+    },
+    "git": {
+      "command": "git-mcp-server",
+      "args": [],
+      "env": {},
+      "disabled": false,
+      "autoApprove": []
+    },
+    "github": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-e",
+        "GITHUB_PERSONAL_ACCESS_TOKEN",
+        "mcp/github"
+      ],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": {{ (keepassxcAttribute "github cursor token" "Password") }}
+      }
+    }
+  }
+}
