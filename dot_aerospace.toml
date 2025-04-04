@@ -187,3 +187,7 @@ run = 'move-node-to-workspace 4'
 [[on-window-detected]]
 if.app-name-regex-substring = 'firefox'
 run = 'move-node-to-workspace 2'
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'cursor'
+run = 'move-node-to-workspace 8'
