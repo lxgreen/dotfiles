@@ -1,5 +1,6 @@
 {
   "extras": [
+    "lazyvim.plugins.extras.ai.copilot",
     "lazyvim.plugins.extras.coding.blink",
     "lazyvim.plugins.extras.coding.luasnip",
     "lazyvim.plugins.extras.coding.mini-surround",
@@ -18,7 +19,6 @@
     "lazyvim.plugins.extras.test.core",
     "lazyvim.plugins.extras.ui.alpha",
     "lazyvim.plugins.extras.ui.edgy",
-    "lazyvim.plugins.extras.ui.mini-animate",
     "lazyvim.plugins.extras.ui.mini-indentscope",
     "lazyvim.plugins.extras.ui.treesitter-context",
     "lazyvim.plugins.extras.util.chezmoi",
@@ -27,6 +27,7 @@
     "lazyvim.plugins.extras.util.octo",
     "lazyvim.plugins.extras.util.project",
     "lazyvim.plugins.extras.vscode",
+    "plugins.extras.ai.avante",
     "plugins.extras.buffers.remove",
     "plugins.extras.buffers.scope",
     "plugins.extras.coding.abbreviate",

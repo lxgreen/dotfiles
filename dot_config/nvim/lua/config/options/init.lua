@@ -45,6 +45,9 @@ local options = {
 vim.opt.iskeyword:append({ "!", "=", "<", ">" })
 vim.o.guifont = "JetBrains Mono:h18"
 
+-- set path to Node v20
+vim.g.node_host_prog = "$HOME/.local/share/fnm/aliases/nvim_node/bin/node"
+
 -- TODO: move to separate module
 if vim.g.neovide then
 	vim.keymap.set("n", "<D-s>", ":w<CR>") -- Save

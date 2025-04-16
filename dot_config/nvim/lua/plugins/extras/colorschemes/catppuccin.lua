@@ -6,6 +6,20 @@ end
 
 local override_all = function(c)
 	return {
+		AvanteTitle = { fg = c.lavender, bg = c.none, style = { "bold" } },
+		AvanteReversedTitle = { fg = c.base, bg = c.lavender, style = { "bold" } },
+		AvanteSubtitle = { fg = c.mauve, bg = c.none, style = { "italic" } },
+		AvanteReversedSubtitle = { fg = c.base, bg = c.mauve, style = { "italic" } },
+		AvanteThirdTitle = { fg = c.green, bg = c.none, style = { "bold" } },
+		AvanteReversedThirdTitle = { fg = c.base, bg = c.green, style = { "bold" } },
+		AvanteConflictCurrent = { bg = c_blend(c.blue, c.base, 90) },
+		AvanteConflictCurrentLabel = { bg = c_blend(c.blue, c.base, 85), fg = c.text },
+		AvanteConflictIncoming = { bg = c_blend(c.green, c.base, 90) },
+		AvanteConflictIncomingLabel = { bg = c_blend(c.green, c.base, 85), fg = c.text },
+		AvantePopupHint = { fg = c.overlay1 },
+		AvanteInlineHint = { fg = c.overlay1, style = { "italic" } },
+		AvantePromptInput = { fg = c.text, bg = c.base },
+		AvantePromptInputBorder = { fg = c_blend(c.base, c.lavender, 50) },
 		AerialLine = { fg = "none", bg = c.crust },
 		AlphaFooter = { fg = c.surface1, style = {} },
 		AlphaShortcut = { bg = c_blend(c.base, c.crust, 50), fg = c_blend(c.base, c.surface1, 50) },
