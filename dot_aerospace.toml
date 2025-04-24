@@ -61,7 +61,7 @@ inner.horizontal = 4
 inner.vertical = 4
 outer.left = 4
 outer.bottom = 4
-outer.top = [{ monitor."Built-in Retina Display" = 8 }, 39]
+outer.top = [{ monitor."Built-in Retina Display" = 32 }, 39]
 outer.right = 4
 
 # See https://nikitabobko.github.io/AeroSpace/guide#exec-env-vars

@@ -1,0 +1,35 @@
+{
+	"nativeMCPServers": [],
+	"mcpServers": {
+		"git": {
+			"command": "git-mcp-server",
+			"args": [],
+			"env": {},
+			"disabled": false,
+			"autoApprove": []
+		},
+		"github": {
+			"env": {
+				"GITHUB_PERSONAL_ACCESS_TOKEN": "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"
+			},
+			"args": [
+				"run",
+				"-i",
+				"--rm",
+				"-e",
+				"GITHUB_PERSONAL_ACCESS_TOKEN",
+				"mcp/github"
+			],
+			"command": "docker"
+		},
+		"figma": {
+			"args": [
+				"-y",
+				"figma-developer-mcp",
+				"--figma-api-key=figd_I03JodMHjP8qG99XUuV1f5pybvIfQLySqkreLQr3",
+				"--stdio"
+			],
+			"command": "npx"
+		}
+	}
+}
