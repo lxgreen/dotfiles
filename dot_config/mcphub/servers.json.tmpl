@@ -10,7 +10,7 @@
 		},
 		"github": {
 			"env": {
-				"GITHUB_PERSONAL_ACCESS_TOKEN": "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"
+				"GITHUB_PERSONAL_ACCESS_TOKEN": "{{ (keepassxcAttribute "github cursor token" "Password") }}"
 			},
 			"args": [
 				"run",
@@ -26,7 +26,7 @@
 			"args": [
 				"-y",
 				"figma-developer-mcp",
-				"--figma-api-key=figd_I03JodMHjP8qG99XUuV1f5pybvIfQLySqkreLQr3",
+				"--figma-api-key={{ (keepassxcAttribute "figma-api" "Password") }}",
 				"--stdio"
 			],
 			"command": "npx"
