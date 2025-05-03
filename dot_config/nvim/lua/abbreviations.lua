@@ -1,4 +1,5 @@
 vim.cmd("abbreviate cosnt const")
+vim.cmd("abbreviate opeation operation")
 vim.cmd("abbreviate dont don't")
 vim.cmd("abbreviate doesnt doesn't")
 vim.cmd("abbreviate shouldnt shouldn't")

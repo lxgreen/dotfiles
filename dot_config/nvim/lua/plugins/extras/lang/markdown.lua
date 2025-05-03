@@ -10,7 +10,7 @@ return {
 		config = function()
 			require("markview").setup({
 				preview = {
-					filetypes = { "md", "Avante" },
+					filetypes = { "md", "markdown", "Avante" },
 					modes = { "n", "no", "c" },
 					hybrid_modes = { "n" },
 					callbacks = {

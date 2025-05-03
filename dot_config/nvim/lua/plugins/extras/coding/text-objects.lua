@@ -12,9 +12,8 @@ return {
 				enable = true,
 				keymaps = {
 					init_selection = "vv",
-					node_incremental = ".",
-					scope_incremental = ",",
-					node_decremental = "<esc>",
+					node_incremental = "<Up>",
+					node_decremental = "<Down>",
 				},
 			},
 		},

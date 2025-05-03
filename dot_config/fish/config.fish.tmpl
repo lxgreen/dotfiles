@@ -315,6 +315,12 @@ if status is-interactive
         end
     end
 
+    # Daily note
+    function d
+        set today (date "+%Y-%m-%d")
+        zk new -t $today -g inbox -W ~/Sync/Notes/Inbox/
+    end
+
     # Note
     function n
         if test -z "$argv[1]"
