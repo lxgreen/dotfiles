@@ -8,12 +8,22 @@ return {
 		behaviour = {
 			enable_cursor_planning_mode = true,
 		},
+		file_selector = { provider = "snacks" },
+
+		hints = { enabled = true },
+
+		windows = {
+			sidebar_header = { align = "left", rounded = false },
+			input = { prefix = " ", height = 6 },
+			edit = { border = "rounded" },
+			ask = { start_insert = false },
+		},
 		-- NOTE: AFTER MODIFICATION, RESTART RAG DOCKER-BASED SERVICE BY `docker rm -fv avante-rag-service`
 		rag_service = {
-			enabled = false, -- Enables the RAG service
+			enabled = true, -- Enables the RAG service
 			host_mount = os.getenv("HOME"), -- Host mount path for the rag service
 			provider = "openai", -- The provider to use for RAG service (e.g. openai or ollama)
-			llm_model = "", -- The LLM model to use for RAG service
+			llm_model = "gpt-4o", -- The LLM model to use for RAG service
 			embed_model = "", -- The embedding model to use for RAG service
 			endpoint = "https://api.openai.com/v1", -- The API endpoint for RAG service
 		},
@@ -54,6 +64,46 @@ return {
 					use_absolute_path = true,
 				},
 			},
+		},
+		{
+			"saghen/blink.cmp",
+			optional = true,
+			dependencies = { "saghen/blink.compat" },
+
+			opts = {
+				sources = {
+					default = { "avante_commands", "avante_mentions", "avante_files" },
+					compat = { "avante_commands", "avante_mentions", "avante_files" },
+
+					providers = {
+						avante_commands = {
+							name = "avante_commands",
+							module = "blink.compat.source",
+							score_offset = 90,
+							opts = {},
+						},
+
+						avante_files = {
+							name = "avante_files",
+							module = "blink.compat.source",
+							score_offset = 100,
+							opts = {},
+						},
+
+						avante_mentions = {
+							name = "avante_mentions",
+							module = "blink.compat.source",
+							score_offset = 1000,
+							opts = {},
+						},
+					},
+				},
+			},
+		},
+		{
+			"catppuccin/nvim",
+			optional = true,
+			opts = { integrations = { avante = true } },
 		},
 	},
 }
