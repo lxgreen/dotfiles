@@ -3,6 +3,7 @@ return {
 	event = "VeryLazy",
 	version = false, -- Never set this value to "*"! Never!
 	opts = {
+		mode = "legacy",
 		provider = "openai",
 		cursor_applying_provider = "openai",
 		behaviour = {
