@@ -6,6 +6,7 @@ local function header_colorize(header)
 			type = "text",
 			val = chars,
 			opts = {
+				-- hl = "AlphaHeader" .. math.random(1, 8),
 				hl = "FlashLabel",
 				position = "center",
 			},
