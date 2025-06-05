@@ -9,8 +9,8 @@
 {
   "assistant": {
     "default_model": {
-      "provider": "openai",
-      "model": "o3-mini"
+      "provider": "copilot_chat",
+      "model": "claude-3-7-sonnet"
     },
     "version": "2"
   },

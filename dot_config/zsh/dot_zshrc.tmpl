@@ -50,6 +50,15 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 {{ else if eq .chezmoi.os "linux" }}
 source $ZDOTDIR/spaceship/spaceship.zsh
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+# astra
+source ~/.astra/astra.sh
+export PATH="$(brew --prefix scala@2.12)/bin:$PATH"
+export JAVA_OPTS_FROM_OUTSIDE='-Dfile.encoding=UTF-8'
+export ASTRA_AZURE_HOST=https://ero.wewix.net/proxy/azure-ai/openai/deployments/
+export ASTRA_OPENAI_API_KEY=UNDEFINED
+export ELASTIC_HOST=http://127.0.0.1:9200
+
 {{ end }}
 
 # aliases -- keep this last
