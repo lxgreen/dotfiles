@@ -167,14 +167,18 @@ return {
 		{
 			key = "v",
 			mods = "LEADER",
-			action = wezterm.action.SwitchToWorkspace({
-				name = "CONFIG",
-				spawn = {
-					args = { "nvim", os.getenv("HOME") .. "/.config" },
-					cwd = os.getenv("HOME") .. "/.config",
-					label = "CONFIGURATION",
-				},
-			}),
+			action = wezterm.action_callback(function(window, pane)
+				local config_dir = os.getenv("HOME") .. "/.config"
+				local command = { "nvim", config_dir }
+
+				window:perform_action(
+					wezterm.action.SpawnCommandInNewTab({
+						cwd = config_dir,
+						args = command,
+					}),
+					pane
+				)
+			end),
 		},
 		{
 			key = "g",
@@ -200,6 +204,20 @@ return {
 				window:perform_action(
 					wezterm.action.SpawnCommandInNewTab({
 						cwd = notes_dir,
+						args = command,
+					}),
+					pane
+				)
+			end),
+		},
+		{
+			key = "a",
+			mods = "LEADER",
+			action = wezterm.action_callback(function(window, pane)
+				local command = { "zsh" }
+
+				window:perform_action(
+					wezterm.action.SpawnCommandInNewTab({
 						args = command,
 					}),
 					pane

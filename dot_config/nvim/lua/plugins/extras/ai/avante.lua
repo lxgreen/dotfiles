@@ -21,20 +21,24 @@ return {
 		},
 		-- NOTE: AFTER MODIFICATION, RESTART RAG DOCKER-BASED SERVICE BY `docker rm -fv avante-rag-service`
 		rag_service = {
-			enabled = true, -- Enables the RAG service
-			host_mount = os.getenv("HOME"), -- Host mount path for the rag service
+			enabled = false, -- Enables the RAG service
+			host_mount = os.getenv("HOME") .. "/dev", -- Host mount path for the rag service
 			provider = "openai", -- The provider to use for RAG service (e.g. openai or ollama)
 			llm_model = "gpt-4o", -- The LLM model to use for RAG service
 			embed_model = "", -- The embedding model to use for RAG service
 			endpoint = "https://api.openai.com/v1", -- The API endpoint for RAG service
 		},
-		openai = {
-			endpoint = "https://api.openai.com/v1",
-			model = "gpt-4o", -- your desired model (or use gpt-4o, etc.)
-			timeout = 30000, -- Timeout in milliseconds, increase this for reasoning models
-			temperature = 0,
-			max_completion_tokens = 8192, -- Increase this to include reasoning tokens (for reasoning models)
-			--reasoning_effort = "medium", -- low|medium|high, only used for reasoning models
+		providers = {
+			openai = {
+				endpoint = "https://api.openai.com/v1",
+				model = "gpt-4o", -- your desired model (or use gpt-4o, etc.)
+				timeout = 30000, -- Timeout in milliseconds, increase this for reasoning models
+				extra_request_body = {
+					temperature = 0,
+					max_completion_tokens = 8192, -- Increase this to include reasoning tokens (for reasoning models)
+					reasoning_effort = "medium", -- low|medium|high, only used for reasoning models
+				},
+			},
 		},
 	},
 	-- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
