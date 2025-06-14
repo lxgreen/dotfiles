@@ -3,6 +3,7 @@
 	"blocks": [
 		{
 			"alignment": "left",
+			"type": "prompt",
 			"segments": [
 				{
 					"foreground": "cyan",
@@ -14,10 +15,27 @@
 					"type": "path"
 				},
 				{
+					"style": "plain",
+					"template": "{{ if eq .Env.FISH_BIND_MODE \"default\" }}<blue>󰰓</>{{ else if eq .Env.FISH_BIND_MODE \"insert\" }}<magenta>󰰄</>{{ else if eq .Env.FISH_BIND_MODE \"replace_one\" }}<yellow>󰰟</>{{ else if eq .Env.FISH_BIND_MODE \"visual\"}}<cyan>󰰫</>{{ end }}",
+					"type": "text"
+				}
+			]
+		},
+		{
+			"alignment": "right",
+			"type": "rprompt",
+			"segments": [
+				{
+					"foreground": "green",
+					"style": "plain",
+					"template": "{{ if .Full }}<white>󰋙</> {{ .Full }} {{ end }}",
+					"type": "node"
+				},
+				{
 					"type": "git",
 					"style": "plain",
 					"foreground": "blue",
-					"template": "<white>{{ .UpstreamIcon }}</>{{ .HEAD }} ",
+					"template": "{{ if .UpstreamIcon }}<white>{{ .UpstreamIcon }}</> {{ end }}{{ if .HEAD }}{{ .HEAD }} {{ end }}",
 					"properties": {
 						"branch_icon": "",
 						"fetch_status": true,
@@ -29,26 +47,8 @@
 							"bugfix/*": "b/"
 						}
 					}
-				},
-				{
-					"style": "plain",
-					"template": "󰋙 <green>{{ .Full }}</> ",
-					"type": "node"
-				},
-				{
-					"foreground_templates": [
-						"{{if contains \"N\" .Env.POSH_VI_MODE}}blue{{end}}",
-						"{{if contains \"I\" .Env.POSH_VI_MODE}}green{{end}}",
-						"{{if contains \"V\" .Env.POSH_VI_MODE}}cyan{{end}}",
-						"{{if contains \"V-L\" .Env.POSH_VI_MODE}}cyan{{end}}",
-						"{{if contains \"R\" .Env.POSH_VI_MODE}}red{{end}}"
-					],
-					"style": "plain",
-					"template": "{{ if .Env.POSH_VI_MODE }}{{ .Env.POSH_VI_ICON }}{{ end }}",
-					"type": "text"
 				}
-			],
-			"type": "prompt"
+			]
 		}
 	],
 	"final_space": true,
