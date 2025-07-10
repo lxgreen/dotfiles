@@ -224,6 +224,7 @@ set -q GIT_EDITOR; or set -Ux GIT_EDITOR $EDITOR
 set -gx OPENAI_API_KEY {{ (keepassxcAttribute "ChatGPT" "Password") }}
 set -gx TAVILY_API_KEY {{ (keepassxcAttribute "Tavily" "Password") }}
 set -gx ANTHROPIC_API_KEY {{ keepassxcAttribute "Anthropic" "Password" }}
+set -gx GEMINI_API_KEY {{ keepassxcAttribute "gemini api" "Password"}}
 
 set -x GPG_TTY (tty)
 
