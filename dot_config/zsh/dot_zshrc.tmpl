@@ -47,9 +47,6 @@ eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/config.json)"
 eval "$(/opt/homebrew/bin/brew shellenv)"
 # haskell env init
 [ -f "/Users/alexgr/.ghcup/env" ] && source "/Users/alexgr/.ghcup/env" # ghcup-env
-{{ else if eq .chezmoi.os "linux" }}
-source $ZDOTDIR/spaceship/spaceship.zsh
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 # astra
 source ~/.astra/astra.sh
@@ -59,6 +56,9 @@ export ASTRA_AZURE_HOST=https://ero.wewix.net/proxy/azure-ai/openai/deployments/
 export ASTRA_OPENAI_API_KEY=UNDEFINED
 export ELASTIC_HOST=http://127.0.0.1:9200
 
+{{ else if eq .chezmoi.os "linux" }}
+source $ZDOTDIR/spaceship/spaceship.zsh
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 {{ end }}
 
 # aliases -- keep this last
