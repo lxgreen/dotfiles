@@ -345,18 +345,13 @@ return {
 					})
 				end,
 			},
-
 			{
-				"goolord/alpha-nvim",
-				dependencies = { "catppuccin/nvim" },
+				"catppuccin/nvim",
 				optional = true,
-
-				init = function()
-					vim.api.nvim_create_autocmd("User", {
-						once = true,
-						pattern = "AlphaReady",
-						callback = alpha_header_animate,
-					})
+				opts = function()
+					-- https://github.com/LazyVim/LazyVim/pull/6354
+					local bufferline = require("catppuccin.groups.integrations.bufferline")
+					bufferline.get = bufferline.get or bufferline.get_theme
 				end,
 			},
 		},

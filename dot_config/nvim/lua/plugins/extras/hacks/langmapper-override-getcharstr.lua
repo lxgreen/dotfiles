@@ -1,5 +1,6 @@
 return {
 	"Wansmer/langmapper.nvim",
+	vscode = true,
 	optional = true,
 	opts = function()
 		local getcharstr_orig = vim.fn.getcharstr

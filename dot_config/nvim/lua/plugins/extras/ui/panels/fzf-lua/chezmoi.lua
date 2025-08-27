@@ -1,5 +1,6 @@
 return {
 	"xvzc/chezmoi.nvim",
+	vscode = true,
 	optional = true,
 	dependencies = { "nvim-lua/plenary.nvim" },
 	config = function()

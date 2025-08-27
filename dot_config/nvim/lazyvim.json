@@ -1,8 +1,8 @@
 {
 	"extras": [
-		"lazyvim.plugins.extras.coding.blink",
 		"lazyvim.plugins.extras.coding.luasnip",
 		"lazyvim.plugins.extras.coding.mini-surround",
+		"lazyvim.plugins.extras.coding.nvim-cmp",
 		"lazyvim.plugins.extras.coding.yanky",
 		"lazyvim.plugins.extras.dap.core",
 		"lazyvim.plugins.extras.editor.snacks_explorer",
@@ -101,7 +101,6 @@
 		"plugins.extras.linting.stylelint",
 		"plugins.extras.nav.better-escape",
 		"plugins.extras.nav.multiple-cursors",
-		"plugins.extras.nav.paredit",
 		"plugins.extras.nav.search-labels",
 		"plugins.extras.nav.treesitter-context",
 		"plugins.extras.nav.treewalker",

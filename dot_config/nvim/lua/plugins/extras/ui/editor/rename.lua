@@ -1,3 +1,3 @@
 return {
-	{ "saecki/live-rename.nvim", event = "LazyFile" },
+	{ "saecki/live-rename.nvim", lazy = true },
 }

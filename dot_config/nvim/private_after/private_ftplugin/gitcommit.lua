@@ -1,9 +1,8 @@
 -- Runs once when the gitcommit is opened for the first time.
--- TODO: adapt for blink.cmp
--- if vim.g.workspaces_source_loaded == true then
---   return
--- end
--- local cmp = require("cmp")
--- local workspaces = require("workspaces-cmp")
--- cmp.register_source("workspaces", workspaces)
--- vim.g.workspaces_source_loaded = true
+if vim.g.workspaces_source_loaded == true then
+  return
+end
+local cmp = require("cmp")
+local workspaces = require("workspaces-cmp")
+cmp.register_source("workspaces", workspaces)
+vim.g.workspaces_source_loaded = true

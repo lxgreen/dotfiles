@@ -226,6 +226,13 @@ set -gx TAVILY_API_KEY {{ (keepassxcAttribute "Tavily" "Password") }}
 set -gx ANTHROPIC_API_KEY {{ keepassxcAttribute "Anthropic" "Password" }}
 set -gx GEMINI_API_KEY {{ keepassxcAttribute "gemini api" "Password"}}
 
+set -gx LANGSMITH_TRACING true
+set -gx LANGSMITH_PROJECT Personal
+set -gx LANGSMITH_API_KEY {{ (keepassxcAttribute "langsmith" "Password") }}
+set -gx LANGSMITH_ENDPOINT https://api.smith.langchain.com
+set -gx PINECONE_INDEX_NAME Personal
+set -gx PINECONE_API_KEY {{ (keepassxcAttribute "pinecone" "Password") }}
+
 set -x GPG_TTY (tty)
 
 # -- ABBRS -------------------------------------------------------------------------------------------------------------
@@ -259,9 +266,9 @@ if status is-interactive
     # File operations
     alias rmf "rm -rf"
     alias dd "dirs -v"
-    for i in (seq 1 9)
-        alias $i "cd -$i"
-    end
+
+    alias cd __zoxide_z
+
     alias .. "cd .."
     alias ... "cd ../.."
     alias .... "cd ../../.."
