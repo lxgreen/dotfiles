@@ -31,7 +31,7 @@ return {
 			links = {
 				style = "markdown",
 				name_is_source = false,
-				conceal = true,
+				conceal = false,
 				context = 0,
 				implicit_extension = "md",
 				transform_implicit = false,

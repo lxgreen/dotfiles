@@ -22,7 +22,6 @@ local disabled_filetypes = {
 
 return {
 	"nvim-lualine/lualine.nvim",
-
 	opts = function(_, opts)
 		local winbar_filetype = {
 			{

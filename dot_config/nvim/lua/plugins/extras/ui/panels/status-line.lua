@@ -21,7 +21,6 @@ local mode_icon_map = {
 return {
 	{
 		"nvim-lualine/lualine.nvim",
-
 		opts = function(_, opts)
 			table.insert(opts.extensions, "fugitive")
 			table.insert(opts.extensions, "mason")

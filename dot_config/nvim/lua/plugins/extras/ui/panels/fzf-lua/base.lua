@@ -41,6 +41,7 @@ local ignore_patterns = {
 
 return {
 	"ibhagwan/fzf-lua",
+
 	config = function()
 		local fzf_lua = require("fzf-lua")
 		fzf_lua.setup({

@@ -16,7 +16,7 @@ return {
 					hybrid_modes = { "n" },
 					callbacks = {
 						on_enable = function(_, win)
-							vim.wo[win].conceallevel = 2
+							vim.wo[win].conceallevel = 1
 							vim.wo[win].concealcursor = "c"
 						end,
 					},
@@ -34,7 +34,12 @@ return {
 			require("zk").setup({
 				-- can be "telescope", "fzf" or "select" (`vim.ui.select`)
 				-- it's recommended to use "telescope" or "fzf"
-				picker = "telescope",
+				picker = "snacks_picker",
+				snacks_picker = {
+					layout = {
+						preset = "ivy",
+					},
+				},
 
 				lsp = {
 					-- `config` is passed to `vim.lsp.start_client(config)`
