@@ -1,11 +1,15 @@
-local opts = require("opts")
-local sbar = require("sketchybar")
+local settings = require("settings")
 
 -- Equivalent to the --bar domain
 sbar.bar({
-	topmost = "window",
-	height = 35,
-	color = opts.color.base,
-	padding_right = 2,
-	padding_left = 2,
+    topmost = "window",
+    height = settings.bar.height,
+    color = settings.bar.background,
+    padding_right = settings.bar.padding.x,
+    padding_left = settings.bar.padding.x,
+    -- padding_top = settings.bar.padding.y,
+    -- padding_bottom = settings.bar.padding.y,
+    sticky = true,
+    position = "top",
+    shadow = false
 })

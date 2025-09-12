@@ -233,6 +233,31 @@ return {
 				flags = "FUZZY|WORKSPACES",
 			}),
 		},
+		-- Scrolling bindings
+		-- gg equivalent - scroll to top
+		{
+			key = "g",
+			mods = "CTRL",
+			action = wezterm.action.ScrollToTop,
+		},
+		-- G equivalent - scroll to bottom  
+		{
+			key = "G",
+			mods = "CTRL|SHIFT", 
+			action = wezterm.action.ScrollToBottom,
+		},
+		-- Ctrl+U - scroll up by half page
+		{
+			key = "u",
+			mods = "CTRL",
+			action = wezterm.action.ScrollByLine(-1),
+		},
+		-- Ctrl+D - scroll down by half page
+		{
+			key = "d",
+			mods = "CTRL",
+			action = wezterm.action.ScrollByLine(1),
+		},
 	},
 
 	-- requires kitty.terminfo
