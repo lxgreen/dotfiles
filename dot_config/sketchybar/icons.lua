@@ -1,13 +1,16 @@
 return {
 	plus = "􀅼",
 	loading = "􀖇",
-	apple = "",
+	apple = "􀣺",
 	rebel = "",
 	empire = "",
 	gear = "􀍟",
 	cpu = "􀫥",
 	nuke = "",
 	clipboard = "􀉄",
+	vpn_off = "􀞙",
+	vpn_on = "􀞚",
+	calendar = "􀉉",
 
 	switch = {
 		on = "􁏮",

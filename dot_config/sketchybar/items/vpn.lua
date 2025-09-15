@@ -3,35 +3,36 @@ local colors = require("colors")
 local icons = require("icons")
 
 local vpn = sbar.add("item", {
-	icon = { font = { size = 26 }, string = icons.trigrams.fire, color = colors.yellow },
+	icon = { font = { size = 26 }, string = icons.vpn_off, color = colors.yellow },
 	position = "right",
-	update_freq = 10 * 60,
+	update_freq = 30,
+	
 })
 
 local function update()
-	local icon = { font = { size = 26 }, string = icons.trigrams.fire, color = colors.yellow }
+	local icon = { font = { size = 26 }, string = icons.vpn_off, color = colors.yellow }
 	local label = { string = "", color = colors.white, drawing = true }
 
 	sbar.animate("sin", 10, function()
 		vpn:set({ label = label, icon = icon })
 	end)
 
-	local command = "curl --connect-timeout 3 -f --silent --output /dev/null 'https://bo.wix.com'"
+	-- Use the new VPN monitor script for accurate GlobalProtect state detection
+	local command = "$CONFIG_DIR/helpers/vpn_monitor.sh"
 
-	-- Running command and capturing exit code
-	local handle = io.popen(command .. "; echo $?")
+	-- Running command and capturing output
+	local handle = io.popen(command)
 	local result = handle:read("*a")
 	handle:close()
 
-	-- Extracting the exit code from the output
-	local exit_code = tonumber(result)
-
-	if exit_code == 0 then
+	-- Parse the state from the output
+	local state = result:match("(%w+)")
+	if state == "connected" then
 		icon.color = colors.green
-		icon.string = icons.trigrams.heaven
+		icon.string = icons.vpn_on
 	else
 		icon.color = colors.red
-		icon.string = icons.trigrams.earth
+		icon.string = icons.vpn_off
 	end
 
 	sbar.animate("sin", 10, function()
@@ -39,7 +40,14 @@ local function update()
 	end)
 end
 
-vpn:subscribe({ "forced", "routine", "vpn_update", "update" }, update)
+
+-- Subscribe to real-time VPN state changes
+vpn:subscribe({ "forced", "routine", "vpn_update", "update", "vpn_state_changed" }, update)
 vpn:subscribe("mouse.clicked", update)
+
+
+-- Set up periodic VPN state monitoring (every 10 seconds)
+-- This provides near real-time detection without complex daemon management
+sbar.exec("while true; do $CONFIG_DIR/helpers/vpn_monitor.sh; sleep 10; done &")
 
 return vpn

@@ -7,6 +7,7 @@ require("items.calendar")
 require("items.widgets")
 require("items.media")
 require("items.keyboard_layout")
-require("items.brew")
 require("items.vpn")
+require("items.brew")
 -- require("items.svim")
+
