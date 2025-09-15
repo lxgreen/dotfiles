@@ -43,7 +43,6 @@ end
 
 -- Subscribe to real-time VPN state changes
 vpn:subscribe({ "forced", "routine", "vpn_update", "update", "vpn_state_changed" }, update)
-vpn:subscribe("mouse.clicked", update)
 
 
 -- Set up periodic VPN state monitoring (every 10 seconds)
