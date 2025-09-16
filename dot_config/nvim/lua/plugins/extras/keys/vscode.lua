@@ -1,39 +1,53 @@
--- VS Code specific keybindings that work better with vscode-neovim extension
-return {
-	{
-		"LazyVim/LazyVim",
-		cond = function() return vim.g.vscode end,
-		keys = {
-			-- File operations using VS Code's native commands
-			{ "<leader>ff", "<cmd>call VSCodeNotify('workbench.action.quickOpen')<CR>", desc = "Find files" },
-			{ "<leader>fg", "<cmd>call VSCodeNotify('workbench.action.findInFiles')<CR>", desc = "Live grep" },
-			{ "<leader>fb", "<cmd>call VSCodeNotify('workbench.action.showAllEditors')<CR>", desc = "Find buffers" },
+-- Simple autocmd-based approach for VS Code keybindings
+-- This ensures keybindings are set after all plugins load
+
+if vim.g.vscode then
+	vim.api.nvim_create_autocmd("User", {
+		pattern = "LazyVimKeymaps",
+		callback = function()
+			-- Override LazyVim keybindings for VS Code
+			local function vscode_notify(cmd)
+				return function()
+					vim.fn.VSCodeNotify(cmd)
+				end
+			end
+
+			-- File operations
+			vim.keymap.set("n", "<leader>e", vscode_notify("workbench.files.action.focusFilesExplorer"), { desc = "Explorer" })
+			vim.keymap.set("n", "<leader>ff", vscode_notify("workbench.action.quickOpen"), { desc = "Find files" })
+			vim.keymap.set("n", "<leader>fg", vscode_notify("workbench.action.findInFiles"), { desc = "Live grep" })
+			vim.keymap.set("n", "<leader>fb", vscode_notify("workbench.action.showAllEditors"), { desc = "Find buffers" })
+			vim.keymap.set("n", "<leader>fr", vscode_notify("workbench.action.openRecent"), { desc = "Recent files" })
 			
 			-- Git operations
-			{ "<leader>gg", "<cmd>call VSCodeNotify('workbench.view.scm')<CR>", desc = "Git status" },
-			{ "<leader>gb", "<cmd>call VSCodeNotify('gitlens.showQuickBranchHistory')<CR>", desc = "Git branches" },
+			vim.keymap.set("n", "<leader>gg", vscode_notify("workbench.view.scm"), { desc = "Git status" })
+			vim.keymap.set("n", "<leader>gb", vscode_notify("gitlens.showQuickBranchHistory"), { desc = "Git branches" })
+			vim.keymap.set("n", "<leader>gc", vscode_notify("git.commitStaged"), { desc = "Git commit" })
 			
 			-- Code navigation
-			{ "gd", "<cmd>call VSCodeNotify('editor.action.revealDefinition')<CR>", desc = "Go to definition" },
-			{ "gr", "<cmd>call VSCodeNotify('editor.action.goToReferences')<CR>", desc = "Go to references" },
-			{ "gi", "<cmd>call VSCodeNotify('editor.action.goToImplementation')<CR>", desc = "Go to implementation" },
+			vim.keymap.set("n", "gd", vscode_notify("editor.action.revealDefinition"), { desc = "Go to definition" })
+			vim.keymap.set("n", "gr", vscode_notify("editor.action.goToReferences"), { desc = "Go to references" })
+			vim.keymap.set("n", "gi", vscode_notify("editor.action.goToImplementation"), { desc = "Go to implementation" })
+			vim.keymap.set("n", "K", vscode_notify("editor.action.showHover"), { desc = "Hover" })
 			
 			-- Code actions
-			{ "<leader>ca", "<cmd>call VSCodeNotify('editor.action.quickFix')<CR>", desc = "Code action" },
-			{ "<leader>cr", "<cmd>call VSCodeNotify('editor.action.rename')<CR>", desc = "Rename" },
-			
-			-- Format
-			{ "<leader>cf", "<cmd>call VSCodeNotify('editor.action.formatDocument')<CR>", desc = "Format document" },
+			vim.keymap.set("n", "<leader>ca", vscode_notify("editor.action.quickFix"), { desc = "Code action" })
+			vim.keymap.set("n", "<leader>cr", vscode_notify("editor.action.rename"), { desc = "Rename" })
+			vim.keymap.set("n", "<leader>cf", vscode_notify("editor.action.formatDocument"), { desc = "Format document" })
 			
 			-- Terminal
-			{ "<leader>ft", "<cmd>call VSCodeNotify('workbench.action.terminal.toggleTerminal')<CR>", desc = "Toggle terminal" },
-			
-			-- Explorer
-			{ "<leader>e", "<cmd>call VSCodeNotify('workbench.files.action.focusFilesExplorer')<CR>", desc = "Explorer" },
+			vim.keymap.set("n", "<leader>ft", vscode_notify("workbench.action.terminal.toggleTerminal"), { desc = "Toggle terminal" })
+			vim.keymap.set("n", "<c-`>", vscode_notify("workbench.action.terminal.toggleTerminal"), { desc = "Toggle terminal" })
 			
 			-- Problems/Diagnostics
-			{ "<leader>xx", "<cmd>call VSCodeNotify('workbench.actions.view.problems')<CR>", desc = "Problems" },
-		},
-	},
-}
+			vim.keymap.set("n", "<leader>xx", vscode_notify("workbench.actions.view.problems"), { desc = "Problems" })
+			vim.keymap.set("n", "<leader>xd", vscode_notify("editor.action.marker.next"), { desc = "Next diagnostic" })
+			vim.keymap.set("n", "<leader>xD", vscode_notify("editor.action.marker.prev"), { desc = "Previous diagnostic" })
+		end,
+	})
+end
+
+-- Return empty table since we're using autocmds instead
+return {}
+
 

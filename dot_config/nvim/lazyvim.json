@@ -113,6 +113,8 @@
     "plugins.extras.optimizations.setup-devicons-after-colorscheme-changed",
     "plugins.extras.optimizations.stop-inactive-lsp",
     "plugins.extras.optimizations.stop-treesitter-on-large-js-files",
+    "plugins.extras.optimizations.vs-code",
+    "plugins.extras.optimizations.disable-lazyvim-vscode",
     "plugins.extras.test.coverage",
     "plugins.extras.test.jest",
     "plugins.extras.ui.editor.auto-dark",

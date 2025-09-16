@@ -1,6 +1,7 @@
 return {
 	{
 		"folke/snacks.nvim",
+		cond = function() return not vim.g.vscode end, -- Disable in VS Code
 		opts = {
 			statuscolumn = {
 				enabled = true,
