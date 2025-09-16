@@ -8,7 +8,7 @@ return {
 				bib = false,
 				buffers = true,
 				cmp = false,
-				conceal = false,
+				conceal = true,
 				folds = true,
 				links = true,
 				lists = true,
@@ -31,7 +31,7 @@ return {
 			links = {
 				style = "markdown",
 				name_is_source = false,
-				conceal = false,
+				conceal = true,
 				context = 0,
 				implicit_extension = "md",
 				transform_implicit = false,

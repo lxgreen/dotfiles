@@ -6,7 +6,7 @@ local options = {
 	backup = true,
 	backupdir = vim.fn.getenv("HOME") .. "/.local/state/nvim/backup/",
 	smoothscroll = true,
-	conceallevel = 1,
+	conceallevel = 2,
 	foldmethod = "expr",
 	foldexpr = "nvim_treesitter#foldexpr()",
 
