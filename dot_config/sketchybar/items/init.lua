@@ -8,7 +8,7 @@ require("items.widgets")
 require("items.media")
 require("items.keyboard_layout")
 require("items.vpn")
-require("items.brew")
 require("items.npm_registry")
+require("items.brew")
 -- require("items.svim")
 

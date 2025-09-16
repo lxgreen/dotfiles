@@ -1,15 +1,15 @@
 #!/bin/bash
 
-# GlobalProtect VPN State Monitor - Simple Version
-# Uses interface flags for reliable detection
+# GlobalProtect VPN State Monitor - DNS Version
+# Uses DNS configuration for reliable detection
 
 # Configuration
 LAST_STATE_FILE="/tmp/sketchybar_vpn_last_state"
 
 # Function to check VPN state
 check_vpn_state() {
-    # Check if utun4 has UP flag (8051 = UP,POINTOPOINT,RUNNING,MULTICAST)
-    if ifconfig utun4 2>/dev/null | grep -q "flags=8051"; then
+    # Check if any DNS server is a VPN server
+    if scutil --dns 2>/dev/null | grep -q "10\.104\.118\.200\|10\.11\.118\.200"; then
         echo "connected"
     else
         echo "disconnected"
