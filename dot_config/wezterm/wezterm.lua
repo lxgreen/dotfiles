@@ -1,6 +1,15 @@
 local wezterm = require("wezterm")
 local open_in_nvim = require("open-in-nvim")
 
+-- Define theme selection function first (needed by event handlers)
+local scheme_by_os = function(appearance)
+	if appearance:find("Dark") then
+		return "Catppuccin Mocha Extended"
+	else
+		return "Catppuccin Latte Extended"
+	end
+end
+
 wezterm.on("update-status", function(window, _pane)
 	window:set_right_status(wezterm.format({
 		{ Text = window:active_workspace() },
@@ -8,7 +17,87 @@ wezterm.on("update-status", function(window, _pane)
 end)
 
 wezterm.on("window-config-reloaded", function(window, pane)
+	local overrides = window:get_config_overrides() or {}
+	local old_scheme = overrides.color_scheme
+	local current_appearance = wezterm.gui.get_appearance()
+	local new_scheme = scheme_by_os(current_appearance)
+	
+	overrides.color_scheme = new_scheme
+	window:set_config_overrides(overrides)
+	
+	-- Reload Fish shell if theme changed
+	if old_scheme ~= new_scheme then
+		local foreground_process = pane:get_foreground_process_name()
+		local foreground_process_info = pane:get_foreground_process_info()
+		local user_vars = pane:get_user_vars()
+		
+		-- Try multiple methods to detect Fish
+		local is_fish = false
+		if foreground_process and foreground_process:find("fish") then
+			is_fish = true
+		elseif foreground_process_info and foreground_process_info.name and foreground_process_info.name:find("fish") then
+			is_fish = true
+		elseif user_vars.SHELL and user_vars.SHELL:find("fish") then
+			is_fish = true
+		elseif os.getenv("SHELL") and os.getenv("SHELL"):find("fish") then
+			is_fish = true
+		end
+		
+		-- Clear and reload Fish shell (space prefix prevents history recording)
+		pane:send_text(" clear && exec fish\n")
+	end
+	
 	window:toast_notification("wezterm", "Configuration reloaded!", nil, 2000)
+end)
+
+-- Handle OS appearance changes (dark/light mode switching)
+-- Store the last known appearance to detect changes
+local last_appearance = wezterm.gui.get_appearance()
+
+-- Function to handle appearance changes
+local function handle_appearance_change(window, pane)
+	local current_appearance = wezterm.gui.get_appearance()
+	
+	if current_appearance ~= last_appearance then
+		last_appearance = current_appearance
+		
+		local overrides = window:get_config_overrides() or {}
+		local new_scheme = scheme_by_os(current_appearance)
+		
+		overrides.color_scheme = new_scheme
+		window:set_config_overrides(overrides)
+		
+		-- Reload Fish shell to pick up new theme
+		local foreground_process = pane:get_foreground_process_name()
+		local foreground_process_info = pane:get_foreground_process_info()
+		local user_vars = pane:get_user_vars()
+		
+		-- Try multiple methods to detect Fish
+		local is_fish = false
+		if foreground_process and foreground_process:find("fish") then
+			is_fish = true
+		elseif foreground_process_info and foreground_process_info.name and foreground_process_info.name:find("fish") then
+			is_fish = true
+		elseif user_vars.SHELL and user_vars.SHELL:find("fish") then
+			is_fish = true
+		elseif os.getenv("SHELL") and os.getenv("SHELL"):find("fish") then
+			is_fish = true
+		end
+		
+		-- Clear and reload Fish shell (space prefix prevents history recording)
+		pane:send_text(" clear && exec fish\n")
+		
+		window:toast_notification("wezterm", "Theme switched to " .. current_appearance, nil, 2000)
+	end
+end
+
+wezterm.on("window-focus-changed", function(window, pane)
+	handle_appearance_change(window, pane)
+end)
+
+-- Also check on update-status events (happens more frequently)
+wezterm.on("update-right-status", function(window, pane)
+	handle_appearance_change(window, pane)
 end)
 
 wezterm.on("user-var-changed", function(window, pane, name, value)
@@ -39,14 +128,6 @@ wezterm.on("user-var-changed", function(window, pane, name, value)
 
 	window:set_config_overrides(overrides)
 end)
-
-local scheme_by_os = function(appearance)
-	if appearance:find("Dark") then
-		return "Catppuccin Mocha Extended"
-	else
-		return "Catppuccin Latte Extended"
-	end
-end
 
 local scheme_extend = function(scheme_name)
 	local scheme = wezterm.color.get_builtin_schemes()[scheme_name]
