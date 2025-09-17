@@ -30,7 +30,7 @@ local buffer_delete_create = function(force)
 end
 
 return {
-	"echasnovski/mini.bufremove",
+	"nvim-mini/mini.bufremove",
 	optional = true,
 
 	keys = {

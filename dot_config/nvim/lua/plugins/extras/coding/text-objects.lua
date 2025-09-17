@@ -2,7 +2,7 @@ return {
 	{
 		"nvim-treesitter/nvim-treesitter",
 		dependencies = {
-			"echasnovski/mini.ai",
+			"nvim-mini/mini.ai",
 		},
 		build = ":TSUpdate",
 		opts = {

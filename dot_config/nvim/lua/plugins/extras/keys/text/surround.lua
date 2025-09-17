@@ -1,5 +1,5 @@
 return {
-	"echasnovski/mini.surround",
+	"nvim-mini/mini.surround",
 	optional = true,
 	keys = {
 		{ "'", [[:<C-u>lua MiniSurround.add('visual')<CR>']], { silent = true }, mode = { "x" } },

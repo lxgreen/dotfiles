@@ -25,7 +25,7 @@ end
 
 return {
 	"akinsho/bufferline.nvim",
-	dependencies = { "echasnovski/mini.bufremove" },
+	dependencies = { "nvim-mini/mini.bufremove" },
 	optional = true,
 
 	opts = {
