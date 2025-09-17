@@ -28,7 +28,7 @@ local wifi_up = sbar.add("item", "widgets.wifi1", {
             style = settings.font.style_map["Bold"],
             size = 9.0
         },
-        color = colors.red,
+        color = colors.orange,
         string = "??? Bps"
     },
     y_offset = 4
@@ -165,7 +165,7 @@ sbar.add("item", {
 })
 
 wifi_up:subscribe("network_update", function(env)
-    local up_color = (env.upload == "000 Bps") and colors.grey or colors.red
+    local up_color = (env.upload == "000 Bps") and colors.grey or colors.orange
     local down_color = (env.download == "000 Bps") and colors.grey or colors.blue
     wifi_up:set({
         icon = {
@@ -193,7 +193,7 @@ wifi:subscribe({"wifi_change", "system_woke"}, function(env)
         wifi:set({
             icon = {
                 string = connected and icons.wifi.connected or icons.wifi.disconnected,
-                color = connected and colors.white or colors.red
+                color = connected and colors.white or colors.orange
             }
         })
     end)
