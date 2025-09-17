@@ -9,12 +9,12 @@ local icons = {
 }
 
 local keyboard_layout = sbar.add("item", "keyboard_layout", {
-	icon = { font = { size = 26 }, align = "right" },
+	icon = { font = { size = 22 }, align = "right" },
 	label = {
 		width = 0,
 		padding_left = 0,
 		padding_right = 8,
-		color = colors.white
+		color = colors.white,
 	},
 	padding_left = 0,
 	padding_right = 4,
@@ -29,7 +29,7 @@ local function update()
 		string = icons.unknown,
 		color = colors.white,
 	}
-	
+
 	local label = {
 		string = layout,
 		color = colors.white,
@@ -62,9 +62,9 @@ end
 
 local function action()
 	local layout = assert(io.popen("im-select"):read("a"):gsub("%s+", ""))
-	
-	local next_layout = "com.apple.keylayout.ABC"  -- Default to English
-	
+
+	local next_layout = "com.apple.keylayout.ABC" -- Default to English
+
 	if layout == "com.apple.keylayout.ABC" then
 		next_layout = "com.apple.keylayout.Russian-Phonetic"
 	elseif layout == "com.apple.keylayout.Russian-Phonetic" then
@@ -72,7 +72,7 @@ local function action()
 	elseif layout == "com.apple.keylayout.Hebrew" then
 		next_layout = "com.apple.keylayout.ABC"
 	end
-	
+
 	sbar.exec("im-select " .. next_layout)
 	update()
 end
@@ -86,8 +86,8 @@ keyboard_layout:subscribe("mouse.entered", function(env)
 	sbar.animate("tanh", 30, function()
 		keyboard_layout:set({
 			label = {
-				width = "dynamic"
-			}
+				width = "dynamic",
+			},
 		})
 	end)
 end)
@@ -96,8 +96,8 @@ keyboard_layout:subscribe("mouse.exited", function(env)
 	sbar.animate("tanh", 30, function()
 		keyboard_layout:set({
 			label = {
-				width = 0
-			}
+				width = 0,
+			},
 		})
 	end)
 end)

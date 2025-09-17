@@ -9,7 +9,7 @@ return {
 	nuke = "",
 	clipboard = "􀉄",
 	vpn_off = "􀞙",
-	vpn_on = "􀞚",
+	vpn_on = "􀞙",
 	calendar = "􀉉",
 
 	switch = {

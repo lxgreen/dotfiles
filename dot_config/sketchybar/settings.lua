@@ -35,7 +35,7 @@ return {
 			return colors.rainbow[workspace + 1]
 		end,
 		highlight_color = function(workspace)
-			return colors.yellow
+			return colors.green
 		end,
 		colors = {
 			background = colors.bg1,

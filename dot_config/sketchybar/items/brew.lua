@@ -2,17 +2,18 @@ local sbar = require("sketchybar")
 local colors = require("colors")
 
 local brew = sbar.add("item", "brew", {
-	icon = { string = "􀐛", font = { size = 22.0 } },
+	icon = { string = "􀐛", font = { size = 20 } },
 	label = {
 		width = 0,
 		padding_left = 0,
 		padding_right = 8,
-		color = colors.grey
+		color = colors.grey,
 	},
 	padding_left = 0,
 	padding_right = 4,
 	position = "right",
-	update_freq = 60, -- Check every minute for more reliable updates
+	display = "active",
+	update_freq = 30,
 })
 
 local function update()
@@ -50,13 +51,12 @@ local function action()
 	-- Don't call update() here - let the terminal command trigger it after completion
 end
 
-
 -- Removed "forced" and "routine" from startup to eliminate 1.45s delay
 -- Brew check now only runs on manual updates or brew_update events
 brew:subscribe({ "brew_update", "update" }, update)
 brew:subscribe("mouse.clicked", action)
-brew:subscribe("mouse.clicked.right", function() 
-    sbar.exec("sketchybar --trigger brew_update")
+brew:subscribe("mouse.clicked.right", function()
+	sbar.exec("sketchybar --trigger brew_update")
 end)
 
 -- Mouse hover functionality
@@ -64,8 +64,8 @@ brew:subscribe("mouse.entered", function(env)
 	sbar.animate("tanh", 30, function()
 		brew:set({
 			label = {
-				width = "dynamic"
-			}
+				width = "dynamic",
+			},
 		})
 	end)
 end)
@@ -74,12 +74,11 @@ brew:subscribe("mouse.exited", function(env)
 	sbar.animate("tanh", 30, function()
 		brew:set({
 			label = {
-				width = 0
-			}
+				width = 0,
+			},
 		})
 	end)
 end)
-
 
 -- Initialize brew widget after startup delay to avoid blocking startup
 -- This allows fast startup while still initializing the widget

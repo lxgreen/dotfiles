@@ -8,11 +8,12 @@ local npm_registry = sbar.add("item", "npm_registry", {
 		width = 0,
 		padding_left = 0,
 		padding_right = 8,
-		color = colors.white
+		color = colors.white,
 	},
 	padding_left = 0,
 	padding_right = 4,
 	position = "right",
+	display = "active",
 	update_freq = 30, -- Check every 30 seconds
 })
 
@@ -30,15 +31,15 @@ local function update()
 
 	-- Determine registry type and set appropriate icon/color
 	if registry:match("wixpress%.com") then
-		icon.string = "􀀰"  -- SF Symbol for Wix private registry
-		icon.color = colors.orange
-		label.color = colors.orange
-	elseif registry:match("npmjs%.org") or registry == "" then
-		icon.string = "􀆪"  -- SF Symbol for public registry
+		icon.string = "􀀰" -- SF Symbol for Wix private registry
 		icon.color = colors.green
 		label.color = colors.green
+	elseif registry:match("npmjs%.org") or registry == "" then
+		icon.string = "􀆪" -- SF Symbol for public registry
+		icon.color = colors.orange
+		label.color = colors.orange
 	else
-		icon.string = "❓"  -- Unknown registry
+		icon.string = "❓" -- Unknown registry
 		icon.color = colors.red
 		label.color = colors.red
 	end
@@ -50,7 +51,7 @@ end
 
 local function switch_registry()
 	local current_registry = get_current_registry()
-	
+
 	if current_registry:match("wixpress%.com") then
 		-- Switch to public registry
 		sbar.exec("npm config set registry https://registry.npmjs.org")
@@ -60,7 +61,7 @@ local function switch_registry()
 		sbar.exec("npm config set registry http://npm.dev.wixpress.com")
 		sbar.exec("echo 'Switched to Wix private npm registry'")
 	end
-	
+
 	-- Wait a moment for the registry change to take effect, then update
 	sbar.exec("sleep 0.1 && sketchybar --trigger npm_registry_update")
 end
@@ -74,8 +75,8 @@ npm_registry:subscribe("mouse.entered", function(env)
 	sbar.animate("tanh", 30, function()
 		npm_registry:set({
 			label = {
-				width = "dynamic"
-			}
+				width = "dynamic",
+			},
 		})
 	end)
 end)
@@ -84,8 +85,8 @@ npm_registry:subscribe("mouse.exited", function(env)
 	sbar.animate("tanh", 30, function()
 		npm_registry:set({
 			label = {
-				width = 0
-			}
+				width = 0,
+			},
 		})
 	end)
 end)
