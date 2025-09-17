@@ -154,7 +154,7 @@ local spaces_indicator = sbar.add("item", {
     icon = {
         padding_left = 8,
         padding_right = 9,
-        color = colors.grey,
+        color = colors.green,
         string = icons.switch.on
     },
     label = {
@@ -162,11 +162,11 @@ local spaces_indicator = sbar.add("item", {
         padding_left = 0,
         padding_right = 8,
         string = "Spaces",
-        color = colors.bg1
+        color = colors.green
     },
     background = {
-        color = colors.with_alpha(colors.grey, 0.0),
-        border_color = colors.with_alpha(colors.bg1, 0.0)
+        color = colors.with_alpha(colors.green, 0.0),
+        border_color = colors.with_alpha(colors.green, 0.0)
     }
 })
 
@@ -235,14 +235,14 @@ spaces_indicator:subscribe("mouse.entered", function(env)
         spaces_indicator:set({
             background = {
                 color = {
-                    alpha = 1.0
+                    alpha = 0.0
                 },
                 border_color = {
                     alpha = 1.0
                 }
             },
             icon = {
-                color = colors.bg1
+                color = colors.green
             },
             label = {
                 width = "dynamic"
@@ -263,8 +263,7 @@ spaces_indicator:subscribe("mouse.exited", function(env)
                 }
             },
             icon = {
-                color = colors.grey
-            },
+                color = colors.green},
             label = {
                 width = 0
             }

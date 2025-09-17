@@ -15,3 +15,9 @@ curl -L https://github.com/kvndrsslr/sketchybar-app-font/releases/download/v2.0.
 
 # SbarLua
 (git clone https://github.com/FelixKratz/SbarLua.git /tmp/SbarLua && cd /tmp/SbarLua/ && make install && rm -rf /tmp/SbarLua/)
+
+# Catppuccin
+os.execute(
+	"[ ! -d $HOME/.local/share/sketchybar_themes/catppuccin ] && "
+		.. "git clone https://github.com/catppuccin/lua.git $HOME/.local/share/sketchybar_themes/catppuccin"
+)

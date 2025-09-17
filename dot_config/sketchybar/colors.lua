@@ -1,33 +1,62 @@
-return {
-    black = 0xff181819,
-    white = 0xffe2e2e3,
-    red = 0xfffc5d7c,
-    green = 0xff9ed072,
-    blue = 0xff76cce0,
-    yellow = 0xffe7c664,
-    orange = 0xfff39660,
-    magenta = 0xffb39df3,
-    grey = 0xff7f8490,
-    transparent = 0x00000000,
+-- Function to get colors from current theme
+local function get_colors()
+    local colorscheme = require("colorscheme")
+    local theme = colorscheme.current
+    
+    return {
+        -- Basic colors from catppuccin theme (already converted to numbers)
+        black = theme.base,  -- Use base as black
+        white = theme.text,  -- Use text as white
+        red = theme.red,
+        green = theme.green,
+        blue = theme.blue,
+        yellow = theme.yellow,
+        orange = theme.orange,
+        magenta = theme.purple,  -- Map purple to magenta
+        grey = theme.surface,    -- Use surface as grey
+        transparent = 0x00000000,
 
-    bar = {
-        bg = 0xd02c2e34,
-        border = 0xff2c2e34
-    },
-    popup = {
-        bg = 0xc02c2e34,
-        border = 0xff7f8490
-    },
-    bg1 = 0xff363944,
-    bg2 = 0xff414550,
+        -- Bar colors
+        bar = {
+            bg = theme.base & 0xd0ffffff, -- with transparency
+            border = theme.base
+        },
+        
+        -- Popup colors
+        popup = {
+            bg = theme.base & 0xc0ffffff, -- with transparency
+            border = theme.surface
+        },
+        
+        -- Background colors
+        bg1 = theme.surface,
+        bg2 = theme.surface,  -- Use same as bg1 for now
 
-    rainbow = {0xffff007c, 0xffc53b53, 0xffff757f, 0xff41a6b5, 0xff4fd6be, 0xffc3e88d, 0xffffc777, 0xff9d7cd8,
-               0xffff9e64, 0xffbb9af7, 0xff7dcfff, 0xff7aa2f7},
+        -- Rainbow colors using catppuccin palette
+        rainbow = {
+            theme.red,
+            theme.orange,
+            theme.yellow,
+            theme.green,
+            theme.blue,
+            theme.purple,
+            theme.pink,
+            theme.blue,  -- Repeat some colors to fill array
+            theme.purple,
+            theme.pink,
+            theme.red,
+            theme.orange
+        },
 
-    with_alpha = function(color, alpha)
-        if alpha > 1.0 or alpha < 0.0 then
-            return color
+        -- Utility function for alpha blending
+        with_alpha = function(color, alpha)
+            if alpha > 1.0 or alpha < 0.0 then
+                return color
+            end
+            return (color & 0x00ffffff) | (math.floor(alpha * 255.0) << 24)
         end
-        return (color & 0x00ffffff) | (math.floor(alpha * 255.0) << 24)
-    end
-}
+    }
+end
+
+-- Return colors based on current theme
+return get_colors()

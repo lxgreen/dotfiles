@@ -1,4 +1,5 @@
-local colors = require("colors")
+local colorscheme = require("colorscheme")
+local colors = colorscheme.current
 local icons = require("icons")
 
 return {
@@ -7,11 +8,11 @@ return {
 	modes = {
 		main = {
 			icon = icons.apple,
-			color = colors.rainbow[1],
+			color = colors.blue,
 		},
 		service = {
 			icon = icons.gear,
-			color = 0xffff9e64,
+			color = colors.orange,
 		},
 	},
 	bar = {
@@ -20,7 +21,7 @@ return {
 			x = 10,
 			y = 0,
 		},
-		background = colors.bar.bg,
+		background = colors.base,
 	},
 	items = {
 		height = 26,
@@ -32,13 +33,14 @@ return {
 			bottom = 0,
 		},
 		default_color = function(workspace)
-			return colors.rainbow[workspace + 1]
+			local rainbow_colors = {colors.red, colors.orange, colors.yellow, colors.green, colors.blue, colors.purple, colors.pink}
+			return rainbow_colors[workspace + 1] or colors.blue
 		end,
 		highlight_color = function(workspace)
 			return colors.green
 		end,
 		colors = {
-			background = colors.bg1,
+			background = colors.surface,
 		},
 		corner_radius = 6,
 	},
