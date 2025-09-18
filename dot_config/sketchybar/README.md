@@ -9,6 +9,7 @@ A highly optimized SketchyBar configuration with performance improvements and co
 - 📊 **System Monitoring**: CPU, network, battery, and volume widgets
 - 🚀 **Aerospace Integration**: Window management and workspace indicators
 - 🎨 **Modern UI**: Clean design with SF Symbols and custom styling
+- 🌓 **Auto Theme Switching**: Automatic dark/light mode detection with Catppuccin themes
 
 ## Quick Start
 
@@ -39,6 +40,13 @@ A highly optimized SketchyBar configuration with performance improvements and co
 3. **Start SketchyBar**:
    ```bash
    sketchybar --reload
+   ```
+
+4. **Setup Auto Theme Switching** (Optional):
+   ```bash
+   # Install the LaunchAgent for automatic theme switching
+   cp helpers/com.sketchybar.theme-detector.plist ~/Library/LaunchAgents/
+   launchctl load ~/Library/LaunchAgents/com.sketchybar.theme-detector.plist
    ```
 
 ## Compilation Instructions
@@ -99,6 +107,8 @@ make clean && make
 │   ├── init.lua          # Helper initialization (compilation disabled)
 │   ├── makefile          # Build system
 │   ├── vpn_monitor.sh    # VPN state detection script
+│   ├── auto_theme_detector_safe.sh # Theme detection script
+│   ├── com.sketchybar.theme-detector.plist # LaunchAgent config
 │   ├── event_providers/  # C binaries for system monitoring
 │   │   ├── cpu_load/     # CPU monitoring
 │   │   └── network_load/ # Network monitoring
@@ -107,9 +117,14 @@ make clean && make
 │   ├── calendar.lua      # Clock with seconds (1s updates)
 │   ├── widgets/          # System monitoring widgets
 │   └── ...
-├── colors.lua            # Color scheme
+├── colors.lua            # Dynamic color scheme (theme-aware)
+├── colorscheme.lua       # Theme loading and selection logic
+├── colors/
+│   └── catppuccin.lua    # Catppuccin theme wrapper
 ├── icons.lua             # Icon definitions
-└── settings.lua          # Global settings
+├── settings.lua          # Global settings
+├── theme_detector.log    # Theme service logs
+└── theme_detector_error.log # Theme service error logs
 ```
 
 ## Widgets
@@ -154,6 +169,70 @@ The configuration includes a sophisticated VPN monitoring system for GlobalProte
 - ✅ **Reliable**: Uses the most reliable system indicator (interface flags)
 - ✅ **Background Monitoring**: Continuous state monitoring without blocking
 
+## Auto Theme Switching
+
+The configuration includes automatic theme switching that detects macOS appearance changes and applies corresponding Catppuccin themes:
+
+### How It Works
+- **OS Detection**: Monitors `defaults read -g AppleInterfaceStyle` for dark/light mode changes
+- **Theme Mapping**: 
+  - **Light Mode** → `catppuccin-latte` (light theme)
+  - **Dark Mode** → `catppuccin-mocha` (dark theme)
+- **Auto Reload**: Automatically reloads SketchyBar when theme changes
+- **Service Management**: Runs as a macOS LaunchAgent for reliability
+
+### Setup Instructions
+
+1. **Install LaunchAgent**:
+   ```bash
+   # Copy the LaunchAgent configuration
+   cp helpers/com.sketchybar.theme-detector.plist ~/Library/LaunchAgents/
+   
+   # Load the service
+   launchctl load ~/Library/LaunchAgents/com.sketchybar.theme-detector.plist
+   ```
+
+2. **Verify Installation**:
+   ```bash
+   # Check if service is running
+   launchctl list | grep theme-detector
+   
+   # Check logs
+   tail -f theme_detector.log
+   ```
+
+### Service Management
+
+```bash
+# Start the service
+launchctl start com.sketchybar.theme-detector
+
+# Stop the service
+launchctl stop com.sketchybar.theme-detector
+
+# Unload/remove the service
+launchctl unload ~/Library/LaunchAgents/com.sketchybar.theme-detector.plist
+
+# Check service status
+launchctl list | grep theme-detector
+```
+
+### Files
+- `helpers/auto_theme_detector_safe.sh` - Theme detection script
+- `helpers/com.sketchybar.theme-detector.plist` - LaunchAgent configuration
+- `colorscheme.lua` - Theme loading logic
+- `colors/catppuccin.lua` - Catppuccin theme wrapper
+- `theme_detector.log` - Service output logs
+- `theme_detector_error.log` - Service error logs
+
+### Features
+- ✅ **Automatic Detection**: Monitors macOS appearance changes
+- ✅ **Instant Switching**: Reloads SketchyBar within 2-3 seconds
+- ✅ **Service Reliability**: Auto-restarts if crashed
+- ✅ **System Integration**: Runs as native macOS service
+- ✅ **Survives Reboots**: Auto-starts on system boot
+- ✅ **Catppuccin Themes**: Beautiful, consistent color schemes
+
 ## Performance Monitoring
 
 The configuration includes built-in performance monitoring:
@@ -194,6 +273,12 @@ If you experience slow startup times:
   - Test VPN detection manually: `./helpers/vpn_monitor.sh`
   - Check interface flags: `ifconfig utun4 | grep flags`
   - Verify GlobalProtect is using `utun4` interface
+- **Theme not switching automatically**:
+  - Check if LaunchAgent is running: `launchctl list | grep theme-detector`
+  - Check theme service logs: `tail -f theme_detector.log`
+  - Check for errors: `cat theme_detector_error.log`
+  - Restart the service: `launchctl stop com.sketchybar.theme-detector && launchctl start com.sketchybar.theme-detector`
+  - Verify theme files exist: `ls -la ~/.local/share/nvim/last-color`
 
 ### Performance Issues
 - **High CPU usage**: Check widget update frequencies
@@ -238,6 +323,8 @@ local colors = {
 - **Aerospace**: Window manager (optional)
 - **SwitchAudioSource**: Audio device switching
 - **nowplaying-cli**: Media control
+- **Catppuccin Themes**: Color schemes (auto-downloaded from GitHub)
+- **macOS LaunchAgent**: Theme switching service (built-in)
 
 ## License
 

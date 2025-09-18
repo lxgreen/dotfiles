@@ -44,7 +44,7 @@ update_sketchybar_theme() {
     
     # Reload sketchybar to apply the new theme (with a small delay to prevent loops)
     sleep 1
-    sketchybar --reload
+    /opt/homebrew/bin/sketchybar --reload
     
     # Log the change
     echo "$(date): Auto-switched to $catppuccin_theme (OS theme: $(get_current_os_theme))" >> "$LOG_FILE"
