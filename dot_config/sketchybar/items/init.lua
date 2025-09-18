@@ -10,5 +10,6 @@ require("items.keyboard_layout")
 require("items.vpn")
 require("items.npm_registry")
 require("items.brew")
+require("items.widgets_group")
 require("items.svim")
 

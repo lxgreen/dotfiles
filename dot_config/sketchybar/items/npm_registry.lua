@@ -3,12 +3,15 @@ local colors = require("colors")
 local icons = require("icons")
 
 local npm_registry = sbar.add("item", "npm_registry", {
-	icon = { font = { size = 22 }, string = "📦", color = colors.blue },
+	icon = { font = { size = 16.0 }, string = "📦", color = colors.blue },
 	label = {
 		width = 0,
 		padding_left = 0,
 		padding_right = 8,
 		color = colors.white,
+		font = {
+			size = 10.0
+		}
 	},
 	padding_left = 0,
 	padding_right = 4,
@@ -26,7 +29,7 @@ end
 
 local function update()
 	local registry = get_current_registry()
-	local icon = { font = { size = 22 }, color = colors.blue }
+	local icon = { font = { size = 16.0 }, color = colors.blue }
 	local label = { string = registry, color = colors.white }
 
 	-- Determine registry type and set appropriate icon/color

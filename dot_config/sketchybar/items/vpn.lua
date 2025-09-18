@@ -3,12 +3,15 @@ local colors = require("colors")
 local icons = require("icons")
 
 local vpn = sbar.add("item", "vpn", {
-	icon = { font = { size = 22 }, string = icons.vpn_off, color = colors.yellow },
+	icon = { font = { size = 16.0 }, string = icons.vpn_off, color = colors.yellow },
 	label = {
 		width = 0,
 		padding_left = 0,
 		padding_right = 8,
 		color = colors.white,
+		font = {
+			size = 10.0
+		}
 	},
 	padding_left = 0,
 	padding_right = 4,
@@ -18,7 +21,7 @@ local vpn = sbar.add("item", "vpn", {
 })
 
 local function update()
-	local icon = { font = { size = 22 }, string = icons.vpn_off, color = colors.yellow }
+	local icon = { font = { size = 16.0 }, string = icons.vpn_off, color = colors.yellow }
 	local label = { string = "", color = colors.white }
 
 	-- Use the new VPN monitor script for accurate GlobalProtect state detection
