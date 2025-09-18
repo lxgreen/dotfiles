@@ -2,15 +2,15 @@ local sbar = require("sketchybar")
 local colors = require("colors")
 
 local brew = sbar.add("item", "brew", {
-	icon = { string = "􀐛", font = { size = 14.0 } },
+	icon = { string = "􀐛", font = { size = 14.0 }, padding_left = 10 },
 	label = {
 		width = 0,
 		padding_left = 0,
 		padding_right = 8,
 		color = colors.grey,
 		font = {
-			size = 10.0
-		}
+			size = 10.0,
+		},
 	},
 	padding_left = 0,
 	padding_right = 4,
