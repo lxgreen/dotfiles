@@ -15,6 +15,9 @@ require("default")
 require("items")
 sbar.end_config()
 
+-- Start safe auto theme detector (only if not already running)
+sbar.exec("pgrep -f 'auto_theme_detector_safe.sh' > /dev/null || $CONFIG_DIR/helpers/auto_theme_detector_safe.sh start")
+
 -- Performance monitoring: Log startup time
 local startup_time = os.clock() - start_time
 sbar.exec("echo 'Sketchybar startup took: " .. string.format("%.3f", startup_time) .. " seconds'")

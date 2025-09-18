@@ -42,9 +42,9 @@ local function update()
 		label.color = colors.green
 	elseif layout == "com.apple.keylayout.Russian-Phonetic" then
 		icon.string = icons.ru
-		icon.color = colors.red
+		icon.color = colors.orange
 		label.string = "RU"
-		label.color = colors.red
+		label.color = colors.orange
 	elseif layout == "com.apple.keylayout.Hebrew" then
 		icon.string = icons.he
 		icon.color = colors.blue
