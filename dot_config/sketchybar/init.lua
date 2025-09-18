@@ -15,7 +15,7 @@ require("default")
 require("items")
 sbar.end_config()
 
-- Performance monitoring: Log startup time
+-- Performance monitoring: Log startup time
 local startup_time = os.clock() - start_time
 sbar.exec("echo 'Sketchybar startup took: " .. string.format("%.3f", startup_time) .. " seconds'")
 

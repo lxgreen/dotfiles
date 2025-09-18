@@ -3,7 +3,7 @@ local colors = require("colors")
 local icons = require("icons")
 
 local npm_registry = sbar.add("item", "npm_registry", {
-	icon = { font = { size = 16.0 }, string = "📦", color = colors.blue },
+	icon = { font = { size = 16.0 }, string = "􀆪", color = colors.grey },
 	label = {
 		width = 0,
 		padding_left = 0,
