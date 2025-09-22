@@ -63,6 +63,16 @@ vim.api.nvim_create_autocmd("User", {
 			vim.keymap.set("n", "gd", vscode_notify("editor.action.revealDefinition"), { desc = "Go to definition", silent = true })
 			vim.keymap.set("n", "gr", vscode_notify("editor.action.goToReferences"), { desc = "Go to references", silent = true })
 			vim.keymap.set("n", "K", vscode_notify("editor.action.showHover"), { desc = "Hover", silent = true })
+			
+			-- Flash.nvim keybindings for VSCode
+			if package.loaded["flash"] then
+				vim.keymap.set({ "n", "x", "o" }, "s", function() require("flash").jump() end, { desc = "Flash Jump", silent = true })
+				vim.keymap.set({ "n", "x", "o" }, "S", function() require("flash").treesitter() end, { desc = "Flash Treesitter", silent = true })
+				vim.keymap.set("o", "r", function() require("flash").remote() end, { desc = "Remote Flash", silent = true })
+				vim.keymap.set({ "o", "x" }, "R", function() require("flash").treesitter_search() end, { desc = "Treesitter Search", silent = true })
+				vim.keymap.set("c", "<c-s>", function() require("flash").toggle() end, { desc = "Toggle Flash Search", silent = true })
+				print("✅ Flash.nvim keybindings loaded for VSCode")
+			end
 
 			print("VS Code keybindings loaded successfully!")
 		end, 200)
