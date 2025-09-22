@@ -1,12 +1,15 @@
 {
   "mcpServers": {
-		"wix-mcp": {
-			"command": "npx",
-			"args": [
-				"-y",
-				"mcp-remote",
-				"https://public-mcp-remote-server.dorch.workers.dev/sse"
-			]
+		"wix-local-mcp": {
+		  "command": "npx",
+		  "args": [
+		    "-y",
+		    "@wix/mcp"
+		  ]
+		},
+		"wix-design-system-mcp": {
+		  "command": "design-system-mcp",
+		  "args": []
 		},
     "figma": {
       "command": "npx",
@@ -17,30 +20,18 @@
         "--stdio"
       ]
     },
-    "git": {
-      "command": "git-mcp-server",
-      "args": [],
-      "env": {},
-      "disabled": false,
-      "autoApprove": []
-    },
-    "github": {
-      "command": "docker",
-      "args": [
-        "run",
-        "-i",
-        "--rm",
-        "-e",
-        "GITHUB_PERSONAL_ACCESS_TOKEN",
-        "mcp/github"
-      ],
-      "env": {
-        "GITHUB_PERSONAL_ACCESS_TOKEN": "{{ (keepassxcAttribute "github cursor token" "Password") }}"
-      }
-    },
     "business-schema": {
       "command": "npx",
-      "args": ["@wix/business-schema-mcp"]
+      "args": [
+        "@wix/business-schema-mcp"
+      ]
+    },
+    "fire-console": {
+      "command": "/opt/homebrew/bin/node",
+      "args": [
+        "/Users/alexgr/dev/fc-mcp/src/server.js"
+      ],
+      "cwd": "/Users/alexgr/dev/fc-mcp"
     }
   }
 }
