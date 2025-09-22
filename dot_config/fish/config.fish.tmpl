@@ -254,7 +254,7 @@ pyenv init - fish | source
 
 if status is-interactive
     abbr -a -- y yazi
-    abbr -a -- zr "clear && exec fish"
+    abbr -a -- zr " clear && exec fish"
     abbr -a -- ca chezmoi apply
     abbr -a -- ee nvim_config_pick
     abbr -a -- eu "nvim --headless '+Lazy! update' +qa && nvim"
@@ -388,7 +388,7 @@ if status is-interactive
         # Search for directories or files without extensions
         for dir in $search_dirs
             if test -d "$dir" || test -f "$dir"
-                nvim "$dir"
+                cd "$dir" && $EDITOR "$dir"
                 return
             end
         end
