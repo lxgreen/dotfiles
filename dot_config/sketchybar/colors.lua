@@ -7,11 +7,11 @@ local function get_colors()
 		-- Basic colors from catppuccin theme (already converted to numbers)
 		black = theme.base, -- Use base as black
 		white = theme.text, -- Use text as white
-		red = theme.orange,
 		green = theme.green,
 		blue = theme.blue,
 		yellow = theme.yellow,
 		orange = theme.orange,
+		red = 0xFFFF0000,
 		magenta = theme.purple, -- Map purple to magenta
 		grey = theme.surface, -- Use surface as grey
 		transparent = 0x00000000,

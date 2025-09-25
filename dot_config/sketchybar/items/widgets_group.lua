@@ -6,6 +6,7 @@ local settings = require("settings")
 -- This groups them together with a green border and no background
 sbar.add("bracket", "widgets_group.bracket", {
     "npm_registry",
+    "widgets.cursor",
     "brew", 
     "keyboard_layout",
     "vpn"
@@ -20,7 +21,13 @@ sbar.add("bracket", "widgets_group.bracket", {
 -- Add padding after the grouped widgets (matching CPU/volume widgets)
 sbar.add("item", "widgets_group.padding", {
     position = "right",
-    width = settings.group_paddings
+    width = settings.group_paddings,
 })
+
+sbar.add("item", "widgets_group.padding", {
+    position = "left",
+    width = settings.group_paddings,
+})
+
 
 return true
