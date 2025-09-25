@@ -12,6 +12,9 @@ local opts = {
 	checker = { enabled = true, notify = false },
 	change_detection = { enabled = false },
 	diff = { cmd = "diffview.nvim" },
+	rocks = {
+		hererocks = true, -- Enable hererocks to manage Lua versions and rocks for image.nvim
+	},
 	ui = {
 		border = "rounded",
 		backdrop = 100,

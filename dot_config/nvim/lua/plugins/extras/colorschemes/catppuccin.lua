@@ -312,9 +312,9 @@ return {
 						return
 					end
 
-					local catppuccin_bufferline = require("catppuccin.groups.integrations.bufferline")
+					local catppuccin_bufferline = require("catppuccin.special.bufferline")
 
-					opts.highlights = catppuccin_bufferline.get({
+					opts.highlights = catppuccin_bufferline.get_theme({
 						styles = { "bold" },
 						custom = {
 							frappe = override_bufferline_hls(colors_get("frappe")),
@@ -322,7 +322,7 @@ return {
 							mocha = override_bufferline_hls(colors_get("mocha")),
 							latte = override_bufferline_hls(colors_get("latte")),
 						},
-					})
+					})()
 				end,
 			},
 
@@ -343,15 +343,6 @@ return {
 							require("lualine").setup({ options = { theme = lualine_theme_create(colors_get()) } })
 						end),
 					})
-				end,
-			},
-			{
-				"catppuccin/nvim",
-				optional = true,
-				opts = function()
-					-- https://github.com/LazyVim/LazyVim/pull/6354
-					local bufferline = require("catppuccin.groups.integrations.bufferline")
-					bufferline.get = bufferline.get or bufferline.get_theme
 				end,
 			},
 		},
