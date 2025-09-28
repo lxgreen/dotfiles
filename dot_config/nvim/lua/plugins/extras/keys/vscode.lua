@@ -14,10 +14,10 @@ if vim.g.vscode then
 
 			-- File operations
 			vim.keymap.set("n", "<leader>e", vscode_notify("workbench.files.action.focusFilesExplorer"), { desc = "Explorer" })
-			vim.keymap.set("n", "<leader>ff", vscode_notify("workbench.action.quickOpen"), { desc = "Find files" })
-			vim.keymap.set("n", "<leader>fg", vscode_notify("workbench.action.findInFiles"), { desc = "Live grep" })
-			vim.keymap.set("n", "<leader>fb", vscode_notify("workbench.action.showAllEditors"), { desc = "Find buffers" })
-			vim.keymap.set("n", "<leader>fr", vscode_notify("workbench.action.openRecent"), { desc = "Recent files" })
+			vim.keymap.set("n", "<leader><Space>", vscode_notify("workbench.action.quickOpen"), { desc = "Find files" })
+			vim.keymap.set("n", "<leader>/", vscode_notify("workbench.action.findInFiles"), { desc = "Live grep" })
+			vim.keymap.set("n", "<leader>,", vscode_notify("workbench.action.showAllEditors"), { desc = "Find buffers" })
+			vim.keymap.set("n", "<leader><CR>", vscode_notify("workbench.action.openRecent"), { desc = "Recent files" })
 			
 			-- Git operations
 			vim.keymap.set("n", "<leader>gg", vscode_notify("workbench.view.scm"), { desc = "Git status" })
@@ -43,6 +43,9 @@ if vim.g.vscode then
 			vim.keymap.set("n", "<leader>xx", vscode_notify("workbench.actions.view.problems"), { desc = "Problems" })
 			vim.keymap.set("n", "<leader>xd", vscode_notify("editor.action.marker.next"), { desc = "Next diagnostic" })
 			vim.keymap.set("n", "<leader>xD", vscode_notify("editor.action.marker.prev"), { desc = "Previous diagnostic" })
+			
+			-- Quit Cursor
+			vim.keymap.set("n", "<leader>qq", vscode_notify("workbench.action.quit"), { desc = "Quit Cursor" })
 			
 			-- Flash.nvim keybindings for VSCode
 			if package.loaded["flash"] or pcall(require, "flash") then
