@@ -163,6 +163,16 @@ return {
 	font = wezterm.font_with_fallback({
 		{ family = "JetBrains Mono", weight = "Medium" },
 		"SF Pro",
+		-- Chinese font support
+		"PingFang SC",  -- Simplified Chinese (macOS system font)
+		"Hiragino Sans GB",  -- Alternative Chinese font on macOS
+		"Microsoft YaHei",  -- Windows Chinese font (if available)
+		"Source Han Sans SC",  -- Adobe's open source Chinese font
+		"Noto Sans CJK SC",  -- Google's open source Chinese font
+		-- Fallback for other CJK languages
+		"PingFang TC",  -- Traditional Chinese
+		"Hiragino Kaku Gothic ProN",  -- Japanese
+		"Malgun Gothic",  -- Korean
 	}),
 
 	show_new_tab_button_in_tab_bar = false,
