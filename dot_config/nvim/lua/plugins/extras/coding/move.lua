@@ -27,7 +27,7 @@ return {
 	},
 	{
 		"chrisgrieser/nvim-spider",
-		lazy = true,
+		event = "LazyFile",
 		vscode = true,
 		dependencies = {
 			"theHamsta/nvim_rocks",

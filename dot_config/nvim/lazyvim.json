@@ -34,6 +34,7 @@
     "plugins.extras.coding.comments",
     "plugins.extras.coding.cut",
     "plugins.extras.coding.debugprint",
+    "plugins.extras.coding.mini-pairs",
     "plugins.extras.coding.move",
     "plugins.extras.coding.operators",
     "plugins.extras.coding.snippets",

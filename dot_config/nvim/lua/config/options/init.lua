@@ -22,7 +22,7 @@ local options = {
 	winblend = 0,
 
 	timeout = true,
-	timeoutlen = 350,
+	timeoutlen = 200, -- Reduced from 350ms for faster key response
 	ttimeoutlen = 0,
 
 	showmode = false,
