@@ -2,12 +2,10 @@ local sbar = require("sketchybar")
 local colors = require("colors")
 local settings = require("settings")
 
--- Create a common bracket for npm, brew, keyboard, and VPN widgets
+-- Create a common bracket for npm, keyboard, and VPN widgets
 -- This groups them together with a green border and no background
 sbar.add("bracket", "widgets_group.bracket", {
 	"npm_registry",
-	-- "widgets.cursor",
-	"brew",
 	"keyboard_layout",
 	"vpn",
 }, {

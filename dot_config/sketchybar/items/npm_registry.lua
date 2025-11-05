@@ -13,7 +13,7 @@ local npm_registry = sbar.add("item", "npm_registry", {
 			size = 10.0
 		}
 	},
-	padding_left = 0,
+	padding_left = 4,
 	padding_right = 4,
 	position = "right",
 	display = "active",

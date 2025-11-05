@@ -1,21 +1,22 @@
 local sbar = require("sketchybar")
 local colors = require("colors")
+local settings = require("settings")
 
 local brew = sbar.add("item", "brew", {
-	icon = { string = "􀐛", font = { size = 14.0 }, padding_left = 10 },
+	icon = { 
+		string = "􀐚", 
+	},
 	label = {
-		width = 0,
-		padding_left = 0,
+		width = "dynamic",
+		padding_left = 8,
 		padding_right = 8,
-		color = colors.grey,
 		font = {
-			size = 10.0,
+			family = settings.font.numbers
 		},
 	},
-	padding_left = 0,
+	padding_left = 4,
 	padding_right = 4,
 	position = "right",
-	display = "active",
 	update_freq = 30,
 })
 
@@ -23,26 +24,15 @@ local function update()
 	local file = assert(io.popen("brew outdated | wc -l | tr -d ' '"))
 	local brew_info = assert(file:read("a"))
 	local count = tonumber(brew_info)
-	local icon = { color = colors.green }
-	local label = { string = tostring(count), color = colors.white }
-
-	if count == 0 then
-		icon.string = "􀐚"
-		label.string = "0"
-		label.color = colors.green
-	elseif count < 9 then
-		icon.color = colors.yellow
-		label.string = tostring(count)
-		label.color = colors.yellow
-	elseif count < 19 then
-		icon.color = colors.orange
-		label.string = tostring(count)
-		label.color = colors.orange
-	else
-		icon.color = colors.red
-		label.string = tostring(count)
-		label.color = colors.red
-	end
+	local icon = { 
+		string = "􀐛",
+	}
+	local label = { 
+		string = tostring(count), 
+		font = {
+			family = settings.font.numbers
+		}
+	}
 
 	sbar.animate("sin", 10, function()
 		brew:set({ label = label, icon = icon })
@@ -58,30 +48,24 @@ end
 -- Brew check now only runs on manual updates or brew_update events
 brew:subscribe({ "brew_update", "update" }, update)
 brew:subscribe("mouse.clicked", action)
-brew:subscribe("mouse.clicked.right", function()
-	sbar.exec("sketchybar --trigger brew_update")
-end)
-
--- Mouse hover functionality
-brew:subscribe("mouse.entered", function(env)
-	sbar.animate("tanh", 30, function()
-		brew:set({
-			label = {
-				width = "dynamic",
-			},
-		})
+	brew:subscribe("mouse.clicked.right", function()
+		sbar.exec("sketchybar --trigger brew_update")
 	end)
-end)
 
-brew:subscribe("mouse.exited", function(env)
-	sbar.animate("tanh", 30, function()
-		brew:set({
-			label = {
-				width = 0,
-			},
-		})
-	end)
-end)
+-- Create bracket for brew widget
+sbar.add("bracket", "brew.bracket", {brew.name}, {
+	background = {
+		color = colors.bg1,
+		border_color = colors.rainbow[#colors.rainbow - 6],
+		border_width = 1
+	}
+})
+
+-- Add padding after the brew widget
+sbar.add("item", "brew.padding", {
+	position = "right",
+	width = settings.group_paddings
+})
 
 -- Initialize brew widget after startup delay to avoid blocking startup
 -- This allows fast startup while still initializing the widget
