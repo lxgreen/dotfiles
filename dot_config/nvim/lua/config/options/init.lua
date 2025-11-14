@@ -56,6 +56,26 @@ if vim.g.neovide then
 	vim.keymap.set("v", "<D-v>", '"+P') -- Paste visual mode
 	vim.keymap.set("c", "<D-v>", "<C-R>+") -- Paste command mode
 	vim.keymap.set("i", "<D-v>", '<ESC>l"+Pli') -- Paste insert mode
+
+	-- Optional: Ghost-specific setup
+	vim.g.nvim_ghost_autostart = 1
+
+	vim.api.nvim_create_autocmd("User", {
+		pattern = "nvim_ghost_user_autostart",
+		callback = function()
+			vim.cmd("NeovideFocus")
+		end,
+	})
+
+	vim.api.nvim_create_autocmd("BufNew", {
+		pattern = "nvim-ghost://*",
+		callback = function()
+			vim.cmd("NeovideFocus")
+		end,
+	})
+else
+	-- Disable it explicitly for terminal sessions
+	vim.g.nvim_ghost_autostart = 0
 end
 
 OptionsUtil.options_apply(options)

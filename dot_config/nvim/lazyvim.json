@@ -116,6 +116,8 @@
     "plugins.extras.optimizations.vs-code",
     "plugins.extras.test.coverage",
     "plugins.extras.test.jest",
+    "plugins.extras.ui.browser.firenvim",
+    "plugins.extras.ui.browser.ghost",
     "plugins.extras.ui.editor.auto-dark",
     "plugins.extras.ui.editor.cursor",
     "plugins.extras.ui.editor.folds",
