@@ -9,7 +9,6 @@
 [core]
   mergeoptions = --no-edit
 	excludesFile = ~/.gitignore
-	pager = diff-so-fancy | less --tabs=2 -RFX
   editor = nvim
 [interactive]
 	diffFilter = diff-so-fancy --patch
@@ -50,6 +49,9 @@
 	useUnicodeRuler = true
 [diff]
 	tool = difftastic
+	algorithm = patience
+	ignoreWhitespace = true
+	indentHeuristic = true
 [difftool]
 	prompt = false
 [difftool "difftastic"]

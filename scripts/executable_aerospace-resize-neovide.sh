@@ -17,13 +17,14 @@ if echo "$windows" | jq -e '.[0]' >/dev/null 2>&1; then
         echo "large" > "$state_file"
         ;;
       "large")
-        # Currently large, resize to full (fill screen)
-        # Use a very large height value to fill the screen
-        aerospace resize --window-id "$window_id" height 10000
+        # Currently large, resize to full (fullscreen)
+        aerospace fullscreen on --window-id "$window_id"
         echo "full" > "$state_file"
         ;;
       *)
         # Unknown or full state, resize to small (30px)
+        # Turn off fullscreen first if it's on
+        aerospace fullscreen off --window-id "$window_id"
         aerospace resize --window-id "$window_id" height 30
         echo "small" > "$state_file"
         ;;

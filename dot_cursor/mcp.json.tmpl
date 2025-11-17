@@ -1,5 +1,9 @@
 {
   "mcpServers": {
+		"chrome-devtools": {
+			"command": "npx",
+			"args": ["-y", "chrome-devtools-mcp@latest"]
+		},
 		"wix-local-mcp": {
 		  "command": "npx",
 		  "args": [
@@ -29,9 +33,9 @@
     "fire-console": {
       "command": "/opt/homebrew/bin/node",
       "args": [
-        "/Users/alexgr/dev/fc-mcp/src/server.js"
+        "/Users/alexgr/dev/fc/packages/fc-mcp/index.js"
       ],
-      "cwd": "/Users/alexgr/dev/fc-mcp"
+      "cwd": "/Users/alexgr/dev/fc/packages/fc-mcp"
     }
   }
 }
