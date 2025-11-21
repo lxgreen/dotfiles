@@ -240,6 +240,8 @@ set -gx LANGSMITH_ENDPOINT https://api.smith.langchain.com
 set -gx PINECONE_INDEX_NAME Personal
 set -gx PINECONE_API_KEY {{ (keepassxcAttribute "pinecone" "Password") }}
 
+set -gx FIGMA_ACCESS_TOKEN {{ (keepassxcAttribute "figma-api" "Password") }}
+
 set -x GPG_TTY (tty)
 
 # -- PYTHON ------------------------------------------------------------------------------------------------------------
