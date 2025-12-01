@@ -1,0 +1,34 @@
+#!/bin/bash
+#
+# Export GPG Key for Backup
+#
+# This script exports your GPG private key in ASCII-armored format.
+# Store the output in KeePassXC as a note field entry.
+
+set -euo pipefail
+
+KEY_ID="{{ keepassxcAttribute "dot-gpg-mac-23" "Password" }}"
+
+echo "=========================================" >&2
+echo "GPG Key Export for Backup" >&2
+echo "=========================================" >&2
+echo "" >&2
+echo "Key ID: $KEY_ID" >&2
+echo "" >&2
+echo "Instructions:" >&2
+echo "1. Copy the output below (everything between the markers)" >&2
+echo "2. Open KeePassXC and create/edit an entry" >&2
+echo "3. Paste the key into a Note field" >&2
+echo "4. Save the KeePassXC database" >&2
+echo "" >&2
+echo "--- BEGIN GPG PRIVATE KEY ---" >&2
+echo "" >&2
+
+# Export the private key in ASCII-armored format
+gpg --armor --export-secret-keys "$KEY_ID"
+
+echo "" >&2
+echo "--- END GPG PRIVATE KEY ---" >&2
+echo "" >&2
+echo "Export complete!" >&2
+echo "Remember to securely store this in KeePassXC." >&2

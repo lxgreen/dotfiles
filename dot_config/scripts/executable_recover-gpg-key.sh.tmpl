@@ -1,0 +1,102 @@
+#!/bin/bash
+#
+# Recover GPG Key from Backup
+#
+# This script imports a GPG private key from a backup file,
+# sets it up with proper trust, and configures git to use it.
+
+set -euo pipefail
+
+KEY_ID="{{ keepassxcAttribute "dot-gpg-mac-23" "Password" }}"
+
+echo "========================================="
+echo "GPG Key Recovery Script"
+echo "========================================="
+echo ""
+echo "This script will:"
+echo "1. Import your GPG private key from a backup file"
+echo "2. Set the trust level to ultimate"
+echo "3. Configure git to use this key for signing"
+echo "4. Verify the setup"
+echo ""
+echo "Key ID: $KEY_ID"
+echo ""
+
+# Prompt for backup file path
+read -p "Enter the path to your GPG key backup file: " BACKUP_FILE
+
+if [ ! -f "$BACKUP_FILE" ]; then
+	echo "Error: File not found: $BACKUP_FILE" >&2
+	exit 1
+fi
+
+echo ""
+echo "Step 1: Importing GPG key..."
+if gpg --import "$BACKUP_FILE" 2>&1; then
+	echo "✓ Key imported successfully"
+else
+	echo "Error: Failed to import key" >&2
+	exit 1
+fi
+
+echo ""
+echo "Step 2: Setting trust level to ultimate..."
+# Import ownertrust: format is "fingerprint:trust_level:"
+# Trust level 6 = ultimate trust
+echo "$KEY_ID:6:" | gpg --import-ownertrust 2>/dev/null
+if [ $? -eq 0 ]; then
+	echo "✓ Trust level set to ultimate"
+else
+	echo "⚠ Warning: Could not set trust level automatically" >&2
+	echo "You may need to set it manually with: gpg --edit-key $KEY_ID" >&2
+fi
+
+echo ""
+echo "Step 3: Configuring git..."
+git config --global user.signingkey "$KEY_ID"
+echo "✓ Git signing key configured"
+
+# Check if commit signing is enabled
+if [ "$(git config --global commit.gpgsign)" != "true" ]; then
+	read -p "Enable automatic commit signing? (y/n) [y]: " ENABLE_SIGNING
+	ENABLE_SIGNING=${ENABLE_SIGNING:-y}
+	if [[ "$ENABLE_SIGNING" =~ ^[Yy]$ ]]; then
+		git config --global commit.gpgsign true
+		echo "✓ Automatic commit signing enabled"
+	fi
+else
+	echo "✓ Automatic commit signing already enabled"
+fi
+
+echo ""
+echo "Step 4: Verifying setup..."
+echo ""
+
+# Verify key is in keyring
+if gpg --list-secret-keys --keyid-format LONG "$KEY_ID" >/dev/null 2>&1; then
+	echo "✓ Key found in GPG keyring"
+	gpg --list-secret-keys --keyid-format LONG "$KEY_ID" | head -n 3
+else
+	echo "✗ Warning: Key not found in keyring" >&2
+	exit 1
+fi
+
+# Verify git config
+GIT_KEY=$(git config --global user.signingkey)
+if [ "$GIT_KEY" = "$KEY_ID" ]; then
+	echo "✓ Git signing key configured correctly: $GIT_KEY"
+else
+	echo "✗ Warning: Git signing key mismatch" >&2
+	exit 1
+fi
+
+echo ""
+echo "========================================="
+echo "Recovery Complete!"
+echo "========================================="
+echo ""
+echo "Your GPG key has been successfully recovered and configured."
+echo ""
+echo "To test, try signing a commit or running:"
+echo "  echo 'test' | gpg --clearsign"
+echo ""
