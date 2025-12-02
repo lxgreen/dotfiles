@@ -2,6 +2,7 @@ return {
 	{
 		"3rd/image.nvim",
 		event = "VeryLazy",
+		enabled = false,
 		dependencies = {
 			{
 				"nvim-treesitter/nvim-treesitter",
