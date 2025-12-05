@@ -57,6 +57,7 @@ return {
 			-- support for image pasting
 			"HakonHarnes/img-clip.nvim",
 			event = "VeryLazy",
+			enabled = false,
 			opts = {
 				-- recommended settings
 				default = {
@@ -73,7 +74,7 @@ return {
 		{
 			"hrsh7th/nvim-cmp",
 			optional = true,
-			dependencies = { 
+			dependencies = {
 				"yetone/avante.nvim",
 			},
 			opts = function(_, opts)
@@ -84,7 +85,7 @@ return {
 					{ name = "avante_mentions", priority = 1000 },
 					{ name = "avante_files", priority = 100 },
 				}
-				
+
 				if opts.sources then
 					-- Merge with existing sources
 					for _, source in ipairs(avante_sources) do
@@ -93,7 +94,7 @@ return {
 				else
 					opts.sources = avante_sources
 				end
-				
+
 				return opts
 			end,
 		},
