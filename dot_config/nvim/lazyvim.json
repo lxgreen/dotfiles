@@ -103,6 +103,7 @@
     "plugins.extras.nav.better-escape",
     "plugins.extras.nav.multiple-cursors",
     "plugins.extras.nav.search-labels",
+    "plugins.extras.nav.tabout",
     "plugins.extras.nav.treesitter-context",
     "plugins.extras.nav.treewalker",
     "plugins.extras.optimizations.auto-update-third-party-tools",
