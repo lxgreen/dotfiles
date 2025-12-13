@@ -380,16 +380,31 @@ if status is-interactive
         end
     end
 
-    # Open configuration files
     # Open configuration files/directories
-    # Usage: c <name> - opens config for <name> (e.g., c fish, c nvim, c git)
+    # Usage: c [-r] <name> - opens config for <name> (e.g., c fish, c nvim, c git)
+    #        -r: resolve only, print the command without executing
     function c
-        if test -z "$argv[1]"
-            echo "Usage: c <config-name>"
-            return 1
+        set -l resolve_only false
+        set -l name
+
+        # Parse arguments
+        for arg in $argv
+            switch $arg
+                case -r --resolve
+                    set resolve_only true
+                case '-*'
+                    echo "Unknown option: $arg"
+                    return 1
+                case '*'
+                    set name $arg
+            end
         end
 
-        set -l name $argv[1]
+        if test -z "$name"
+            echo "Usage: c [-r] <config-name>"
+            echo "  -r: resolve only, print command without executing"
+            return 1
+        end
 
         # XDG directories
         set -l config_home (set -q XDG_CONFIG_HOME; and echo $XDG_CONFIG_HOME; or echo $HOME/.config)
@@ -412,22 +427,42 @@ if status is-interactive
             "/etc/$name" \
             "/usr/local/etc/$name"
 
-        # Helper function to open with chezmoi or editor
-        function __c_open_config --argument-names path
-            if chezmoi managed --include=files 2>/dev/null | grep -qF "$path"
-                echo "Opening with chezmoi: $path"
-                chezmoi edit "$path"
+        # Helper function to resolve or open with chezmoi or editor
+        function __c_open_config --argument-names path resolve_only
+            # Convert absolute path to path relative to $HOME for chezmoi comparison
+            set -l rel_path (string replace "$HOME/" "" "$path")
+            set -l is_managed false
+
+            if chezmoi managed --include=files 2>/dev/null | grep -qE "^$rel_path(/|\$)"
+                set is_managed true
+            end
+
+            if test "$is_managed" = true
+                if test "$resolve_only" = true
+                    echo "chezmoi edit $path"
+                else
+                    echo "Opening with chezmoi: $path"
+                    chezmoi edit "$path"
+                end
             else if test -d "$path"
-                cd "$path" && $EDITOR .
+                if test "$resolve_only" = true
+                    echo "cd $path && $EDITOR ."
+                else
+                    cd "$path" && $EDITOR .
+                end
             else
-                $EDITOR "$path"
+                if test "$resolve_only" = true
+                    echo "$EDITOR $path"
+                else
+                    $EDITOR "$path"
+                end
             end
         end
 
         # Search for directories or files without extensions
         for dir in $search_dirs
             if test -d "$dir" -o -f "$dir"
-                __c_open_config "$dir"
+                __c_open_config "$dir" "$resolve_only"
                 functions -e __c_open_config
                 return 0
             end
@@ -440,7 +475,7 @@ if status is-interactive
                 # Try: ~/.config/name.ext, ~/name.ext, ~/.name.ext
                 for pattern in "$base/$name.$ext" "$base/.$name.$ext" "$base/."$name"rc.$ext"
                     if test -f "$pattern"
-                        __c_open_config "$pattern"
+                        __c_open_config "$pattern" "$resolve_only"
                         functions -e __c_open_config
                         return 0
                     end
@@ -457,7 +492,7 @@ if status is-interactive
 
         for pattern in $rc_patterns
             if test -f "$pattern"
-                __c_open_config "$pattern"
+                __c_open_config "$pattern" "$resolve_only"
                 functions -e __c_open_config
                 return 0
             end
