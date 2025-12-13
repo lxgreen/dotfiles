@@ -441,7 +441,7 @@ if status is-interactive
                     echo "chezmoi edit $path"
                 else
                     echo "Opening with chezmoi: $path"
-                    chezmoi edit "$path"
+                    chezmoi edit --apply "$path"
                 end
             else if test -d "$path"
                 if test "$resolve_only" = true
