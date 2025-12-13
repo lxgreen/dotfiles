@@ -262,6 +262,7 @@ if status is-interactive
     abbr -a -- eu "nvim --headless '+Lazy! update' +qa && nvim"
     abbr -a -- f "for i in (seq 1 5); /usr/bin/time fish -i -c exit; end"
     abbr -a -- x exit
+    abbr -a -- - "cd -"
 
     # Theme-dependent `bat` alias
     function bat
@@ -380,35 +381,94 @@ if status is-interactive
     end
 
     # Open configuration files
+    # Open configuration files/directories
+    # Usage: c <name> - opens config for <name> (e.g., c fish, c nvim, c git)
     function c
-        # Set the configuration directory
-        set config_home (set -q XDG_CONFIG_HOME; and echo $XDG_CONFIG_HOME; or echo $HOME/.config)
+        if test -z "$argv[1]"
+            echo "Usage: c <config-name>"
+            return 1
+        end
 
-        # Common file extensions to search for
-        set extensions conf config toml json yml yaml
+        set -l name $argv[1]
 
-        # Define search directories
-        set search_dirs "$config_home/$argv[1]" "$HOME/.$argv[1]"
+        # XDG directories
+        set -l config_home (set -q XDG_CONFIG_HOME; and echo $XDG_CONFIG_HOME; or echo $HOME/.config)
+        set -l data_home (set -q XDG_DATA_HOME; and echo $XDG_DATA_HOME; or echo $HOME/.local/share)
+        set -l state_home (set -q XDG_STATE_HOME; and echo $XDG_STATE_HOME; or echo $HOME/.local/state)
 
-        # Search for directories or files without extensions
-        for dir in $search_dirs
-            if test -d "$dir" || test -f "$dir"
-                cd "$dir" && $EDITOR "$dir"
-                return
+        # Common config file extensions
+        set -l extensions conf config toml json yml yaml ini cfg rc lua vim
+
+        # Search locations (ordered by priority)
+        set -l search_dirs \
+            "$config_home/$name" \
+            "$HOME/.$name" \
+            "$HOME/$name" \
+            "$HOME/."$name"config" \
+            "$HOME/."$name"rc" \
+            "$HOME/."$name".d" \
+            "$data_home/$name" \
+            "$state_home/$name" \
+            "/etc/$name" \
+            "/usr/local/etc/$name"
+
+        # Helper function to open with chezmoi or editor
+        function __c_open_config --argument-names path
+            if chezmoi managed --include=files 2>/dev/null | grep -qF "$path"
+                echo "Opening with chezmoi: $path"
+                chezmoi edit "$path"
+            else if test -d "$path"
+                cd "$path" && $EDITOR .
+            else
+                $EDITOR "$path"
             end
         end
 
-        # Search for files with common extensions
-        for ext in $extensions
-            for dir in $search_dirs
-                if test -f "$dir.$ext"
-                    nvim "$dir.$ext"
-                    return
+        # Search for directories or files without extensions
+        for dir in $search_dirs
+            if test -d "$dir" -o -f "$dir"
+                __c_open_config "$dir"
+                functions -e __c_open_config
+                return 0
+            end
+        end
+
+        # Search for files with common extensions in config locations
+        set -l base_dirs "$config_home" "$HOME" "$data_home"
+        for base in $base_dirs
+            for ext in $extensions
+                # Try: ~/.config/name.ext, ~/name.ext, ~/.name.ext
+                for pattern in "$base/$name.$ext" "$base/.$name.$ext" "$base/."$name"rc.$ext"
+                    if test -f "$pattern"
+                        __c_open_config "$pattern"
+                        functions -e __c_open_config
+                        return 0
+                    end
                 end
             end
         end
 
-        echo "No matching file or directory found."
+        # Try common rc file patterns
+        set -l rc_patterns \
+            "$HOME/."$name"rc" \
+            "$HOME/."$name"_profile" \
+            "$HOME/."$name"_aliases" \
+            "$config_home/"$name"rc"
+
+        for pattern in $rc_patterns
+            if test -f "$pattern"
+                __c_open_config "$pattern"
+                functions -e __c_open_config
+                return 0
+            end
+        end
+
+        functions -e __c_open_config
+        echo "No config found for '$name'. Searched:"
+        echo "  - $config_home/$name"
+        echo "  - ~/.$name, ~/."$name"rc"
+        echo "  - Extensions: $extensions"
+        return 1
     end
 
     # Chezmoi
