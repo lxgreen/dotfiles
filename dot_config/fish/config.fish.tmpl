@@ -323,7 +323,7 @@ if status is-interactive
     alias lg lazygit
     alias chrome "open -a 'Google Chrome'"
     alias chromed "open -a 'Google Chrome' --args --disable-web-security --user-data-dir='/tmp/chrome_dev'"
-    alias pr "gh pr view --web"
+    alias pr "gh dash"
 
     alias bi "brew install"
     alias bu "brew uninstall"
@@ -331,12 +331,15 @@ if status is-interactive
 
     alias ww "w3m -no-mouse"
 
+    alias zen "open -a 'Zen Browser'"
+    alias zend "open -a 'Zen Browser' about:debugging"
+
     # Inbox note
     function i
         if test -z "$argv[1]"
             zk new -g inbox -W ~/Sync/Notes/Inbox/
         else
-            zk new -t $argv[1] -g inbox -W ~/Sync/Notes/Inbox/
+            zk new -t $argv[1] --no-input -g inbox -W ~/Sync/Notes/Inbox/
         end
     end
 
