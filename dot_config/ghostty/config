@@ -44,7 +44,7 @@ font-codepoint-map = U+E0A0-U+E0A3,U+E0B0-U+E0C8,U+E0CA,U+E0CC-U+E0D2,U+E0D4="Je
 font-variation = wght=500
 
 # -- ADVANCED SETTINGS -------------------------------------------------------------------------------------------------
-adjust-cell-height = 15
+adjust-cell-height = 20%
 adjust-box-thickness = 120%
 
 # -- MOUSE SETTINGS ----------------------------------------------------------------------------------------------------
