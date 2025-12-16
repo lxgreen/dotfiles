@@ -37,7 +37,7 @@ return {
 			return rainbow_colors[workspace + 1] or colors.blue
 		end,
 		highlight_color = function(workspace)
-			return colors.green
+			return colors.text
 		end,
 		colors = {
 			background = colors.surface,

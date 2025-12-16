@@ -21,21 +21,32 @@ local brew = sbar.add("item", "brew", {
 })
 
 local function update()
-	local file = assert(io.popen("brew outdated | wc -l | tr -d ' '"))
-	local brew_info = assert(file:read("a"))
-	local count = tonumber(brew_info)
-	local icon = { 
-		string = "􀐛",
-	}
-	local label = { 
-		string = tostring(count), 
-		font = {
-			family = settings.font.numbers
+	-- Use JSON output with jq to reliably count outdated packages
+	sbar.exec("brew outdated --json 2>&1 | jq -r '(if .formulae then (.formulae | length) else 0 end) + (if .casks then (.casks | length) else 0 end)'", function(output)
+		if not output then
+			return
+		end
+		
+		-- Remove any trailing newlines/whitespace
+		local brew_info = output:gsub("%s+", "")
+		local count = tonumber(brew_info) or 0
+		
+		local icon = { 
+			string = "􀐛",
 		}
-	}
+		local label = { 
+			string = tostring(count), 
+			width = "dynamic",
+			padding_left = 8,
+			padding_right = 8,
+			font = {
+				family = settings.font.numbers
+			}
+		}
 
-	sbar.animate("sin", 10, function()
-		brew:set({ label = label, icon = icon })
+		sbar.animate("sin", 10, function()
+			brew:set({ label = label, icon = icon })
+		end)
 	end)
 end
 
