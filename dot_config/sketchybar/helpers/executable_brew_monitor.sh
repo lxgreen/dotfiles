@@ -23,9 +23,21 @@ is_brew_running() {
     fi
 }
 
+# Function to check if brew was recently active (within last 2 minutes)
+is_brew_recently_active() {
+    # Check if any brew processes were running recently
+    # This helps catch brew operations that completed quickly
+    local recent_pids=$(pgrep -f "brew.*upgrade\|brew.*install\|brew.*update" 2>/dev/null)
+    if [ -n "$recent_pids" ]; then
+        return 0
+    fi
+    return 1
+}
+
 # Function to monitor brew operations
 monitor_brew() {
     local was_running=false
+    local last_check_time=$(date +%s)
     
     while true; do
         if is_brew_running; then
@@ -38,6 +50,20 @@ monitor_brew() {
                 echo "$(date): Brew operation completed - triggering update"
                 trigger_brew_update
                 was_running=false
+                last_check_time=$(date +%s)
+            else
+                # Check if brew was active recently (might have completed between checks)
+                # Trigger update if it's been more than 10 seconds since last check
+                local current_time=$(date +%s)
+                local time_since_check=$((current_time - last_check_time))
+                if [ $time_since_check -ge 10 ]; then
+                    # Small delay to ensure brew process has fully terminated
+                    sleep 2
+                    if ! is_brew_running; then
+                        trigger_brew_update
+                    fi
+                    last_check_time=$(date +%s)
+                fi
             fi
         fi
         

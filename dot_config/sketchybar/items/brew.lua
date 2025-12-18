@@ -8,45 +8,49 @@ local brew = sbar.add("item", "brew", {
 	},
 	label = {
 		width = "dynamic",
-		padding_left = 8,
-		padding_right = 8,
+		padding_left = 6,
+		padding_right = 6,
 		font = {
 			family = settings.font.numbers
 		},
 	},
-	padding_left = 4,
-	padding_right = 4,
+	padding_left = 8,
+	padding_right = 8,
 	position = "right",
 	update_freq = 30,
 })
 
 local function update()
-	-- Use JSON output with jq to reliably count outdated packages
-	sbar.exec("brew outdated --json 2>&1 | jq -r '(if .formulae then (.formulae | length) else 0 end) + (if .casks then (.casks | length) else 0 end)'", function(output)
-		if not output then
-			return
+	-- Use helper script to count outdated packages (ensures proper PATH)
+	sbar.exec("$CONFIG_DIR/helpers/brew_count.sh", function(output)
+		local count = 0
+		
+		if output and output ~= "" then
+			-- Remove all whitespace and extract first number
+			local cleaned = output:gsub("%s+", "")
+			count = tonumber(cleaned) or 0
+			
+			-- Fallback: try to extract number with pattern matching
+			if count == 0 and cleaned ~= "0" then
+				local num_match = cleaned:match("(%d+)")
+				if num_match then
+					count = tonumber(num_match) or 0
+				end
+			end
 		end
 		
-		-- Remove any trailing newlines/whitespace
-		local brew_info = output:gsub("%s+", "")
-		local count = tonumber(brew_info) or 0
-		
-		local icon = { 
-			string = "􀐛",
-		}
-		local label = { 
-			string = tostring(count), 
-			width = "dynamic",
-			padding_left = 8,
-			padding_right = 8,
-			font = {
-				family = settings.font.numbers
+		-- Update label with count - always show, including 0
+		brew:set({ 
+			icon = { 
+				string = "􀐛"
+			},
+			label = {
+				string = tostring(count),
+				width = "dynamic",
+				padding_left = 6,
+				padding_right = 6
 			}
-		}
-
-		sbar.animate("sin", 10, function()
-			brew:set({ label = label, icon = icon })
-		end)
+		})
 	end)
 end
 
@@ -55,9 +59,9 @@ local function action()
 	-- Don't call update() here - let the terminal command trigger it after completion
 end
 
--- Removed "forced" and "routine" from startup to eliminate 1.45s delay
--- Brew check now only runs on manual updates or brew_update events
-brew:subscribe({ "brew_update", "update" }, update)
+-- Subscribe to routine events for periodic updates (every 30 seconds)
+-- Also subscribe to brew_update events for immediate updates after brew operations
+brew:subscribe({ "brew_update", "routine" }, update)
 brew:subscribe("mouse.clicked", action)
 	brew:subscribe("mouse.clicked.right", function()
 		sbar.exec("sketchybar --trigger brew_update")
