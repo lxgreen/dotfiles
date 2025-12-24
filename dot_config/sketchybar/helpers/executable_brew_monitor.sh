@@ -1,73 +1,70 @@
 #!/bin/bash
 
-# Brew Update Monitor
+# Brew Update Monitor (optimized version)
 # Detects when brew operations complete and triggers widget updates
+# Uses adaptive polling to reduce CPU usage when idle
 
 # Configuration
 BREW_PID_FILE="/tmp/sketchybar_brew_pid"
 LAST_UPDATE_FILE="/tmp/sketchybar_brew_last_update"
+CACHE_FILE="/tmp/sketchybar_brew_count_cache"
 
 # Function to trigger brew widget update
 trigger_brew_update() {
     sketchybar --trigger brew_update 2>/dev/null
-    echo "$(date)" > "$LAST_UPDATE_FILE"
+    date +%s > "$LAST_UPDATE_FILE" 2>/dev/null
 }
 
-# Function to check if brew is currently running
+# Optimized function to check if brew is currently running
+# Uses pgrep with more specific patterns and limits output
 is_brew_running() {
-    # Check for brew processes
-    if pgrep -f "brew.*upgrade\|brew.*install\|brew.*update" > /dev/null; then
-        return 0  # Brew is running
-    else
-        return 1  # Brew is not running
-    fi
+    # Use -x flag for exact match when possible, and limit to first match
+    pgrep -f "brew (upgrade|install|update|reinstall)" >/dev/null 2>&1
 }
 
-# Function to check if brew was recently active (within last 2 minutes)
-is_brew_recently_active() {
-    # Check if any brew processes were running recently
-    # This helps catch brew operations that completed quickly
-    local recent_pids=$(pgrep -f "brew.*upgrade\|brew.*install\|brew.*update" 2>/dev/null)
-    if [ -n "$recent_pids" ]; then
-        return 0
-    fi
-    return 1
-}
-
-# Function to monitor brew operations
+# Function to monitor brew operations with adaptive polling
 monitor_brew() {
     local was_running=false
     local last_check_time=$(date +%s)
+    local sleep_interval=5  # Start with 5 seconds
+    local max_sleep=60      # Max sleep when idle
+    local min_sleep=2       # Min sleep when active
     
     while true; do
         if is_brew_running; then
             if [ "$was_running" = false ]; then
-                echo "$(date): Brew operation started"
+                # Brew just started - reduce sleep interval for faster detection
+                sleep_interval=$min_sleep
                 was_running=true
             fi
         else
             if [ "$was_running" = true ]; then
-                echo "$(date): Brew operation completed - triggering update"
+                # Brew just finished - trigger update and reset
+                # Clear cache to force fresh count on next update
+                rm -f "$CACHE_FILE" 2>/dev/null
                 trigger_brew_update
                 was_running=false
+                sleep_interval=$min_sleep
                 last_check_time=$(date +%s)
             else
-                # Check if brew was active recently (might have completed between checks)
-                # Trigger update if it's been more than 10 seconds since last check
+                # Brew is idle - use exponential backoff to reduce CPU usage
                 local current_time=$(date +%s)
                 local time_since_check=$((current_time - last_check_time))
-                if [ $time_since_check -ge 10 ]; then
-                    # Small delay to ensure brew process has fully terminated
-                    sleep 2
-                    if ! is_brew_running; then
-                        trigger_brew_update
-                    fi
-                    last_check_time=$(date +%s)
+                
+                # Gradually increase sleep interval when idle (up to max_sleep)
+                if [ $sleep_interval -lt $max_sleep ]; then
+                    sleep_interval=$((sleep_interval + 1))
+                fi
+                
+                # Only check occasionally when idle (every 30 seconds)
+                if [ $time_since_check -ge 30 ]; then
+                    trigger_brew_update
+                    last_check_time=$current_time
                 fi
             fi
         fi
         
-        sleep 5  # Check every 5 seconds
+        sleep $sleep_interval
     done
 }
 
