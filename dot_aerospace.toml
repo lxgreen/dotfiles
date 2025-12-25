@@ -111,7 +111,7 @@ alt-c = 'exec-and-forget open -n /Applications/Google\ Chrome.app/'
 alt-m = 'exec-and-forget open -n /Applications/MEGAsync.app/'
 alt-s = 'exec-and-forget open -a "Slack"'
 alt-p = 'exec-and-forget open -n /Applications/KeePassXC.app/'
-alt-q = 'exec-and-forget /bin/bash -c "aerospace list-windows --all --format \"%{window-id} %{app-name}\" | grep GlobalProtect | awk \"{print \\$1}\" | xargs -I {} aerospace close --window-id {}"'
+alt-q = 'exec-and-forget /bin/bash -c "aerospace list-windows --all --format \"%{window-id}\" | grep GlobalProtect | awk \"{print \\$1}\" | xargs -I {} aerospace close --window-id {}"'
 
 f7 = "exec-and-forget zsh ~/scripts/aerospace-resize-neovide.sh"
 
