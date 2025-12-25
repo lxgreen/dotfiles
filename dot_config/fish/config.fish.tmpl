@@ -263,6 +263,10 @@ if status is-interactive
     abbr -a -- f "for i in (seq 1 5); /usr/bin/time fish -i -c exit; end"
     abbr -a -- x exit
     abbr -a -- - "cd -"
+    abbr -a -- kg " aerospace list-windows --all --format '%{window-id}' \
+| grep 'GlobalProtect' \
+| awk '{print $1}' \
+| xargs -I {} aerospace close --window-id {}"
 
     # Theme-dependent `bat` alias
     function bat
