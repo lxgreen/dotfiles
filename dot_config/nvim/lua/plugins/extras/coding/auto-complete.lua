@@ -17,10 +17,9 @@ return {
 			return vim.tbl_deep_extend("force", opts, {
 				sources = cmp.config.sources({
 					{ name = "nvim_lsp" },
-					{ name = "luasnip" },
 					{ name = "path" },
-				}, {
 					{ name = "buffer" },
+					{ name = "luasnip" },
 				}),
 				mapping = cmp.mapping.preset.insert({
 					["<C-b>"] = cmp.mapping.scroll_docs(-4),
@@ -59,6 +58,24 @@ return {
 					completion = cmp.config.window.bordered(),
 					documentation = cmp.config.window.bordered(),
 				},
+			})
+		end,
+		config = function(_, opts)
+			local cmp = require("cmp")
+			cmp.setup(opts)
+
+			-- Disable nvim_lsp source for markdown filetype
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = "markdown",
+				callback = function()
+					cmp.setup.buffer({
+						sources = cmp.config.sources({
+							{ name = "path" },
+							{ name = "buffer" },
+							{ name = "luasnip" },
+						}),
+					})
+				end,
 			})
 		end,
 	},

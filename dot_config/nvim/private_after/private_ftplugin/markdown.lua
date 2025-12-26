@@ -35,7 +35,8 @@ vim.api.nvim_buf_set_keymap(buffer_number, "v", "[[", ":'<,'>ZkInsertLinkAtSelec
 vim.api.nvim_buf_set_keymap(buffer_number, "v", "<leader>s", ":'<,'>ZkMatch<CR>", opts)
 vim.api.nvim_buf_set_keymap(buffer_number, "n", "<leader>B", "<cmd>InsertBacklink<CR>", opts)
 -- -- toggle checkbox
-vim.api.nvim_buf_set_keymap(buffer_number, "n", "[]", "<Cmd>Telekasten toggle_todo<CR>", opts)
+vim.api.nvim_buf_set_keymap(buffer_number, "n", "[]", "<Cmd>MkdnToggleTodo<CR>", opts)
+
 -- go back
 vim.api.nvim_buf_set_keymap(buffer_number, "n", "<bs>", ":edit #<cr>", { silent = true })
 -- open notes on <Space><Space>
