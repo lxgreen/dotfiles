@@ -9,7 +9,7 @@ return {
 				buffers = true,
 				cmp = false,
 				conceal = true,
-				folds = true,
+				folds = false,
 				links = true,
 				lists = true,
 				maps = true,

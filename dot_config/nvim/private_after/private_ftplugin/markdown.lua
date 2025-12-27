@@ -1,4 +1,4 @@
-vim.cmd("setlocal foldmethod=manual")
+vim.cmd("setlocal foldmethod=expr")
 
 local buffer_number = vim.api.nvim_get_current_buf()
 local opts = { noremap = true, silent = false }
