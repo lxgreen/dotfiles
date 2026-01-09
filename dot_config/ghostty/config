@@ -7,6 +7,10 @@
 command = /opt/homebrew/opt/fish/bin/fish --login --interactive
 term = xterm-256color
 
+# -- SHADERS -----------------------------------------------------------------------------------------------------------
+#
+custom-shader = shaders/cursor_warp.glsl
+
 # -- WINDOW SETTINGS ---------------------------------------------------------------------------------------------------
 maximize = true
 confirm-close-surface = false
