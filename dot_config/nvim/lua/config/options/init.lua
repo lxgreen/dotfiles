@@ -44,6 +44,14 @@ local options = {
 
 vim.opt.iskeyword:append({ "!", "=", "<", ">" })
 vim.o.guifont = "JetBrains Mono:h18"
+vim.o.guicursor = table.concat({
+	"n-sm:block-CursorNormal",
+	"v:block-CursorVisual",
+	"c:block-CursorCommand",
+	"i-ci-ve:ver50-CursorInsert",
+	"r-cr:hor20-CursorReplace",
+	"o:hor50-CursorNormal",
+}, ",")
 
 -- set path to Node v20
 vim.g.node_host_prog = "$HOME/.local/share/fnm/aliases/nvim_node/bin/node"

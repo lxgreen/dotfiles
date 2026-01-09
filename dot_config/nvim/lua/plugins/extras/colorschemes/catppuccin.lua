@@ -138,7 +138,6 @@ local override_all = function(c)
 		TroubleIndent = { fg = blend(c.base, c.text, 15) },
 		TroubleNormal = { link = "NormalFloat" },
 		Visual = { style = {} },
-		Whitespace = { fg = c.base },
 		WinSeparator = { fg = blend(c.base, c.crust, 40) },
 		ZenBg = { bg = c.mantle },
 	}
@@ -146,6 +145,14 @@ end
 
 local override_dark = function(c)
 	return {
+		Cursor = { fg = c.base, bg = c.blue },
+		lCursor = { fg = c.base, bg = c.green },
+		CursorIM = { fg = c.base, bg = c.green },
+		CursorNormal = { fg = c.base, bg = c.blue },
+		CursorInsert = { fg = c.base, bg = c.green },
+		CursorVisual = { fg = c.base, bg = c.mauve },
+		CursorReplace = { fg = c.base, bg = c.red },
+		CursorCommand = { fg = c.base, bg = c.peach },
 		AerialGuide = { fg = c.surface0 },
 		FloatBorder = { fg = blend(c.base, c.lavender, 50) },
 		GitSignsCurrentLineBlame = { fg = c.surface2 },
@@ -168,6 +175,14 @@ end
 
 local override_light = function(c)
 	return {
+		Cursor = { fg = c.base, bg = c.blue },
+		lCursor = { fg = c.base, bg = c.green },
+		CursorIM = { fg = c.base, bg = c.green },
+		CursorNormal = { fg = c.base, bg = c.blue },
+		CursorInsert = { fg = c.base, bg = c.green },
+		CursorVisual = { fg = c.base, bg = c.mauve },
+		CursorReplace = { fg = c.base, bg = c.red },
+		CursorCommand = { fg = c.base, bg = c.peach },
 		AerialGuide = { fg = c.crust },
 		FloatBorder = { fg = blend(c.base, c.text, 20) },
 		GitSignsCurrentLineBlame = { fg = c.surface0 },
