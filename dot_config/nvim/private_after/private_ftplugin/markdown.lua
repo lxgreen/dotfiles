@@ -3,6 +3,8 @@ vim.cmd("setlocal foldmethod=expr")
 local buffer_number = vim.api.nvim_get_current_buf()
 local opts = { noremap = true, silent = false }
 
+vim.opt.conceallevel = 2
+
 -- Create a new note in the same directory as the current buffer, using the current selection for note content and asking for its title.
 vim.api.nvim_buf_set_keymap(
 	buffer_number,
