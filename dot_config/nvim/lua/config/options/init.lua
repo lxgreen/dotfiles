@@ -49,7 +49,7 @@ vim.o.guicursor = table.concat({
 	"v:block-CursorVisual",
 	"c:block-CursorCommand",
 	"i-ci-ve:ver50-CursorInsert",
-	"r-cr:hor20-CursorReplace",
+	"r-cr:hor50-CursorReplace",
 	"o:hor50-CursorNormal",
 }, ",")
 

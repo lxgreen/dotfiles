@@ -5,7 +5,12 @@ local app_icons = require("helpers.app_icons")
 
 local spaces = {}
 
-local workspaces = get_workspaces()
+local all_workspaces = get_workspaces()
+-- Limit to first 9 workspaces
+local workspaces = {}
+for i = 1, math.min(9, #all_workspaces) do
+    workspaces[i] = all_workspaces[i]
+end
 local current_workspace = get_current_workspace()
 local function split(str, sep)
     local result = {}

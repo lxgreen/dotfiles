@@ -1,8 +1,14 @@
+-- Disable image.nvim in VSCode and Neovide (requires real terminal for kitty graphics protocol)
+local function is_terminal_nvim()
+	return not vim.g.vscode and not vim.g.neovide
+end
+
 return {
 	{
 		"3rd/image.nvim",
-		event = "VeryLazy",
-		enabled = false,
+		ft = { "markdown" },
+		enabled = true,
+		cond = is_terminal_nvim, -- Disable in VSCode and Neovide (no terminal)
 		dependencies = {
 			{
 				"nvim-treesitter/nvim-treesitter",
@@ -17,6 +23,7 @@ return {
 		},
 		opts = {
 			backend = "kitty",
+			processor = "magick_cli",
 			integrations = {
 				markdown = {
 					enabled = true,
@@ -43,5 +50,8 @@ return {
 			tmux_show_only_in_active_window = false, -- auto show/hide images in the correct Tmux window (needs visual-activity off)
 			hijack_file_patterns = { "*.png", "*.jpg", "*.jpeg", "*.gif", "*.webp", "*.avif" }, -- render image files as images when opened
 		},
+		config = function(_, opts)
+			require("image").setup(opts)
+		end,
 	},
 }

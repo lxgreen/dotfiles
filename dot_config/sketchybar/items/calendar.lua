@@ -55,6 +55,6 @@ sbar.add("item", {
 cal:subscribe({ "forced", "routine", "system_woke" }, function(env)
 	cal:set({
 		icon = icons.calendar,
-		label = os.date("%m/%d %H:%M:%S"),
+		label = os.date("%d.%m %H:%M:%S"),
 	})
 end)
