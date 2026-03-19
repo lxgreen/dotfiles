@@ -11,7 +11,7 @@
 						"style": "folder"
 					},
 					"style": "plain",
-					"template": "<white></> {{ .Path }} ",
+					"template": "<white></> {{ .Path }} ",
 					"type": "path"
 				},
 				{
@@ -30,6 +30,16 @@
 					"style": "plain",
 					"template": "{{ if .Full }}<white>󰋙</> {{ .Full }} {{ end }}",
 					"type": "node"
+				},
+				{
+					"type": "executiontime",
+					"style": "plain",
+					"foreground": "yellow",
+					"template": "{{ if .FormattedMs }}<white>󱦟</> {{ .FormattedMs }} {{ end }}",
+					"properties": {
+						"threshold": 500,
+						"style": "austin"
+					}
 				},
 				{
 					"type": "git",
