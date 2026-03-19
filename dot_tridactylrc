@@ -11,14 +11,14 @@ set editorcmd "/opt/homebrew/bin/neovide"
 " Uses startsWith for partial URL matching (handles trailing slashes, query params, etc.)
 command tabopen_or_switch jsb -p browser.tabs.query({}).then(tabs => { const url = JS_ARG; const existingTab = tabs.find(t => t.url.startsWith(url) || url.startsWith(t.url)); if (existingTab) { browser.tabs.update(existingTab.id, { active: true }); browser.windows.update(existingTab.windowId, { focused: true }); } else { browser.tabs.create({ url }); } })
 
-" Binds
-bind gbm tabopen_or_switch https://github.com/wix-private/restaurants-orders-bm/pulls
-bind gjr tabopen_or_switch https://wix.atlassian.net/issues/?filter=30553
-bind gog tabopen_or_switch https://wix-bo.com/dev/project/com.wixpress.olo-settings
+" Binds — data-tools
+bind gdt tabopen_or_switch https://github.com/wix-private/data-tools
+bind gdh tabopen_or_switch https://wix-bo.com/dev/project/com.wixpress.data-tools.data-platform-homepage-web
+bind gdg tabopen_or_switch https://wix-bo.com/dev/project/com.wixpress.data-tools.apps.data-tools-giza-host
+bind gbb tabopen_or_switch https://wix-bo.com/dev/project/com.wixpress.data-tools.bi-bank-web
+bind gbs tabopen_or_switch https://wix-bo.com/dev/project/com.wixpress.data-tools.bi-bank-service
 bind gum tabopen_or_switch https://bo.wix.com/um
 unbind gu
-bind gob tabopen_or_switch https://github.com/wix-private/restaurants-orders-blocks/tree/master/packages/restaurants-orders-bob
-bind gci tabopen_or_switch https://falcon.dev.wixpress.com/buildConfiguration/wix_private_restaurants_orders_blocks_PRs/
 bind gcp tabopen_or_switch https://github.com/copilot/
 bind R reloadall
 bind grc source ~/.tridactylrc

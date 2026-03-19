@@ -9,7 +9,7 @@ term = xterm-256color
 
 # -- SHADERS -----------------------------------------------------------------------------------------------------------
 #
-custom-shader = shaders/cursor_warp.glsl
+custom-shader = shaders/cursor_tail.glsl
 
 # -- WINDOW SETTINGS ---------------------------------------------------------------------------------------------------
 maximize = true
@@ -33,7 +33,8 @@ copy-on-select = true
 
 # -- APPEARANCE & THEMES -----------------------------------------------------------------------------------------------
 background-opacity = 0.9
-theme = "dark:Catppuccin Mocha,light:Catppuccin Latte"
+theme = dark:Catppuccin Mocha,light:Catppuccin Latte
+
 
 # -- CURSOR SETTINGS ---------------------------------------------------------------------------------------------------
 cursor-invert-fg-bg = true
@@ -105,6 +106,8 @@ keybind = ctrl+shift+comma=reload_config
 
 keybind = shift+up=scroll_page_lines:-25
 keybind = shift+down=scroll_page_lines:26
+keybind = ctrl+shift+up=jump_to_prompt:-1
+keybind = ctrl+shift+down=jump_to_prompt:1
 keybind = ctrl+с=text:\x03
 keybind = shift+enter=text:\x1b\r
 
