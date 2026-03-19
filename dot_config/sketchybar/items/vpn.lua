@@ -51,8 +51,8 @@ local function update()
 	end)
 end
 
--- Subscribe to real-time VPN state changes
-vpn:subscribe({ "forced", "routine", "vpn_update", "update", "vpn_state_changed" }, update)
+-- Subscribe to real-time VPN state changes (including system_woke to refresh after sleep)
+vpn:subscribe({ "forced", "routine", "vpn_update", "update", "vpn_state_changed", "system_woke" }, update)
 
 -- Mouse hover functionality
 vpn:subscribe("mouse.entered", function(env)

@@ -48,6 +48,7 @@ return {
 	["Color Picker"] = ":color_picker:",
 	["数码测色计"] = ":color_picker:",
 	["CotEditor"] = ":coteditor:",
+	["Codex"] = ":openai:",
 	["Creative Cloud"] = ":creative_cloud:",
 	["Cypress"] = ":cypress:",
 	["DataGrip"] = ":datagrip:",

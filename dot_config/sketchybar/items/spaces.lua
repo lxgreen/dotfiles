@@ -4,6 +4,7 @@ local settings = require("settings")
 local app_icons = require("helpers.app_icons")
 
 local spaces = {}
+local default_app_icon = app_icons["Default"]
 
 local all_workspaces = get_workspaces()
 -- Limit to first 9 workspaces
@@ -19,6 +20,79 @@ local function split(str, sep)
         table.insert(result, each)
     end
     return result
+end
+
+local function get_app_icon(app_name)
+    local normalized_app_name = ""
+
+    if type(app_name) == "string" then
+        normalized_app_name = app_name:gsub("^%s*(.-)%s*$", "%1")
+    end
+
+    return app_icons[normalized_app_name] or default_app_icon
+end
+
+local function build_lookup(items)
+    local lookup = {}
+
+    if type(items) ~= "table" then
+        return lookup
+    end
+
+    for _, item in ipairs(items) do
+        if type(item) == "string" then
+            lookup[item] = true
+        elseif type(item) == "table" and type(item["app-name"]) == "string" then
+            lookup[item["app-name"]] = true
+        end
+    end
+
+    return lookup
+end
+
+local function set_space_label(space, icon_line)
+    sbar.animate("tanh", 10, function()
+        space:set({
+            label = {
+                string = icon_line,
+                font = settings.icons
+            }
+        })
+    end)
+end
+
+local function update_space_label(space_index, visible_apps_lookup)
+    sbar.exec("aerospace list-windows --workspace " .. space_index .. " --format '%{app-name}' --json ", function(apps)
+        local icon_line = ""
+        local no_app = true
+
+        if type(apps) == "table" then
+            for _, app in ipairs(apps) do
+                local app_name = app["app-name"]
+
+                if visible_apps_lookup[app_name] then
+                    no_app = false
+                    icon_line = icon_line .. " " .. get_app_icon(app_name)
+                end
+            end
+        end
+
+        if no_app then
+            icon_line = " —"
+        end
+
+        set_space_label(spaces[space_index], icon_line)
+    end)
+end
+
+local function refresh_space_labels()
+    sbar.exec("aerospace list-apps --macos-native-hidden no --format '%{app-name}' --json ", function(visible_apps)
+        local visible_apps_lookup = build_lookup(visible_apps)
+
+        for space_index, _ in ipairs(workspaces) do
+            update_space_label(space_index, visible_apps_lookup)
+        end
+    end)
 end
 
 for i, workspace in ipairs(workspaces) do
@@ -40,7 +114,6 @@ for i, workspace in ipairs(workspaces) do
             color = settings.items.default_color(i),
             highlight_color = settings.items.highlight_color(i),
             font = settings.icons,
-            y_offset = -1,
             highlight = selected
         },
         padding_right = 1,
@@ -60,29 +133,6 @@ for i, workspace in ipairs(workspaces) do
     })
 
     spaces[i] = space
-
-    -- Define the icons for open apps on each space initially
-    sbar.exec("aerospace list-windows --workspace " .. i .. " --format '%{app-name}' --json ", function(apps)
-        local icon_line = ""
-        local no_app = true
-        for i, app in ipairs(apps) do
-            no_app = false
-            local app_name = app["app-name"]
-            local lookup = app_icons[app_name]
-            local icon = ((lookup == nil) and app_icons["default"] or lookup)
-            icon_line = icon_line .. " " .. icon
-        end
-
-        if no_app then
-            icon_line = " —"
-        end
-
-        sbar.animate("tanh", 10, function()
-            space:set({
-                label = icon_line
-            })
-        end)
-    end)
 
     -- Padding space between each item
     sbar.add("item", "item." .. i .. "padding", {
@@ -147,6 +197,8 @@ for i, workspace in ipairs(workspaces) do
     end)
 end
 
+refresh_space_labels()
+
 local space_window_observer = sbar.add("item", {
     drawing = false,
     updates = true
@@ -177,55 +229,11 @@ local spaces_indicator = sbar.add("item", {
 
 -- Event handles
 space_window_observer:subscribe("space_windows_change", function(env)
-    for i, workspace in ipairs(workspaces) do
-        sbar.exec("aerospace list-windows --workspace " .. i .. " --format '%{app-name}' --json ", function(apps)
-            local icon_line = ""
-            local no_app = true
-            for i, app in ipairs(apps) do
-                no_app = false
-                local app_name = app["app-name"]
-                local lookup = app_icons[app_name]
-                local icon = ((lookup == nil) and app_icons["default"] or lookup)
-                icon_line = icon_line .. " " .. icon
-            end
-
-            if no_app then
-                icon_line = " —"
-            end
-
-            sbar.animate("tanh", 10, function()
-                spaces[i]:set({
-                    label = icon_line
-                })
-            end)
-        end)
-    end
+    refresh_space_labels()
 end)
 
 space_window_observer:subscribe("aerospace_focus_change", function(env)
-    for i, workspace in ipairs(workspaces) do
-        sbar.exec("aerospace list-windows --workspace " .. i .. " --format '%{app-name}' --json ", function(apps)
-            local icon_line = ""
-            local no_app = true
-            for i, app in ipairs(apps) do
-                no_app = false
-                local app_name = app["app-name"]
-                local lookup = app_icons[app_name]
-                local icon = ((lookup == nil) and app_icons["default"] or lookup)
-                icon_line = icon_line .. " " .. icon
-            end
-
-            if no_app then
-                icon_line = " —"
-            end
-
-            sbar.animate("tanh", 10, function()
-                spaces[i]:set({
-                    label = icon_line
-                })
-            end)
-        end)
-    end
+    refresh_space_labels()
 end)
 
 spaces_indicator:subscribe("swap_menus_and_spaces", function(env)
