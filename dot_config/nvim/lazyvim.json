@@ -26,6 +26,7 @@
     "lazyvim.plugins.extras.util.project",
     "lazyvim.plugins.extras.vscode",
     "plugins.extras.ai.avante",
+    "plugins.extras.ai.claude",
     "plugins.extras.ai.cursor-agent",
     "plugins.extras.ai.mcp",
     "plugins.extras.buffers.remove",
