@@ -5,7 +5,12 @@ return {
 		"nvim-lua/plenary.nvim",
 	},
 	config = function()
-		require("claude-code").setup()
+		require("claude-code").setup({
+			window = {
+				position = "vertical",
+				split_ratio = 0.35,
+			},
+		})
 	end,
 	keys = {
 		{

@@ -5,7 +5,15 @@ return {
 		"folke/edgy.nvim",
 		optional = true,
 		opts = function(_, opts)
-			table.insert(opts.bottom, { ft = "dap-repl" })
+			table.insert(opts.bottom, {
+				ft = "snacks_terminal",
+				size = { height = 0.2 },
+				filter = function(_buf, win)
+					return vim.w[win].snacks_win
+						and vim.w[win].snacks_win.position == "bottom"
+						and vim.w[win].snacks_win.relative == "editor"
+				end,
+			})
 
 			for i, v in pairs(opts.bottom) do
 				if v.ft == "lazyterm" then
@@ -42,7 +50,7 @@ return {
 		opts = {
 			animate = { enabled = false },
 			exit_when_last = true,
-			wo = { winfixwidth = false, winbar = false },
+			wo = { winfixwidth = false },
 
 			options = {
 				-- stylua: ignore start

@@ -34,6 +34,7 @@ copy-on-select = true
 # -- APPEARANCE & THEMES -----------------------------------------------------------------------------------------------
 background-opacity = 0.9
 theme = dark:Catppuccin Mocha,light:Catppuccin Latte
+split-divider-color = #89b4fa
 
 
 # -- CURSOR SETTINGS ---------------------------------------------------------------------------------------------------
@@ -62,15 +63,7 @@ keybind = global:alt+escape=toggle_quick_terminal
 # Terminal-specific keybindings
 keybind = ctrl+m=text:\x0D
 
-# Pane navigation (similar to WezTerm's Ctrl+hjkl)
-keybind = ctrl+h=goto_split:left
-keybind = ctrl+j=goto_split:down
-keybind = ctrl+k=goto_split:up
-keybind = ctrl+l=goto_split:right
-
 # Pane creation (Leader key simulation with Ctrl+S prefix)
-# Note: Ghostty doesn't have a leader key concept, so we use direct bindings
-keybind = ctrl+shift+backslash=new_split:right
 keybind = ctrl+shift+minus=new_split:down
 
 # Tab management
@@ -88,7 +81,7 @@ keybind = ctrl+shift+space=toggle_split_zoom
 
 # Additional keybindings to approximate WezTerm functionality
 
-# Quick select mode (similar to WezTerm's QuickSelect)
+# Quick sele~ct~ mode (similar to WezTerm's QuickSelect)
 # Note: quick_select action doesn't exist in Ghostty, using select_all instead
 keybind = ctrl+shift+f=select_all
 
@@ -100,9 +93,6 @@ keybind = ctrl+shift+z=toggle_split_zoom
 
 # New window
 keybind = ctrl+shift+n=new_window
-
-# Reload configuration
-keybind = ctrl+shift+comma=reload_config
 
 keybind = shift+up=scroll_page_lines:-25
 keybind = shift+down=scroll_page_lines:26

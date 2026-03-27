@@ -83,6 +83,7 @@
     "plugins.extras.keys.nav.go-to-context",
     "plugins.extras.keys.nav.treewalker",
     "plugins.extras.keys.nav.vscode-navigation",
+    "plugins.extras.keys.nav.window",
     "plugins.extras.keys.nav.word",
     "plugins.extras.keys.notifications.noice",
     "plugins.extras.keys.tab.rename",
