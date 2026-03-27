@@ -3,7 +3,8 @@
 [git]
 	autoCommit = false
 [diff]
-	pager = "diff-so-fancy"
+	command = "difft"
+	args = ["{{ `{{ .Destination }}` }}", "{{ `{{ .Target }}` }}"]
 [merge]
 	command = "nvim"
 	args = ["-d", "{{ `{{ .Source }}` }}", "{{ `{{ .Destination }}` }}", "{{ `{{ .Target }}` }}"]
