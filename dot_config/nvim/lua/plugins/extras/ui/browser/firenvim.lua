@@ -307,12 +307,6 @@ return {
 		enabled = false,
 	},
 
-	-- Disable avante (AI assistant)
-	{
-		"yetone/avante.nvim",
-		enabled = false,
-	},
-
 	-- Disable Mason (LSP installer - prevents loading native libraries)
 	{
 		"williamboman/mason.nvim",

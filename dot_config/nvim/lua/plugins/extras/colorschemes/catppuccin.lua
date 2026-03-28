@@ -6,9 +6,6 @@ end
 
 local override_all = function(c)
 	return {
-		AvanteSidebarWinSeparator = { link = "WinSeparator" },
-		AvanteSidebarWinHorizontalSeparator = { fg = c.surface1 },
-		AvantePromptInputBorder = { link = "FloatBorder" },
 		AerialLine = { fg = "none", bg = c.crust },
 		AlphaFooter = { fg = c.surface1, style = {} },
 		AlphaHeader1 = { fg = c.surface2 },
@@ -23,9 +20,6 @@ local override_all = function(c)
 		AlphaShortcutBorder = { fg = blend(c.base, c.surface1, 50) },
 		BufferLineCustomGroupLabel = { bg = c.mantle, fg = c.text, style = { "bold" } },
 		BufferLineCustomGroupSep = { bg = c.mantle, fg = c.maroon },
-		ChatGPTQuestion = { fg = c.mauve },
-		ChatGPTTotalTokens = { bg = "none", fg = c.overlay2 },
-		ChatGPTTotalTokensBorder = { fg = c.text },
 		BlinkCmpDoc = { bg = c.mantle, blend = 15 },
 		BlinkCmpDocSeparator = { fg = blend(c.mantle, c.text, 10) },
 		DiffviewDiffAdd = { bg = blend(c.green, c.base, 93) },
