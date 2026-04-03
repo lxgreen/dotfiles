@@ -180,8 +180,8 @@ end
 
 # -- PAGER -------------------------------------------------------------------------------------------------------------
 
-set -q MANPAGER; or set -Ux MANPAGER nvim +Man!
-set -q PAGER; or set -Ux PAGER $MANPAGER
+# set -q MANPAGER; or set -Ux MANPAGER nvim +Man!
+# set -q PAGER; or set -Ux PAGER $MANPAGER
 
 # Colorize man pages.
 set -q LESS_TERMCAP_mb; or set -Ux LESS_TERMCAP_mb (set_color -o blue)
@@ -339,28 +339,29 @@ if status is-interactive
     alias zend "open -a 'Zen Browser' about:debugging"
 
     alias ai claude
+    alias ay "claude --dangerously-skip-permissions"
 
     # Inbox note
     function i
         if test -z "$argv[1]"
-            zk new -g inbox -W ~/Sync/Notes/Inbox/
+            cd ~/Sync/Notes && zk new -g inbox -W ~/Sync/Notes/Inbox/
         else
-            zk new -t $argv[1] --no-input -g inbox -W ~/Sync/Notes/Inbox/
+            cd ~/Sync/Notes && zk new -t $argv[1] --no-input -g inbox -W ~/Sync/Notes/Inbox/
         end
     end
 
     # Daily note
     function d
         set today (date "+%Y-%m-%d")
-        zk new -t $today -g inbox -W ~/Sync/Notes/Inbox/
+        cd ~/Sync/Notes && zk new -t $today -g inbox -W ~/Sync/Notes/Inbox/
     end
 
     # Note
     function n
         if test -z "$argv[1]"
-            zk edit -i -W ~/Sync/Notes/
+            cd ~/Sync/Notes && zk edit -i -W ~/Sync/Notes/
         else
-            zk edit $argv[1] -W ~/Sync/Notes/
+            cd ~/Sync/Notes && zk edit $argv[1] -W ~/Sync/Notes/
         end
     end
 
@@ -538,11 +539,6 @@ if status is-interactive
 
     # Clipboard to Markdown -- copy Slack messages to Notes interatively
     alias cm "open ~/dev/clipboard2markdown/index.html"
-
-    function dev
-        osascript ~/scripts/dev-session.applescript $argv &
-        disown
-    end
 end
 
 # -- EZA --------------------------------------------------------------------------------------------------------------
