@@ -104,7 +104,7 @@ PATH = '/opt/homebrew/bin:/opt/homebrew/sbin:${PATH}'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#exec-and-forget
 alt-w = 'exec-and-forget open -n /Applications/WezTerm.app/'
-alt-x = 'exec-and-forget open -n /Applications/Ghostty.app/'
+alt-x = 'exec-and-forget open -n /Applications/cmux.app/'
 alt-t = 'exec-and-forget open -n /Applications/Telegram\ Desktop.app/'
 alt-f = 'exec-and-forget open -n /Applications/Firefox\ Developer\ Edition.app/'
 alt-c = 'exec-and-forget open -n /Applications/Google\ Chrome.app/'

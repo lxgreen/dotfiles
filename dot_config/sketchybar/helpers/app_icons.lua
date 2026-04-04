@@ -332,6 +332,7 @@ return {
 	["FreeTube"] = ":freetube:",
 	["Games"] = ":games:",
 	["Ghostty"] = ":ghostty:",
+	["cmux"] = ":ghostty:",
 	["GIMP"] = ":gimp:",
 	["Goodnotes"] = ":goodnotes:",
 	["Granola"] = ":granola:",

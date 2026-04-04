@@ -3,15 +3,15 @@ local colors = require("colors")
 local settings = require("settings")
 
 local brew = sbar.add("item", "brew", {
-	icon = { 
-		string = "􀐚", 
+	icon = {
+		string = "􀐚",
 	},
 	label = {
 		width = "dynamic",
 		padding_left = 6,
 		padding_right = 6,
 		font = {
-			family = settings.font.numbers
+			family = settings.font.numbers,
 		},
 	},
 	padding_left = 8,
@@ -24,12 +24,12 @@ local function update()
 	-- Use helper script to count outdated packages (ensures proper PATH)
 	sbar.exec("$CONFIG_DIR/helpers/brew_count.sh", function(output)
 		local count = 0
-		
+
 		if output and output ~= "" then
 			-- Remove all whitespace and extract first number
 			local cleaned = output:gsub("%s+", "")
 			count = tonumber(cleaned) or 0
-			
+
 			-- Fallback: try to extract number with pattern matching
 			if count == 0 and cleaned ~= "0" then
 				local num_match = cleaned:match("(%d+)")
@@ -38,18 +38,18 @@ local function update()
 				end
 			end
 		end
-		
+
 		-- Update label with count - always show, including 0
-		brew:set({ 
-			icon = { 
-				string = "􀐛"
+		brew:set({
+			icon = {
+				string = "􀐛",
 			},
 			label = {
 				string = tostring(count),
 				width = "dynamic",
 				padding_left = 6,
-				padding_right = 6
-			}
+				padding_right = 6,
+			},
 		})
 	end)
 end
@@ -63,23 +63,23 @@ end
 -- Also subscribe to brew_update events for immediate updates after brew operations
 brew:subscribe({ "brew_update", "routine" }, update)
 brew:subscribe("mouse.clicked", action)
-	brew:subscribe("mouse.clicked.right", function()
-		sbar.exec("sketchybar --trigger brew_update")
-	end)
+brew:subscribe("mouse.clicked.right", function()
+	sbar.exec("sketchybar --trigger brew_update")
+end)
 
 -- Create bracket for brew widget
-sbar.add("bracket", "brew.bracket", {brew.name}, {
+sbar.add("bracket", "brew.bracket", { brew.name }, {
 	background = {
 		color = colors.bg1,
 		border_color = colors.rainbow[#colors.rainbow - 6],
-		border_width = 1
-	}
+		border_width = 1,
+	},
 })
 
 -- Add padding after the brew widget
 sbar.add("item", "brew.padding", {
 	position = "right",
-	width = settings.group_paddings
+	width = settings.group_paddings,
 })
 
 -- Initialize brew widget after startup delay to avoid blocking startup
