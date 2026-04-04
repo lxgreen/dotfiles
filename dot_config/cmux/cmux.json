@@ -1,0 +1,101 @@
+{
+  "commands": [
+    {
+      "name": "data-tools",
+      "description": "Open data-tools monorepo with worktree list",
+      "keywords": ["data", "tools", "monorepo", "wt"],
+      "workspace": {
+        "name": "data-tools",
+        "cwd": "~/dev/data-tools",
+        "layout": {
+          "pane": {
+            "surfaces": [
+              {
+                "type": "terminal",
+                "name": "worktrees",
+                "command": "wt list",
+                "focus": true
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "zk",
+      "description": "Open Zettelkasten notes with interactive search",
+      "keywords": ["notes", "zettelkasten", "zk"],
+      "workspace": {
+        "name": "ZK",
+        "cwd": "~/Sync/Notes",
+        "layout": {
+          "pane": {
+            "surfaces": [
+              {
+                "type": "terminal",
+                "name": "notes",
+                "command": "zk edit -i -W ~/Sync/Notes/",
+                "focus": true
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "cz",
+      "description": "Chezmoi config editor with diff",
+      "keywords": ["chezmoi", "dotfiles", "config"],
+      "workspace": {
+        "name": "CZ",
+        "cwd": "~/.config",
+        "layout": {
+          "direction": "vertical",
+          "split": 0.65,
+          "children": [
+            {
+              "direction": "horizontal",
+              "split": 0.5,
+              "children": [
+                {
+                  "pane": {
+                    "surfaces": [
+                      {
+                        "type": "terminal",
+                        "name": "config",
+                        "cwd": "~/.config",
+                        "focus": true
+                      }
+                    ]
+                  }
+                },
+                {
+                  "pane": {
+                    "surfaces": [
+                      {
+                        "type": "terminal",
+                        "name": "edit",
+                        "command": "chezmoi edit"
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "pane": {
+                "surfaces": [
+                  {
+                    "type": "terminal",
+                    "name": "diff",
+                    "command": "chezmoi diff"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
