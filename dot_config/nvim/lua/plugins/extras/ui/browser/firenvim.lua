@@ -141,7 +141,7 @@ return {
 					callback = function(args)
 						local ft = vim.bo[args.buf].filetype
 						local bufname = vim.api.nvim_buf_get_name(args.buf)
-						-- Close neo-tree, nvim-tree, oil, and other explorers
+						-- Close nvim-tree, oil, and other explorers
 						if
 							ft == "NvimTree"
 							or ft == "oil"
