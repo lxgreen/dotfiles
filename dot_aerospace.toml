@@ -11,27 +11,29 @@ after-login-command = []
 
 # Auto-start SketchyBar when Aerospace launches
 after-startup-command = [
-  'exec-and-forget sketchybar >> $HOME/.sketchybar/service.log 2>&1',
-  # JankyBorders has a built-in detection of already running process,
-  # so it won't be run twice on AeroSpace restart
-  'exec-and-forget borders active_color=0xffe1e3e4 inactive_color=0xff494d64 width=5.0',
+	'exec-and-forget sketchybar >> $HOME/.sketchybar/service.log 2>&1',
+	# JankyBorders has a built-in detection of already running process,
+	# so it won't be run twice on AeroSpace restart
+	'exec-and-forget borders active_color=0xffe1e3e4 inactive_color=0xff494d64 width=5.0',
 ]
 
 # Notify SketchyBar about workspace changes
 exec-on-workspace-change = [
-  '/bin/bash',
-  '-c',
-  'sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE FOCUSED_DISPLAY=$(aerospace list-monitors --focused | awk "{print $1}")',
+	'/bin/bash',
+	'-c',
+	'sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE FOCUSED_DISPLAY=$(aerospace list-monitors --focused | awk "{print $1}")',
 ]
 
 # Notify SketchyBar about focus changes
 # See https://nikitabobko.github.io/AeroSpace/guide#on-focus-changed-callbacks
 on-focus-changed = [
-'exec-and-forget sketchybar --trigger aerospace_focus_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE',
-'move-mouse window-lazy-center',
+	'exec-and-forget sketchybar --trigger aerospace_focus_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE',
+	'move-mouse window-lazy-center',
 ]
 
-on-focused-monitor-changed = ['move-mouse monitor-lazy-center'] # Mouse lazily follows focused monitor (default in i3)
+on-focused-monitor-changed = [
+	'move-mouse monitor-lazy-center',
+] # Mouse lazily follows focused monitor (default in i3)
 
 # Start AeroSpace at login
 start-at-login = true
@@ -104,7 +106,7 @@ PATH = '/opt/homebrew/bin:/opt/homebrew/sbin:${PATH}'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#exec-and-forget
 alt-w = 'exec-and-forget open -n /Applications/WezTerm.app/'
-alt-x = 'exec-and-forget open -n /Applications/cmux.app/'
+alt-x = 'exec-and-forget open -n /Applications/Ghostty.app/'
 alt-t = 'exec-and-forget open -n /Applications/Telegram\ Desktop.app/'
 alt-f = 'exec-and-forget open -n /Applications/Firefox\ Developer\ Edition.app/'
 alt-c = 'exec-and-forget open -n /Applications/Google\ Chrome.app/'
@@ -166,57 +168,59 @@ alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
 
 # Enter service mode and notify SketchyBar
 alt-shift-semicolon = [
-  'mode service',
-  'exec-and-forget sketchybar --trigger aerospace_enter_service_mode',
+	'mode service',
+	'exec-and-forget sketchybar --trigger aerospace_enter_service_mode',
 ]
 
 # 'service' binding mode declaration.
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
 [mode.service.binding]
 esc = [
-  'reload-config',
-  'mode main',
-  'exec-and-forget sketchybar --trigger aerospace_leave_service_mode',
+	'reload-config',
+	'mode main',
+	'exec-and-forget sketchybar --trigger aerospace_leave_service_mode',
 ]
 r = ['flatten-workspace-tree', 'mode main'] # reset layout
 #s = ['layout sticky tiling', 'mode main'] # sticky is not yet supported https://github.com/nikitabobko/AeroSpace/issues/2
 f = [
-  'layout floating tiling',
-  'mode main',
-  'exec-and-forget sketchybar --trigger aerospace_leave_service_mode',
+	'layout floating tiling',
+	'mode main',
+	'exec-and-forget sketchybar --trigger aerospace_leave_service_mode',
 ] # Toggle between floating and tiling layout
 backspace = [
-  'close-all-windows-but-current',
-  'mode main',
-  'exec-and-forget sketchybar --trigger aerospace_leave_service_mode',
+	'close-all-windows-but-current',
+	'mode main',
+	'exec-and-forget sketchybar --trigger aerospace_leave_service_mode',
 ]
 
 alt-shift-h = [
-  'join-with left',
-  'mode main',
-  'exec-and-forget sketchybar --trigger aerospace_leave_service_mode',
+	'join-with left',
+	'mode main',
+	'exec-and-forget sketchybar --trigger aerospace_leave_service_mode',
 ]
 alt-shift-j = [
-  'join-with down',
-  'mode main',
-  'exec-and-forget sketchybar --trigger aerospace_leave_service_mode',
+	'join-with down',
+	'mode main',
+	'exec-and-forget sketchybar --trigger aerospace_leave_service_mode',
 ]
 alt-shift-k = [
-  'join-with up',
-  'mode main',
-  'exec-and-forget sketchybar --trigger aerospace_leave_service_mode',
+	'join-with up',
+	'mode main',
+	'exec-and-forget sketchybar --trigger aerospace_leave_service_mode',
 ]
 alt-shift-l = [
-  'join-with right',
-  'mode main',
-  'exec-and-forget sketchybar --trigger aerospace_leave_service_mode',
+	'join-with right',
+	'mode main',
+	'exec-and-forget sketchybar --trigger aerospace_leave_service_mode',
 ]
-  
+
 [[on-window-detected]]
-if.app-id="com.mitchellh.ghostty"
-run= [
-  "layout tiling","move-node-to-workspace 1"
-]
+if.app-id = "com.mitchellh.ghostty"
+run = ["layout tiling", "move-node-to-workspace 1"]
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'cmux'
+run = "move-node-to-workspace 1"
 
 [[on-window-detected]]
 if.app-id = 'com.google.Chrome'
@@ -227,13 +231,5 @@ if.app-id = 'com.github.wez.wezterm'
 run = 'move-node-to-workspace 1'
 
 [[on-window-detected]]
-if.app-id = 'com.tinyspeck.slackmacgap'
-run = 'move-node-to-workspace 4'
-
-[[on-window-detected]]
 if.app-name-regex-substring = 'Zen'
-run =  "move-node-to-workspace 2"
-
-[[on-window-detected]]
-if.app-name-regex-substring = 'cursor'
-run = 'move-node-to-workspace 1'
+run = "move-node-to-workspace 2"
