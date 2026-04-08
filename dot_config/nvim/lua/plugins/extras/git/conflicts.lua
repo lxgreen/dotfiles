@@ -30,7 +30,4 @@ return {
 			})
 		end,
 	},
-	{
-		"whiteinge/diffconflicts",
-	},
 }

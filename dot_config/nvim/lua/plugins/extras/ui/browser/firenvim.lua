@@ -40,7 +40,6 @@ return {
 				vim.g.lualine_laststatus = 0
 				vim.g.snacks_dashboard_enabled = false
 				vim.g.noice_enabled = false
-				vim.g.neo_tree_remove_legacy_commands = 1
 				vim.g.loaded_netrw = 1
 				vim.g.loaded_netrwPlugin = 1
 				vim.g.nvim_tree_disable_default_keybindings = 1
@@ -144,11 +143,9 @@ return {
 						local bufname = vim.api.nvim_buf_get_name(args.buf)
 						-- Close neo-tree, nvim-tree, oil, and other explorers
 						if
-							ft == "neo-tree"
-							or ft == "NvimTree"
+							ft == "NvimTree"
 							or ft == "oil"
 							or bufname:match("NvimTree")
-							or bufname:match("neo%-tree")
 						then
 							pcall(vim.api.nvim_buf_delete, args.buf, { force = true })
 							-- Also try to close any tree windows
@@ -157,10 +154,8 @@ return {
 								local name = vim.api.nvim_buf_get_name(buf)
 								local winft = vim.bo[buf].filetype
 								if
-									winft == "neo-tree"
-									or winft == "NvimTree"
+									winft == "NvimTree"
 									or name:match("NvimTree")
-									or name:match("neo%-tree")
 								then
 									pcall(vim.api.nvim_win_close, win, true)
 								end
@@ -170,9 +165,6 @@ return {
 				})
 
 				-- Disable tree toggle commands
-				vim.api.nvim_create_user_command("Neotree", function()
-					-- Do nothing
-				end, { nargs = "*" })
 				vim.api.nvim_create_user_command("NvimTreeToggle", function()
 					-- Do nothing
 				end, {})
@@ -232,12 +224,6 @@ return {
 	-- Disable bufferline/tabline
 	{
 		"akinsho/bufferline.nvim",
-		enabled = false,
-	},
-
-	-- Disable neo-tree
-	{
-		"nvim-neo-tree/neo-tree.nvim",
 		enabled = false,
 	},
 

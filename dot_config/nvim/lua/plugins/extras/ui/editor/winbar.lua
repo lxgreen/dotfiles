@@ -11,7 +11,6 @@ local disabled_filetypes = {
 	"fugitive",
 	"gitlab",
 	"lazyterm",
-	"neo-tree",
 	"snacks_picker_list",
 	"neotest-summary",
 	"noice",
