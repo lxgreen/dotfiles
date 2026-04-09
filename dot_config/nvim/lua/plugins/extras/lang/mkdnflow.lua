@@ -54,11 +54,15 @@ return {
 				template = "---\ntitle: {{ title }}\ndate: {{ date }}\ntype: note\n---\n \n# {{ title }}\n",
 			},
 			to_do = {
-				symbols = { " ", "-", "X" },
-				update_parents = true,
-				not_started = " ",
-				in_progress = "-",
-				complete = "X",
+				statuses = {
+					not_started = { marker = " " },
+					in_progress = { marker = "-" },
+					complete     = { marker = "X" },
+				},
+				status_order = { "not_started", "in_progress", "complete" },
+				status_propagation = {
+					up = true,
+				},
 			},
 			tables = {
 				trim_whitespace = true,
