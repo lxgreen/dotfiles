@@ -21,6 +21,25 @@ return {
 
 			lm.setup(opts)
 			lm.hack_get_keymap()
+
+			local lmu = require("langmapper.utils")
+
+			-- Translate Cyrillic input to English for plugins that use getcharstr directly
+			-- (e.g. flash.nvim reads labels via vim.fn.getcharstr, bypassing keymaps)
+			local orig_getcharstr = vim.fn.getcharstr
+			vim.fn.getcharstr = function(...)
+				local char = orig_getcharstr(...)
+				return lmu.translate_keycode(char, "default", "ru")
+			end
+
+			-- langmap only covers normal mode; wire command mode via explicit cnoremap
+			for _, ru_char in ipairs(vim.fn.split(opts.layouts.ru.layout, "\\zs")) do
+				local en_char = lmu.translate_keycode(ru_char, "default", "ru")
+				if ru_char ~= en_char then
+					pcall(vim.keymap.set, "c", ru_char, en_char, { noremap = true })
+				end
+			end
+
 		end,
 	},
 

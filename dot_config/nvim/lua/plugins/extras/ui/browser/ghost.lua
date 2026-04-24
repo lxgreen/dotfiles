@@ -1,1 +1,1 @@
-return { "subnut/nvim-ghost.nvim" }
+return { "subnut/nvim-ghost.nvim", enabled = false }
