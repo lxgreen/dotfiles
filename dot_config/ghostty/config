@@ -32,7 +32,7 @@ clipboard-write = allow
 copy-on-select = true
 
 # -- APPEARANCE & THEMES -----------------------------------------------------------------------------------------------
-background-opacity = 0.9
+background-opacity = 1.0
 theme = dark:Catppuccin Mocha,light:Catppuccin Latte
 split-divider-color = #89b4fa
 
