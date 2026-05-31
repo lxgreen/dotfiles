@@ -1,0 +1,10 @@
+[
+  {
+    "command": "openBrowserTab",
+    "key": null
+  },
+  {
+    "command": "toggleTerminal",
+    "key": "Command+T"
+  }
+]
