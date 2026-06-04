@@ -288,14 +288,19 @@ if status is-interactive
     # File operations
     alias rmf "rm -rf"
 
+    # Navigation
     alias cd __zoxide_z
 
     function zw
         set -l result
+        set -l root (git rev-parse --show-toplevel 2>/dev/null)
+        if test -z "$root"
+            set root $PWD
+        end
         if test (count $argv) -eq 0
-            set result (fd --type d --hidden --exclude .git . "$PWD" | fzf)
+            set result (fd --type d --hidden --exclude .git . "$root" | fzf)
         else
-            set result (zoxide query --base-dir "$PWD" --exclude "$PWD" -- $argv)
+            set result (zoxide query --base-dir "$root" --exclude "$root" -- $argv)
         end
         test -n "$result"; and __zoxide_z -- "$result"
     end
@@ -579,6 +584,8 @@ fish_add_path $HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin
 
 fish_add_path $GOPATH
 fish_add_path $HOME/.cargo/bin
+
+set -gx DOCKER_HOST unix://$HOME/.rd/docker.sock
 
 # -- OTHER -------------------------------------------------------------------------------------------------------------
 
