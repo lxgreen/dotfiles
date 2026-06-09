@@ -243,6 +243,7 @@ set -gx PINECONE_API_KEY {{ (keepassxcAttribute "pinecone" "Password") }}
 set -gx FIGMA_ACCESS_TOKEN {{ (keepassxcAttribute "figma-api" "Password") }}
 
 set -x GPG_TTY (tty)
+set -gx GITHUB_TOKEN (gh auth token 2>/dev/null)
 
 # -- PYTHON ------------------------------------------------------------------------------------------------------------
 
@@ -356,8 +357,10 @@ if status is-interactive
 
     alias ai claude
     alias ay "claude --dangerously-skip-permissions"
+    alias hay "headroom wrap claude --dangerously-skip-permissions"
     alias cx codex
     alias cy "codex --dangerously-bypass-approvals-and-sandbox"
+    alias hcy "headroom wrap codex --dangerously-bypass-approvals-and-sandbox"
 
     # Inbox note
     function i

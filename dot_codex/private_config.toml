@@ -1,0 +1,284 @@
+model = "gpt-5.5"
+model_reasoning_effort = "high"
+
+notify = ["/Users/alexgr/.codex/computer-use/Codex Computer Use.app/Contents/SharedSupport/SkyComputerUseClient.app/Contents/MacOS/SkyComputerUseClient", "turn-ended"]
+
+[projects."/Users/alexgr/dev/raycast-rust"]
+trust_level = "trusted"
+
+[projects."/Users/alexgr/dev/cursor-projects-job"]
+trust_level = "trusted"
+
+[projects."/Users/alexgr"]
+trust_level = "trusted"
+
+[projects."/Users/alexgr/dev/data-tools"]
+trust_level = "trusted"
+
+[projects."/Users/alexgr/dev/data-services"]
+trust_level = "trusted"
+
+[projects."/Users/alexgr/.config/nvim"]
+trust_level = "trusted"
+
+[projects."/Users/alexgr/dev/python-serverless"]
+trust_level = "trusted"
+
+[projects."/Users/alexgr/restaurants-dev/restaurants-menus-showcase-bm"]
+trust_level = "trusted"
+
+[projects."/Users/alexgr/restaurants-dev/restaurants-orders-bm"]
+trust_level = "trusted"
+
+[projects."/Users/alexgr/Documents/Codex/2026-05-29/is-the-codex-config-i-made"]
+trust_level = "trusted"
+
+[projects."/Users/alexgr/Documents/Codex/2026-05-29/is-the-codex-config-i-made-2"]
+trust_level = "trusted"
+
+[projects."/Users/alexgr/Documents/Codex/2026-05-29/read-and-summarize-info-on-lu"]
+trust_level = "trusted"
+
+[projects."/Users/alexgr/Documents/Codex/2026-05-29/codex-app-vim-bindings-is-this"]
+trust_level = "trusted"
+
+[projects."/Users/alexgr/Documents/Codex/2026-05-29/how-to-move-file-to-other"]
+trust_level = "trusted"
+
+[projects."/Users/alexgr/Documents/Codex/2026-05-29/i-m-using-the-wt-cli"]
+trust_level = "trusted"
+
+[projects."/Users/alexgr/Documents/Codex/2026-05-31/write-skill-for-codex-to-initiate"]
+trust_level = "trusted"
+
+[projects."/Users/alexgr/Documents/Codex/2026-05-31/install-vsix-from-microsoft-ai-engineering"]
+trust_level = "trusted"
+
+[projects."/Users/alexgr/Documents/Codex/2026-05-31/is-codex-keyboard-shortcuts-config-persisted"]
+trust_level = "trusted"
+
+[projects."/Users/alexgr/Documents/Codex/2026-05-31/find-the-best-practices-for-agentic"]
+trust_level = "trusted"
+
+[projects."/Users/alexgr/Documents/Codex/2026-05-31/best-way-to-overview-github-pr"]
+trust_level = "trusted"
+
+[projects."/Users/alexgr/Documents/Codex/2026-06-01/look-for-handoff-skill"]
+trust_level = "trusted"
+
+[projects."/Users/alexgr/Documents/Codex/2026-06-02/write-fish-shell-funciton-ws-for"]
+trust_level = "trusted"
+
+[projects."/Users/alexgr/Documents/Codex/2026-06-02/i-use-zoxide-to-globally-navigate"]
+trust_level = "trusted"
+
+[projects."/Users/alexgr/Documents/Codex/2026-06-04/how-to-check-codex-budget-usage"]
+trust_level = "trusted"
+
+[projects."/Users/alexgr/Documents/Codex/2026-06-04/the-goal-the-goal-is-to"]
+trust_level = "trusted"
+
+[projects."/Users/alexgr/Documents/repo-scanner-poc"]
+trust_level = "trusted"
+
+[projects."/Users/alexgr/Documents/Codex/2026-06-05/enable-opening-file-html-pages-on"]
+trust_level = "trusted"
+
+[projects."/Users/alexgr/dev/event-lens-scanner"]
+trust_level = "trusted"
+
+[projects."/Users/alexgr/Documents/Codex/2026-06-08/count-r-s-in-word-strawberry"]
+trust_level = "trusted"
+
+[mcp_servers.wix-mcp-remote]
+command = "npx"
+args = ["-y", "@wix/mcp-remote", "https://mcp.wix.com/sse"]
+
+[mcp_servers.wix-design-system-mcp]
+command = "npx"
+args = ["-y", "@wix/design-system-mcp"]
+
+[mcp_servers.wix-figma-mcp]
+command = "npx"
+args = ["-y", "@wix/figma-mcp"]
+
+[mcp_servers.bi-catalog-mcp]
+url = "https://bo.wix.com/_serverless/bi-catalog-mcp/mcp/"
+
+[mcp_servers.business-schema-mcp]
+command = "npx"
+args = ["-y", "@wix/business-schema-mcp"]
+
+[mcp_servers.wix-auto-patterns-mcp]
+command = "npx"
+args = ["-y", "@wix/auto-patterns-mcp"]
+
+[mcp_servers.ai-assistant]
+url = "https://mcp-s.wewix.net/mcp?mcp=ai-assistant"
+
+[mcp_servers.bi-catalog]
+url = "https://mcp-s.wewix.net/mcp?mcp=bi-catalog"
+
+[mcp_servers.ai-hub]
+url = "https://mcp-s.wewix.net/mcp?mcp=ai-hub"
+
+[mcp_servers.babel]
+url = "https://mcp-s.wewix.net/mcp?mcp=babel"
+
+[mcp_servers.github]
+url = "https://mcp-s.wewix.net/mcp?mcp=github"
+
+[mcp_servers.zen-browser]
+command = "node"
+args = ["/Users/alexgr/dev/zen-mcp/server.mjs"]
+
+[mcp_servers.zen-browser.tools.zen_new_tab]
+approval_mode = "approve"
+
+[mcp_servers.slack]
+url = "https://mcp-s.wewix.net/mcp?mcp=slack"
+
+[mcp_servers.devex]
+url = "https://mcp-s.wewix.net/mcp?mcp=devex"
+
+[mcp_servers.nile-index]
+url = "https://mcp-s.wewix.net/mcp?mcp=nile-index"
+
+[mcp_servers.fire-console]
+url = "https://mcp-s.wewix.net/mcp?mcp=fire-console"
+
+[mcp_servers.fire-console.tools.fire-console__invoke_rpc]
+approval_mode = "approve"
+
+[mcp_servers.jira]
+url = "https://mcp-s.wewix.net/mcp?mcp=jira"
+
+[mcp_servers.google-calendar]
+url = "https://mcp-s.wewix.net/mcp?mcp=google-calendar"
+
+[mcp_servers.google-workspace]
+url = "https://mcp-s.wewix.net/mcp?mcp=google-workspace"
+
+[mcp_servers.gmail]
+url = "https://mcp-s.wewix.net/mcp?mcp=gmail"
+
+[mcp_servers.eventor-mcp]
+url = "https://bo.wix.com/_serverless/eventor-mcp/mcp"
+
+[mcp_servers.babel-mcp]
+url = "https://mcp-s.wewix.net/mcp?mcp=babel"
+
+[mcp_servers.serverless]
+command = "npx"
+args = ["-y", "@wix/serverless-mcp@latest"]
+
+[mcp_servers.data-platform]
+url = "https://mcp-s.wewix.net/mcp?mcp=data-platform"
+
+[mcp_servers.node_repl]
+args = []
+command = "/Applications/Codex.app/Contents/Resources/node_repl"
+startup_timeout_sec = 120
+
+[mcp_servers.node_repl.env]
+NODE_REPL_NATIVE_PIPE_CONNECT_TIMEOUT_MS = "1000"
+NODE_REPL_NODE_MODULE_DIRS = ""
+NODE_REPL_NODE_PATH = "/Applications/Codex.app/Contents/Resources/node"
+NODE_REPL_TRUSTED_CODE_PATHS = "/Users/alexgr/.codex"
+CODEX_HOME = "/Users/alexgr/.codex"
+NODE_REPL_TRUSTED_BROWSER_CLIENT_SHA256S = "4946b004b23af02244ece97240aceb8d123475207fa6a6fc399486bd7086049f"
+BROWSER_USE_AVAILABLE_BACKENDS = "chrome,iab"
+NODE_REPL_INSTRUCTIONS_USE_CASE_BROWSER = "Control the in-app browser in conjunction with the Browser Plugin."
+NODE_REPL_INSTRUCTIONS_USE_CASE_CHROME = "Control the Chrome browser in conjunction with the Chrome Plugin. Prefer this method of controlling Chrome over alternatives (such as Computer Use) unless the user explicitly mentions an alternative."
+BROWSER_USE_CODEX_APP_BUILD_FLAVOR = "prod"
+BROWSER_USE_CODEX_APP_VERSION = "26.602.71036"
+CODEX_CLI_PATH = "/Applications/Codex.app/Contents/Resources/codex"
+
+[marketplaces.openai-primary-runtime]
+last_updated = "2026-06-02T20:05:48Z"
+source_type = "local"
+source = "/Users/alexgr/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime"
+
+[plugins."documents@openai-primary-runtime"]
+enabled = true
+
+[plugins."spreadsheets@openai-primary-runtime"]
+enabled = true
+
+[plugins."presentations@openai-primary-runtime"]
+enabled = true
+
+[plugins."superpowers@openai-curated"]
+enabled = true
+
+[plugins."sites@openai-bundled"]
+enabled = true
+
+[plugins."browser@openai-bundled"]
+enabled = true
+
+[tui.model_availability_nux]
+"gpt-5.5" = 4
+
+[notice.model_migrations]
+"gpt-5.3-codex" = "gpt-5.4"
+
+[desktop]
+conversationDetailMode = "STEPS_COMMANDS"
+ambient-suggestions-enabled = false
+appearanceLightCodeThemeId = "catppuccin"
+appearanceDarkCodeThemeId = "catppuccin"
+codeFontSize = 16
+sansFontSize = 16
+
+[desktop.open-in-target-preferences]
+global = "ghostty"
+
+[desktop.open-in-target-preferences.perPath]
+"/Users/alexgr/dev/raycast-rust" = "ghostty"
+
+[desktop.appearanceLightChromeTheme]
+accent = "#8839ef"
+contrast = 45
+ink = "#4c4f69"
+opaqueWindows = false
+surface = "#eff1f5"
+
+[desktop.appearanceLightChromeTheme.fonts]
+code = "JetBrains Mono"
+ui = "JetBrains Mono"
+
+[desktop.appearanceLightChromeTheme.semanticColors]
+diffAdded = "#40a02b"
+diffRemoved = "#d20f39"
+skill = "#8839ef"
+
+[desktop.appearanceDarkChromeTheme]
+accent = "#cba6f7"
+contrast = 60
+ink = "#cdd6f4"
+opaqueWindows = false
+surface = "#1e1e2e"
+
+[desktop.appearanceDarkChromeTheme.fonts]
+code = "JetBrains Mono"
+ui = "JetBrains Mono"
+
+[desktop.appearanceDarkChromeTheme.semanticColors]
+diffAdded = "#a6e3a1"
+diffRemoved = "#f38ba8"
+skill = "#cba6f7"
+
+[features]
+js_repl = false
+
+# --- Headroom MCP server ---
+[mcp_servers.headroom]
+command = "headroom"
+args = ["mcp", "serve"]
+
+[marketplaces.openai-bundled]
+last_updated = "2026-06-09T19:01:02Z"
+source_type = "local"
+source = "/Users/alexgr/.codex/.tmp/bundled-marketplaces/openai-bundled"
+# --- end Headroom MCP server ---
