@@ -340,7 +340,8 @@ if status is-interactive
     alias firefox "cd /Applications/Firefox\ Developer\ Edition.app/Contents/MacOS; ./firefox $argv"
     alias ff "firefox NUL &"
     alias man batman
-    alias lg lazygit
+    alias gg lazygit
+    alias ww lazywix
     alias chrome "open -a 'Google Chrome'"
     alias chromed "open -a 'Google Chrome' --args --disable-web-security --user-data-dir='/tmp/chrome_dev'"
     alias pr "gh dash"
@@ -348,8 +349,6 @@ if status is-interactive
     alias bi "brew install"
     alias bu "brew uninstall"
     alias bl "brew list"
-
-    alias ww "w3m -no-mouse"
 
     alias zen "open -a 'Zen Browser'"
     alias zenr "open -a 'Zen Browser'  --args --remote-debugging-port 9222"
@@ -589,6 +588,8 @@ fish_add_path $GOPATH
 fish_add_path $HOME/.cargo/bin
 
 set -gx DOCKER_HOST unix://$HOME/.rd/docker.sock
+
+set -gx NO_PROXY localhost,127.0.0.1
 
 # -- OTHER -------------------------------------------------------------------------------------------------------------
 
