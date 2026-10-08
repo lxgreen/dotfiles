@@ -11,6 +11,12 @@ set editorcmd "/opt/homebrew/bin/neovide"
 " Uses startsWith for partial URL matching (handles trailing slashes, query params, etc.)
 command tabopen_or_switch jsb -p browser.tabs.query({}).then(tabs => { const url = JS_ARG; const existingTab = tabs.find(t => t.url.startsWith(url) || url.startsWith(t.url)); if (existingTab) { browser.tabs.update(existingTab.id, { active: true }); browser.windows.update(existingTab.windowId, { focused: true }); } else { browser.tabs.create({ url }); } })
 
+command tabclose_serena_dashboard jsb browser.tabs.query({}).then(tabs => tabs.filter(t => /^http:\/\/127\.0\.0\.1:\d+\/dashboard\/index\.html/.test(t.url)).forEach(t => browser.tabs.remove(t.id)))
+bind gks tabclose_serena_dashboard
+
+command tabclosedupes jsb (async () => { const tabs = await browser.tabs.query({currentWindow: true}); const seen = new Map(); const toClose = []; for (const t of tabs) { const key = t.url; if (seen.has(key)) { if (!t.active && !t.pinned) toClose.push(t.id); } else { seen.set(key, t.id); } } if (toClose.length) await browser.tabs.remove(toClose); })()
+bind gD tabclosedupes
+
 " Binds — data-tools
 bind gdt tabopen_or_switch https://github.com/wix-private/data-tools
 bind gdh tabopen_or_switch https://wix-bo.com/dev/project/com.wixpress.data-tools.data-platform-homepage-web
@@ -21,7 +27,6 @@ bind gum tabopen_or_switch https://bo.wix.com/um
 unbind gu
 bind gcp tabopen_or_switch https://github.com/copilot/
 bind R reloadall
-bind grc source ~/.tridactylrc
 bind <A-p> pin
 bind <A-m> mute toggle
 bind <F1> help

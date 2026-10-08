@@ -43,4 +43,56 @@ return {
 		end,
 	},
 	{ "OXY2DEV/markview.nvim", enabled = false },
+	{
+		"yousefhadder/markdown-plus.nvim",
+		ft = { "markdown" },
+		opts = {
+			enabled = true,
+			filetypes = { "markdown" },
+			features = {
+				links = true,
+				list_management = true,
+				table = true,
+				text_formatting = true,
+				thematic_break = true,
+				images = true,
+				headers_toc = true,
+				quotes = true,
+				callouts = true,
+				code_block = true,
+				html_block_awareness = true,
+				footnotes = true,
+			},
+			keymaps = {
+				enabled = true,
+			},
+			table = {
+				enabled = true,
+				auto_format = true,
+				default_alignment = "left",
+				confirm_destructive = true,
+				keymaps = {
+					enabled = true,
+					prefix = "<localleader>t",
+					insert_mode_navigation = true,
+				},
+			},
+			list = {
+				smart_outdent = true,
+				checkbox_completion = {
+					enabled = true,
+					format = "emoji",
+					date_format = "%Y-%m-%d",
+					remove_on_uncheck = true,
+					update_existing = true,
+				},
+			},
+			links = {
+				smart_paste = {
+					enabled = true,
+					timeout = 5,
+				},
+			},
+		},
+	},
 }

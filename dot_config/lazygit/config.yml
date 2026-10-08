@@ -14,8 +14,9 @@ gui:
   showCommandLog: false
 git:
   branchLogCmd: "git lg {{branchName}} --"
-  pagers:
-    - externalDiffCommand: difft
+  diffRenderers:
+    - command: difft
+      type: extDiff
 customCommands:
   - key: "n"
     context: "localBranches"
@@ -46,6 +47,11 @@ customCommands:
     command: "git checkout -b {{.Form.BranchType}}/{{.Form.BranchName}}"
     description: "new branch"
     loadingText: "creating branch..."
+  - key: "<enter>"
+    context: "worktrees"
+    command: "wt switch {{.SelectedWorktree.Branch}}"
+    description: "switch to worktree (wt switch)"
+    output: terminal
 keybinding:
   commits:
     openLogMenu: <disabled>

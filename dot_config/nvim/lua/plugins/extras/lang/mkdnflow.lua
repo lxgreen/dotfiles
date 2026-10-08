@@ -1,7 +1,7 @@
 return {
 	"jakewvincent/mkdnflow.nvim",
 	ft = { "markdown" },
-	enabled = true,
+	enabled = false,
 	config = function()
 		require("mkdnflow").setup({
 			modules = {
@@ -57,7 +57,7 @@ return {
 				statuses = {
 					not_started = { marker = " " },
 					in_progress = { marker = "-" },
-					complete     = { marker = "X" },
+					complete = { marker = "X" },
 				},
 				status_order = { "not_started", "in_progress", "complete" },
 				status_propagation = {
