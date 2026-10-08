@@ -1,0 +1,136 @@
+#!/bin/sh
+# Claude rewrites ~/.claude.json with session and project state, so only
+# mcpServers is managed here. jq keeps key order and -j drops the trailing
+# newline, so the rest of the file stays byte-identical.
+set -e
+input=$(cat)
+[ -n "$input" ] || input='{}'
+servers=$(cat <<'JSON'
+{
+  "playwright": {
+    "type": "stdio",
+    "command": "npx",
+    "args": [
+      "-y",
+      "@mcp-s/mcp"
+    ],
+    "env": {
+      "USER_ACCESS_KEY": "{{ keepassxcAttribute "mcp-s access key" "Password" }}",
+      "BASE_URL": "https://mcp-s.wewix.net",
+      "MCP": "playwright"
+    }
+  },
+  "kb-retrieval": {
+    "type": "stdio",
+    "command": "npx",
+    "args": [
+      "-y",
+      "@mcp-s/mcp"
+    ],
+    "env": {
+      "USER_ACCESS_KEY": "{{ keepassxcAttribute "mcp-s access key" "Password" }}",
+      "BASE_URL": "https://mcp-s.wewix.net",
+      "MCP": "kb-retrieval"
+    }
+  },
+  "engflow": {
+    "type": "stdio",
+    "command": "npx",
+    "args": [
+      "-y",
+      "@mcp-s/mcp"
+    ],
+    "env": {
+      "USER_ACCESS_KEY": "{{ keepassxcAttribute "mcp-s access key" "Password" }}",
+      "BASE_URL": "https://mcp-s.wewix.net",
+      "MCP": "engflow"
+    }
+  },
+  "ai-assistant": {
+    "type": "http",
+    "url": "https://mcp-s.wewix.net/mcp?mcp=ai-assistant"
+  },
+  "bi-catalog": {
+    "type": "http",
+    "url": "https://mcp-s.wewix.net/mcp?mcp=bi-catalog"
+  },
+  "ai-hub": {
+    "type": "http",
+    "url": "https://mcp-s.wewix.net/mcp?mcp=ai-hub"
+  },
+  "octocode": {
+    "type": "stdio",
+    "command": "npx",
+    "args": [
+      "-y",
+      "@mcp-s/mcp"
+    ],
+    "env": {
+      "USER_ACCESS_KEY": "{{ keepassxcAttribute "mcp-s access key" "Password" }}",
+      "BASE_URL": "https://mcp-s.wewix.net",
+      "MCP": "octocode"
+    }
+  },
+  "babel": {
+    "type": "http",
+    "url": "https://mcp-s.wewix.net/mcp?mcp=babel"
+  },
+  "github": {
+    "type": "http",
+    "url": "https://mcp-s.wewix.net/mcp?mcp=github"
+  },
+  "slack": {
+    "type": "http",
+    "url": "https://mcp-s.wewix.net/mcp?mcp=slack"
+  },
+  "devex": {
+    "type": "http",
+    "url": "https://mcp-s.wewix.net/mcp?mcp=devex"
+  },
+  "nile-index": {
+    "type": "http",
+    "url": "https://mcp-s.wewix.net/mcp?mcp=nile-index"
+  },
+  "fire-console": {
+    "type": "http",
+    "url": "https://mcp-s.wewix.net/mcp?mcp=fire-console"
+  },
+  "jira": {
+    "type": "http",
+    "url": "https://mcp-s.wewix.net/mcp?mcp=jira"
+  },
+  "google-calendar": {
+    "type": "http",
+    "url": "https://mcp-s.wewix.net/mcp?mcp=google-calendar"
+  },
+  "google-workspace": {
+    "type": "http",
+    "url": "https://mcp-s.wewix.net/mcp?mcp=google-workspace"
+  },
+  "gmail": {
+    "type": "http",
+    "url": "https://mcp-s.wewix.net/mcp?mcp=gmail"
+  },
+  "serena": {
+    "type": "stdio",
+    "command": "serena",
+    "args": [
+      "start-mcp-server",
+      "--context",
+      "claude-code",
+      "--project-from-cwd"
+    ],
+    "env": {}
+  },
+  "zen-browser": {
+    "type": "stdio",
+    "command": "node",
+    "args": [
+      "/Users/alexgr/dev/zen-mcp/server.mjs"
+    ],
+    "env": {}
+  }
+}
+JSON
+)
+printf '%s' "$input" | jq -j --indent 2 --argjson servers "$servers" '.mcpServers = $servers'
