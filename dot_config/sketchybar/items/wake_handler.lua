@@ -1,45 +1,63 @@
--- Wake handler to restart event providers and refresh the bar after sleep/wake cycles
--- This fixes the issue where sketchybar gets stuck after Mac goes to sleep
+-- Wake handler: recover the bar after a sleep/wake cycle.
+--
+-- Root cause of the old "frozen until `brew services restart`" bug:
+-- the previous handler fired a burst of *racing* async shell commands on wake
+-- (killall cpu_load/network_load; delayed respawn &; forced `sketchybar --update`),
+-- while the separate theme-detector daemon could fire `sketchybar --reload` in the
+-- same window. Several uncoordinated mutations hitting sketchybar's single-threaded
+-- mach event loop during the fragile post-wake window deadlocked the server. It hung
+-- (never crashed), so launchd's KeepAlive never relaunched it -> a manual full restart
+-- was the only recovery.
+--
+-- Fix: on wake, do exactly ONE thing -- a single, settle-delayed `sketchybar --reload`,
+-- debounced via a shared lock so it can never stack with itself or with a theme reload.
+-- `--reload` re-runs the config, and items/widgets/cpu.lua + items/widgets/wifi.lua
+-- already `killall` their provider before respawning it, so the providers come back
+-- cleanly with no duplicates. No killall race, no forced --update racing the respawn.
 
 local sbar = require("sketchybar")
 
--- Create a hidden item that handles wake events
-local wake_handler = sbar.add("item", "wake_handler", {
-    drawing = false,
-    updates = true,
-})
+-- Keep this window in sync with DEBOUNCE_SECS in helpers/auto_theme_detector_safe.sh.
+local DEBOUNCE_SECS = 20
 
--- Function to restart event providers
-local function restart_event_providers()
-    -- Kill and restart cpu_load event provider
-    sbar.exec("killall cpu_load 2>/dev/null; sleep 0.5 && $CONFIG_DIR/helpers/event_providers/cpu_load/bin/cpu_load cpu_update 2.0 &")
-    
-    -- Kill and restart network_load event provider
-    sbar.exec("killall network_load 2>/dev/null; sleep 0.5 && $CONFIG_DIR/helpers/event_providers/network_load/bin/network_load en0 network_update 2.0 &")
+-- One sequential shell script (NOT several racing execs). It debounces on a shared
+-- lock file, waits for the system to settle, then does a single clean reload.
+local function reload_bar_debounced(reason)
+	sbar.exec(string.format(
+		[[
+		LOCK="$CONFIG_DIR/.reload.lock"
+		LOG="$CONFIG_DIR/wake_handler.log"
+		now=$(date +%%s)
+		# Read the stored epoch back with cat (portable across BSD/GNU stat).
+		last=$(cat "$LOCK" 2>/dev/null)
+		case "$last" in ''|*[!0-9]*) last=0 ;; esac
+		if [ $((now - last)) -lt %d ]; then
+			echo "[$(date)] %s: skipped (debounced)" >> "$LOG"
+			exit 0
+		fi
+		echo "$now" > "$LOCK"
+		echo "[$(date)] %s: reloading after settle" >> "$LOG"
+		sleep 3
+		sketchybar --reload
+		]],
+		DEBOUNCE_SECS, reason, reason
+	))
 end
 
--- Subscribe to system wake event
+-- Hidden item that exists only to receive system power events.
+local wake_handler = sbar.add("item", "wake_handler", {
+	drawing = false,
+	updates = true,
+})
+
 wake_handler:subscribe("system_woke", function(env)
-    -- Log wake event for debugging
-    sbar.exec("echo '[$(date)] System woke - restarting event providers' >> $CONFIG_DIR/wake_handler.log")
-    
-    -- Small delay to let the system stabilize after wake
-    sbar.exec("sleep 1")
-    
-    -- Restart event providers that may have become unresponsive
-    restart_event_providers()
-    
-    -- Force update the entire bar after a short delay
-    sbar.exec("sleep 2 && sketchybar --update")
+	reload_bar_debounced("wake")
 end)
 
--- Also handle system_will_sleep to gracefully stop providers
 wake_handler:subscribe("system_will_sleep", function(env)
-    sbar.exec("echo '[$(date)] System going to sleep' >> $CONFIG_DIR/wake_handler.log")
-    
-    -- Gracefully stop event providers before sleep
-    sbar.exec("killall cpu_load 2>/dev/null")
-    sbar.exec("killall network_load 2>/dev/null")
+	-- Just record it. Do NOT touch the providers here: the wake reload respawns them
+	-- cleanly, and killing them on sleep only adds another moving part to the race.
+	sbar.exec([[echo "[$(date)] system going to sleep" >> "$CONFIG_DIR/wake_handler.log"]])
 end)
 
 return wake_handler

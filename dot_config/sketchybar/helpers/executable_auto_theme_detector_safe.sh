@@ -1,13 +1,20 @@
 #!/bin/bash
 
-# Safe automatic theme detector for sketchybar (optimized version)
-# This version doesn't call sketchybar --reload to prevent infinite loops
-# Instead, it updates theme files and lets sketchybar detect changes
+# Safe automatic theme detector for sketchybar.
+#
+# A theme change genuinely requires `sketchybar --reload`, because colors are baked
+# into every item at config-load time (see colorscheme.lua). So this DOES reload --
+# but every reload is routed through a shared debounce lock (.reload.lock) so it can
+# never stack with itself or with the wake handler's reload (items/wake_handler.lua).
+# Uncoordinated concurrent reloads during the post-wake window were what used to
+# deadlock the bar and force a manual `brew services restart`.
 
 CONFIG_DIR="$(dirname "$0")/.."
 THEME_FILE="$CONFIG_DIR/.current_os_theme"
 LOG_FILE="$CONFIG_DIR/theme_changes.log"
+LOCK_FILE="$CONFIG_DIR/.reload.lock"
 MAX_LOG_SIZE=50000  # Rotate log at 50KB
+DEBOUNCE_SECS=20    # Keep in sync with wake_handler.lua
 
 # Function to rotate log file if it gets too large
 rotate_log_if_needed() {
@@ -57,24 +64,49 @@ get_catppuccin_theme() {
     fi
 }
 
+# Unconditionally reload sketchybar and stamp the shared lock. Stamping the lock
+# makes the wake handler (items/wake_handler.lua) skip its own reload if it fires
+# within DEBOUNCE_SECS, so the two never stack into a double reload.
+force_reload() {
+    local sketchybar_bin
+    date +%s > "$LOCK_FILE"
+    sketchybar_bin=$(find_sketchybar)
+    [ -n "$sketchybar_bin" ] && "$sketchybar_bin" --reload >/dev/null 2>&1
+}
+
+# Reload only if no other reload (wake handler or a theme flip) happened within
+# DEBOUNCE_SECS. Used for the non-essential startup reload, so a detector relaunch
+# right after a wake can't pile a redundant reload onto the wake handler's.
+debounced_reload() {
+    local now last
+    now=$(date +%s)
+    # Read the stored epoch back with cat (portable across BSD/GNU stat).
+    last=$(cat "$LOCK_FILE" 2>/dev/null)
+    case "$last" in ''|*[!0-9]*) last=0 ;; esac
+    if [ $((now - last)) -lt "$DEBOUNCE_SECS" ]; then
+        return 0
+    fi
+    force_reload
+}
+
 # Function to update theme files and reload sketchybar
 update_sketchybar_theme() {
     local catppuccin_theme="$1"
     local nvim_color_file="$HOME/.local/share/nvim/last-color"
-    local sketchybar_bin=$(find_sketchybar)
-    
+
     # Update the nvim color file
     echo "$catppuccin_theme" > "$nvim_color_file" 2>/dev/null
-    
+
     # Update the theme file for sketchybar
     echo "$catppuccin_theme" > "$THEME_FILE"
-    
-    # Reload sketchybar to apply the new theme (with a small delay to prevent loops)
-    if [ -n "$sketchybar_bin" ]; then
-        sleep 1
-        "$sketchybar_bin" --reload >/dev/null 2>&1
-    fi
-    
+
+    # Apply the new theme with an unconditional reload -- colors are baked in at
+    # config load, so a theme flip MUST reload or the colors go stale. A small settle
+    # delay keeps it off the wake window; force_reload stamps the lock so the wake
+    # handler won't reload again right behind it.
+    sleep 1
+    force_reload
+
     # Rotate log if needed before writing
     rotate_log_if_needed
     
@@ -96,12 +128,12 @@ monitor_theme_changes() {
     local nvim_color_file="$HOME/.local/share/nvim/last-color"
     echo "$current_catppuccin_theme" > "$nvim_color_file" 2>/dev/null
     echo "$current_catppuccin_theme" > "$THEME_FILE"
-    
-    local sketchybar_bin=$(find_sketchybar)
-    if [ -n "$sketchybar_bin" ]; then
-        "$sketchybar_bin" --reload >/dev/null 2>&1
-    fi
-    
+
+    # Apply the startup theme through the same debounced choke point, so a detector
+    # relaunch (launchd KeepAlive/ThrottleInterval) right after a wake can't collide
+    # with the wake handler's reload.
+    debounced_reload "startup"
+
     # Log startup only once (to stderr so it goes to error log, not stdout)
     echo "Theme detector started: $current_os_theme -> $current_catppuccin_theme" >&2
     

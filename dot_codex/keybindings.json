@@ -1,5 +1,13 @@
 [
   {
+    "command": "copyConversationMarkdown",
+    "key": "Ctrl+Command+C"
+  },
+  {
+    "command": "openAvatarOverlay",
+    "key": null
+  },
+  {
     "command": "openBrowserTab",
     "key": null
   },

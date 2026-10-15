@@ -17,6 +17,14 @@ bind gks tabclose_serena_dashboard
 command tabclosedupes jsb (async () => { const tabs = await browser.tabs.query({currentWindow: true}); const seen = new Map(); const toClose = []; for (const t of tabs) { const key = t.url; if (seen.has(key)) { if (!t.active && !t.pinned) toClose.push(t.id); } else { seen.set(key, t.id); } } if (toClose.length) await browser.tabs.remove(toClose); })()
 bind gD tabclosedupes
 
+" Same as the zen-tabs skill, built from Tridactyl commands: close leftover tabs, close duplicates, sort.
+" tabclose --match is a literal, case-sensitive substring of the URL or title.
+" The sort keeps pinned tabs (Zen Essentials) and grouped tabs (Zen folders) in place, then orders the rest by host, then URL.
+" Unpinned Slack tabs are closed with jsb: tabclose --match would also hit the pinned Slack Essential and abort the chain.
+" composite splits on ; and | so the jsb and the comparator must not contain them.
+command tabtidy composite tabclose --match /dashboard/index.html ; tabclose --match /dev/dpx/authenticate ; tabclose --match wixpress.com/SAML20/ ; tabclose --match GlobalProtect ; tabclose --match claude.ai/oauth/ ; tabclose --match console.anthropic.com/oauth/ ; tabclose --match mcp-s-connect.wewix.net/authorized ; tabclose --match /callback?code= ; tabclose --match close this tab ; tabclose --match close this window ; jsb browser.tabs.query({currentWindow: true, pinned: false, url: '*://app.slack.com/*'}).then(ts => browser.tabs.remove(ts.map(t => t.id))) ; tabclosedupes ; tabsort (a, b, k = t => t.pinned ? [0, 1e4 + t.index].join() : t.groupId > -1 ? [1, 1e4 + t.index].join() : [2, new URL(t.url).hostname.replace(/^www\./, ``), t.url].join()) => k(a) > k(b) ? 1 : k(a) < k(b) ? -1 : 0
+bind gkt tabtidy
+
 " Binds — data-tools
 bind gdt tabopen_or_switch https://github.com/wix-private/data-tools
 bind gdh tabopen_or_switch https://wix-bo.com/dev/project/com.wixpress.data-tools.data-platform-homepage-web
